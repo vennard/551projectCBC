@@ -1,7 +1,6 @@
 //Not added code for checking corner cases
 module cfg_UART_tb();
-//CHANGE TO CHANGE THE NUMBER OF TESTS
-localparam TESTNUM = 10;
+localparam TESTNUM = 10;   //
 
 //inputs
 reg [23:0] cmd_data_in;
@@ -34,7 +33,7 @@ cfg_mstr mstr(.RX_C(TX),.TX_C(RX),.rsp_rdy(rsp_rdy),.snd_frm(snd_frm)
 //Set up clock (period of 2ns)
 initial begin
 clk = 0;
-forever #2 clk = ~clk;
+forever #1 clk = ~clk;
 end
 
 initial begin
@@ -69,7 +68,7 @@ always @(posedge clk) begin
 	end
 
 	if((frm_rdy)&(!frm_rdy_wait)) begin //If cfg_UART has recieved 24bit packet
-		//Check that it has recieved and is outputting the correct data
+		//Check that it has recieved and is outputting the correct data	
 		$display("checking cmd_data then sending response");
 		if(cmd_data_out!=cmd_data_in) begin
 				$display("ERROR - cmd_data not correct");
@@ -77,11 +76,13 @@ always @(posedge clk) begin
 				$stop;	//end testing
 				end
 		else begin
-		//correctly recieved data, so send response
+		//correctly recieved data, so send response & clear frm_rdy
+		clr_frm_rdy = 1;
 		snd_rsp = 1;
 		repeat(2) @(posedge clk);
+		clr_frm_rdy = 0;
 		snd_rsp = 0;
-		frm_rdy_wait = 1;	//don't re-enter until clr_frm_rdy
+		frm_rdy_wait = 1;	//don't re-enter until response is recieved
 		end
 	end
 
@@ -90,10 +91,9 @@ always @(posedge clk) begin
 			if(rsp_data_in!=rsp_data_out) begin
 					$display("ERROR - rsp_data not correct");
 					$display("rsp_data = x%x -- should be x%x",rsp_data_out,rsp_data_in);
+					$stop;	//end testing
 			end
 		//clear data & start next test
-		clr_frm_rdy = 1;
-		repeat(2) @(posedge clk);
 		frm_rdy_wait = 0;
 		k = 0;
 	end
