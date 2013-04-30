@@ -8,7 +8,8 @@
 `timescale 1 ns / 100 ps;
 module cbc_dig_tb();
 
-localparam TESTHANDLE = 5;		//see above for functionality
+//TODO should be defaulted to 5 -- 2 is as far as it is currently
+localparam TESTHANDLE = 2;		//see above for functionality
 
 //////////////////
 // Local Params //
@@ -34,7 +35,8 @@ wire [13:0] xset;
 wire [13:0] p,i,d;
 wire [13:0] xmeas;
 wire [13:0] err,duty,diferr;
-wire accel_vld,frm_rdy;
+wire accel_vld,frm_rdy,c_duty;
+wire [3:0] state;
 
 /////////////////////////////////////////////
 // Define any registers used in testbench //
@@ -50,7 +52,7 @@ reg [2:0] test;		//holds destination of next test\
 /////////////////////
 integer eepromFile,eepromTestData,i;
 integer pTest,iTest,dTest,xsetTest;
-integer count;
+integer count,testSumErr,testDuty;
 
 ////////////////////
 //Pull Out Values //
@@ -68,6 +70,8 @@ assign diferr = DUT.iDIG.diferr;
 assign xmeas = DUT.iDIG.xmeas;
 assign frm_rdy = DUT.iDIG.frm_rdy; //TODO check value
 assign wrt_duty = DUT.iDIG.wrt_duty; //TODO check
+assign state = DUT.iDIG.ctrl.state;  
+assign c_duty = DUT.iDIG.ctrl.c_duty;
 //////////////////////
 // Instantiate DUT //
 ////////////////////
@@ -113,7 +117,9 @@ always
 initial
   begin    
 	//Initialize Test Variables
+	testDuty = 0;
 	count = 0;
+	testSumErr = 0;
 	accelMode = 0; //Defaults to sending zero's as accel data
 	//Start with 2 clock cycle reset & INIT check
 	test = INIT;
@@ -185,23 +191,68 @@ always @(posedge clk) begin
 			  end
 			 end			  
 		  	
+				//TODO added multiply checker with saturation
 			 //Check Calculation data
 			 if(frm_rdy) begin
 				$display("ERROR - entered command mode from basic operation test");
 				$done;
 			 end
-			 //Once data is suppose to be written out to PWM - then check values
-			 if(wrt_duty) begin //TODO changed calculation checks
-				 if(err != (xmeas - xset)) $display("ERROR - err calculation incorrect");
-				 if(sumerr != (sumerr + err)) $display("ERROR - sumerr calculation incorrect");
-				 if(diferr != (err - preverr)) $display("ERROR - diferr calculation incorrect");
-					//ADD DUTY CALCULATION CHECKS
-			 end
+			 //Check Err calculation
+					if(state==4'h2) begin //In CALC_ERR state //TODO double check correct state values
+				 		if(err != (xmeas - xset)) $display("ERROR - err calculation incorrect");
+							end
+			 //Check 1st duty calculation
+			 		if(state==4'h3) begin //in PMULT state
+					  if(c_duty) begin //multiply finished TODO must concatonate p*err value for /x800
+						 	testDuty = duty;
+		  					if(duty != (p*err)) $display("ERROR - 1st iteration of duty calculation incorrect");
+		  				end
+ 					end
+
+			 //Check sumerr calculation
+			 		if(state==4'h5) begin  //in CALC_SUMERR state
+					  	testSumErr = testSumErr + err;
+  						if(sumerr != (err + testSumErr)) $display("ERROR - sumerr calculation incorrect"); 	
+	 				end
+
+			 //Check 2nd duty calculation
+			 		if(state==4'h6) begin //in IMULT state
+						testDuty = testDuty + ((i*testSumErr)/x800);	//TODO
+						if(c_duty) begin
+							if(duty != testDuty) $display("ERROR - 2nd iteration of duty calculation incorrect");
+					 	end
+				  end
+
+			 //Check diferr calculation
+			 		if(state==4'h8) begin //in CALC_DERR state
+					 	if(diferr != (err - preverr)) $display("ERROR - diferr calculation incorrect");
+					 end
+
+			 //Check 3rd iteratino of duty calculation
+			 		if(state==4'h9) begin //in DMULT state
+						testDuty = testDuty + ((d*diferr)/x800); //TODO
+						if(c_duty) begin
+						  	if(duty != testDuty) $display("ERROR - 3rd iteration of duty calculation incorrect");
+						 end
+				  	end
+
+			 //Check again that duty is correct when sending out to PWM
+			 	 if(wrt_duty) begin
+					 if(dst != testDuty) $display("ERROR - Sent incorrect value out to the PWM");
+				  end
+
+			 //Check that we store preverr correctly
+			 	if(state==4'hA) begin
+				  	if(preverr != err) $display("ERROR - did not save off preverr correctly");
+				 end					
+			 
 			end
+			
 /**************************************************************** 
 *Xset Test
 ****************************************************************/
 	if(test == XSET) begin
+		
 		end
 /**************************************************************** 
 *Command Mode operation tests
@@ -215,10 +266,23 @@ always @(posedge clk) begin
 	if(test = ADVANCE) begin
 	 end
 				
-
+  end
 			//Test random accel data
 			//Test high and low corner cases for accel data
 
+
+ //TODO added function for checking multiplies MUST CONTAIN SATURATION LOGIC
+ 
+task checkMultiply;
+ 	output reg [14:0] SUM:
+	input [14:0] A;
+	input [14:0] B;
+
+	SUM = A*B;
+	if(SUM<=xVALUE) SUM = SUM_MIN;
+	if(SUM>=xVALUE) SUM = SUM_MAX;
+
+ endtask	
 
 `include "/filespace/people/e/ejhoffman/ece551/project/project/cbc_dig/tb_tasks.v"
 
