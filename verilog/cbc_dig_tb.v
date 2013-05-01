@@ -37,6 +37,7 @@ wire [13:0] xmeas;
 wire [13:0] err,duty,diferr;
 wire accel_vld,frm_rdy,c_duty;
 wire [3:0] state;
+wire [1:0] in_cmd;
 
 /////////////////////////////////////////////
 // Define any registers used in testbench //
@@ -53,6 +54,7 @@ reg [2:0] test;		//holds destination of next test\
 integer eepromFile,eepromTestData,i;
 integer pTest,iTest,dTest,xsetTest;
 integer count,testSumErr,testDuty;
+integer xSetIndex,cmdIndex;
 
 ////////////////////
 //Pull Out Values //
@@ -72,6 +74,8 @@ assign frm_rdy = DUT.iDIG.frm_rdy; //TODO check value
 assign wrt_duty = DUT.iDIG.wrt_duty; //TODO check
 assign state = DUT.iDIG.ctrl.state;  
 assign c_duty = DUT.iDIG.ctrl.c_duty;
+assign in_cmd = DUT.iDIG.ctrl.in_cmd;
+
 //////////////////////
 // Instantiate DUT //
 ////////////////////
@@ -118,6 +122,8 @@ initial
   begin    
 	//Initialize Test Variables
 	testDuty = 0;
+    cmdIndex = 0;
+    xSetIndex = 0;
 	count = 0;
 	testSumErr = 0;
 	accelMode = 0; //Defaults to sending zero's as accel data
@@ -191,73 +197,81 @@ always @(posedge clk) begin
 			  end
 			 end			  
 		  	
-				//TODO added multiply checker with saturation
 			 //Check Calculation data
-			 if(frm_rdy) begin
-				$display("ERROR - entered command mode from basic operation test");
-				$done;
-			 end
-			 //Check Err calculation
-					if(state==4'h2) begin //In CALC_ERR state //TODO double check correct state values
-				 		if(err != (xmeas - xset)) $display("ERROR - err calculation incorrect");
-							end
-			 //Check 1st duty calculation
-			 		if(state==4'h3) begin //in PMULT state
-					  if(c_duty) begin //multiply finished TODO must concatonate p*err value for /x800
-						 	testDuty = duty;
-		  					if(duty != (p*err)) $display("ERROR - 1st iteration of duty calculation incorrect");
-		  				end
- 					end
-
-			 //Check sumerr calculation
-			 		if(state==4'h5) begin  //in CALC_SUMERR state
-					  	testSumErr = testSumErr + err;
-  						if(sumerr != (err + testSumErr)) $display("ERROR - sumerr calculation incorrect"); 	
-	 				end
-
-			 //Check 2nd duty calculation
-			 		if(state==4'h6) begin //in IMULT state
-						testDuty = testDuty + ((i*testSumErr)/x800);	//TODO
-						if(c_duty) begin
-							if(duty != testDuty) $display("ERROR - 2nd iteration of duty calculation incorrect");
-					 	end
-				  end
-
-			 //Check diferr calculation
-			 		if(state==4'h8) begin //in CALC_DERR state
-					 	if(diferr != (err - preverr)) $display("ERROR - diferr calculation incorrect");
-					 end
-
-			 //Check 3rd iteratino of duty calculation
-			 		if(state==4'h9) begin //in DMULT state
-						testDuty = testDuty + ((d*diferr)/x800); //TODO
-						if(c_duty) begin
-						  	if(duty != testDuty) $display("ERROR - 3rd iteration of duty calculation incorrect");
-						 end
-				  	end
+			        //TODO implement 
 
 			 //Check again that duty is correct when sending out to PWM
 			 	 if(wrt_duty) begin
 					 if(dst != testDuty) $display("ERROR - Sent incorrect value out to the PWM");
 				  end
 
-			 //Check that we store preverr correctly
-			 	if(state==4'hA) begin
-				  	if(preverr != err) $display("ERROR - did not save off preverr correctly");
-				 end					
-			 
 			end
 			
 /**************************************************************** 
-*Xset Test
+*Xset Test ---- TODO
 ****************************************************************/
 	if(test == XSET) begin
-		
+	    //Start process to send data to the config UART
+        //IE load data from file then increment index       --xsetvals.txt
+        xSetIndex = xSetIndex + 1;
+        if (frm_rdy) begin
+            if(state==4'hB) begin //in NEW_XSET state
+                //TODO check xset value against loaded value
+            else begin
+            $display("ERROR -- did not detect new Xset load correctly");
+            $stop;
+                end
+            end
+            //End Xset test after 20 iterations
+            if(xSetIndex==20) begin
+                if(TESTHANDLE == 3) begin
+                    $display("End of Testing");
+                    $done;
+                else begin
+                    $display("Finishing Xset test...");
+                    test = CMDMODE;
+                    end
+                end
 		end
 /**************************************************************** 
 *Command Mode operation tests
 *****************************************************************/
 	if(test = CMDMODE) begin
+        //Start process by sending invalid commands         --cmdvals.txt
+        cmdIndex = cmdIndex + 1;
+        if(state==4'hC) $display("Entered into command mode aka ALL Zone"); //state is CMDINTR
+        //First 10 iterations invalid commands
+        if(cmdIndex<11) begin
+            //Look for neg acknowledge
+            if((strt_tx)&(dst==14'h05A5)) $display("NEGACK sent out of iDIG");
+            else $display("ERROR - didn't send NEGACK in response to invalid command");
+           end
+        //10th iteration is a write EEPROM command test
+        if(cmdIndex==10) begin
+            //Check command was correct (cfg_data[19:18]) TODO
+            //Check that CHRG_PMP is asserted for long enough
+            //Check that sends positive acknowledge
+            if((strt_tx)&(dst==14'h0A5A)) $display("POSACK sent out of iDIG -- write eeprom");
+            else $display("ERROR - did not send back POSACK response to write eeprom cmd");
+          end
+        //11th iteration is a read EEPROM command test
+        if(cmdIndex==11) begin
+            //Check that command was correct (cfg_data[19:18) TODO
+            //Check that dst bus contains EEPDATA!
+            //if((strt_tx)&(dst==EEPDATA)) 
+           end
+        //12 iteration is a start_CM check 
+        if(cmdIndex==12) begin
+            //Check detected correctly
+            //Check sends out positive acknowledge
+            end
+
+        //TODO set cmdIndex to randomly repeat 10-12 for X number of times --
+        //repeat 5 times if it fails
+
+        //TODO RESET everything to return to normal operation -- test
+        //initialization again
+                
 		end
 
 /**************************************************************** 
@@ -271,19 +285,7 @@ always @(posedge clk) begin
 			//Test high and low corner cases for accel data
 
 
- //TODO added function for checking multiplies MUST CONTAIN SATURATION LOGIC
  
-task checkMultiply;
- 	output reg [14:0] SUM:
-	input [14:0] A;
-	input [14:0] B;
-
-	SUM = A*B;
-	if(SUM<=xVALUE) SUM = SUM_MIN;
-	if(SUM>=xVALUE) SUM = SUM_MAX;
-
- endtask	
-
 `include "/filespace/people/e/ejhoffman/ece551/project/project/cbc_dig/tb_tasks.v"
 
 endmodule

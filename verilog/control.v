@@ -412,7 +412,7 @@ begin
             end // end STRT_CMD
             default : begin //NEGACK
                asrcsel = ZEROA;
-               bsrcsel = POSACKA5A;
+               bsrcsel = POSACKA5A; //TODO incorrect ? negative I think
                c_subtract = 1'b1;
                strt_tx = 1'b1;
                next_state = WAIT_CMD;
