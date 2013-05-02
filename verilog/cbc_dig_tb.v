@@ -105,8 +105,8 @@ eep iEEP(.clk(clk), .por_n(rst_n), .eep_addr(eep_addr), .wrt_data(dst),  .rd_dat
 ////////////////////////////////
 // Instantiate Config Master //
 //////////////////////////////
-cfg_mstr iCFG(.clk(clk), .rst_n(rst_n), .cmd_data(cmd_data), .initiate(sendCfgData),
-	      .RX_C(TX_C), .TX_C(RX_C), .rsp(rsp), .rsp_rdy(rsp_rdy));
+cfg_mstr iCFG(.clk(clk), .rst_n(rst_n), .cmd_data(cmd_data), .snd_frm(sendCfgData),
+	      .RX_C(TX_C), .TX_C(RX_C), .resp(rsp), .rsp_rdy(rsp_rdy));
 
 /////////////////////////////////////
 // Instantiate Accel Data Generator//
