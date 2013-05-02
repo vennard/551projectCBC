@@ -29,7 +29,7 @@ wire [13:0] dst;
 wire [15:0] rsp;
 wire [13:0] duty;
 wire rsp_rdy;
-wire [23:0] cfg_data;
+
 
 
 //Added pull out wires
@@ -37,7 +37,7 @@ wire [13:0] sumerr;
 wire [13:0] preverr;
 wire [13:0] xset;
 wire [13:0] p,i,d;
-wire [13:0] xmeas;
+wire [13:0] xmeas,cfg_data;
 wire [13:0] err,diferr,accelData;
 wire accel_vld,frm_rdy,c_duty;
 wire [3:0] state;

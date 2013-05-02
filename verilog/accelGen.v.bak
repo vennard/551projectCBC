@@ -15,7 +15,7 @@ localparam WAIT_HIGH = 2'b01;
 localparam WAIT_LOW = 2'b10;
 
 wire [7:0] tx_data;
-reg [7:0] outHigh, outLow;
+wire [7:0] outHigh, outLow;
 
 ///////////////////////////////////////////////////////////////////////
 // Memory that holds value of acceleration read from accel_vals.txt //

@@ -1,0 +1,240 @@
+m255
+K3
+13
+cModel Technology
+Z0 d/filespace/people/v/vennard/ece551/HW5
+vaccelGen
+Z1 I4]e<mVeMD_oMh960IfZfh3
+Z2 VO`Tla<j@67`]L@824]YC90
+Z3 d/filespace/people/v/vennard/551projectCBC/verilog
+Z4 w1367533855
+Z5 8/filespace/people/v/vennard/551projectCBC/verilog/accelGen.v
+Z6 F/filespace/people/v/vennard/551projectCBC/verilog/accelGen.v
+L0 2
+Z7 OE;L;10.0c_1;49
+r1
+31
+Z8 !s102 -nocovercells
+Z9 o-work work -nocovercells -L mtiAvm -L mtiOvm -L mtiUvm -L mtiUPF
+Z10 naccel@gen
+Z11 !s100 1FQm624LV7RD0koU_T[bn2
+!s85 0
+Z12 !s108 1367533860.098436
+Z13 !s107 /filespace/people/v/vennard/551projectCBC/verilog/accelGen.v|
+Z14 !s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/verilog/accelGen.v|
+vbit14_reg
+Z15 I2Y91j9Fz>LeZPml^:PR6U3
+Z16 V_ZfgJh0:NE^>5USWNf`>G3
+R3
+Z17 w1366661084
+Z18 8/filespace/people/v/vennard/551projectCBC/verilog/bit14_reg.v
+Z19 F/filespace/people/v/vennard/551projectCBC/verilog/bit14_reg.v
+L0 2
+R7
+r1
+31
+R9
+Z20 !s100 NBJGjD3c@TXMOAiOfbeUT1
+Z21 !s108 1367533820.089862
+Z22 !s107 /filespace/people/v/vennard/551projectCBC/verilog/bit14_reg.v|
+Z23 !s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/verilog/bit14_reg.v|
+R8
+!s85 0
+vbit14_reg_clr
+Z24 I;WF]B=l1ZG6bJMfIBM>VF3
+Z25 V>zk:3ZX2[aJ`7?O`^JJ[Y2
+R3
+Z26 w1366660304
+Z27 8/filespace/people/v/vennard/551projectCBC/verilog/bit14_reg_clr.v
+Z28 F/filespace/people/v/vennard/551projectCBC/verilog/bit14_reg_clr.v
+L0 2
+R7
+r1
+31
+R8
+R9
+Z29 !s100 3`ZE=_I^KK5B]fU63iod;2
+Z30 !s108 1367533820.789315
+Z31 !s107 /filespace/people/v/vennard/551projectCBC/verilog/bit14_reg_clr.v|
+Z32 !s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/verilog/bit14_reg_clr.v|
+!s85 0
+vbit14_reg_rst
+Z33 I@M1M_gj=clKB;3TNKlaTQ3
+Z34 VPbX6DJn5^Pd=@mz5^FSoV1
+R3
+Z35 w1366660306
+Z36 8/filespace/people/v/vennard/551projectCBC/verilog/bit14_reg_rst.v
+Z37 F/filespace/people/v/vennard/551projectCBC/verilog/bit14_reg_rst.v
+L0 2
+R7
+r1
+31
+R8
+R9
+Z38 !s100 Z0iAhOJ67[]GKHfhH8i@`3
+Z39 !s108 1367533821.728897
+Z40 !s107 /filespace/people/v/vennard/551projectCBC/verilog/bit14_reg_rst.v|
+Z41 !s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/verilog/bit14_reg_rst.v|
+!s85 0
+vcbc_dig
+Z42 IJ;CiIkmkY1I7Y<UQz63eX1
+Z43 Va=`Kifi=FXmEh0E34W=jl3
+R3
+Z44 w1366821520
+Z45 8/filespace/people/v/vennard/551projectCBC/verilog/cbc_dig.v
+Z46 F/filespace/people/v/vennard/551projectCBC/verilog/cbc_dig.v
+L0 1
+R7
+r1
+31
+R8
+R9
+Z47 !s100 @P2bEGLY1ojN3jALB:^P`3
+Z48 !s108 1367533822.409682
+Z49 !s107 /filespace/people/v/vennard/551projectCBC/verilog/cbc_dig.v|
+Z50 !s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/verilog/cbc_dig.v|
+!s85 0
+vcbc_dig_tb
+!s100 zAkT:1jM@2[Y=P_CVC9^52
+Im;2z8l4QH@4SXAe=bfJ3Q0
+V;TmL1AR`U8?ERVZlD32VG2
+R3
+w1367535079
+8/filespace/people/v/vennard/551projectCBC/verilog/cbc_dig_tb.v
+F/filespace/people/v/vennard/551projectCBC/verilog/cbc_dig_tb.v
+L0 9
+R7
+r1
+!s85 0
+31
+!s108 1367535084.143134
+!s107 /filespace/people/v/vennard/551projectCBC/verilog/cbc_dig_tb.v|
+!s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/verilog/cbc_dig_tb.v|
+R8
+R9
+vcfg_mstr
+Z51 I`<WDDDJ<>KjL^?I3DmI^F1
+Z52 VOAJHgfN:Yj95b7>@Vz[zm1
+R3
+Z53 w1367457521
+Z54 8/filespace/people/v/vennard/551projectCBC/verilog/cfg_mstr.v
+Z55 F/filespace/people/v/vennard/551projectCBC/verilog/cfg_mstr.v
+L0 1
+R7
+r1
+31
+R8
+R9
+Z56 !s100 KdXK=O7Z9YLCBZ=kOaRZ83
+Z57 !s108 1367533823.726583
+Z58 !s107 /filespace/people/v/vennard/551projectCBC/verilog/cfg_mstr.v|
+Z59 !s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/verilog/cfg_mstr.v|
+!s85 0
+vcontrol
+Z60 I``Z_b6>fRN]8;bLoGAlRF3
+Z61 V?MBmh4JDcUlP^SL:jVVBJ0
+R3
+Z62 w1367433736
+Z63 8/filespace/people/v/vennard/551projectCBC/verilog/control.v
+Z64 F/filespace/people/v/vennard/551projectCBC/verilog/control.v
+L0 1
+R7
+r1
+31
+R8
+R9
+Z65 !s100 ?i9JzHDiDWS9gj:<SL>BH2
+Z66 !s108 1367533823.955650
+Z67 !s107 /filespace/people/v/vennard/551projectCBC/verilog/control.v|
+Z68 !s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/verilog/control.v|
+!s85 0
+vdatapath_control
+Z69 I=efYEDoQDLP><14dL1Ni@2
+Z70 VakHIQWXzDgfK2SEeHKzzk2
+R3
+Z71 w1367168224
+Z72 8/filespace/people/v/vennard/551projectCBC/verilog/datapathcontrol.v
+Z73 F/filespace/people/v/vennard/551projectCBC/verilog/datapathcontrol.v
+L0 2
+R7
+r1
+31
+R8
+R9
+Z74 !s100 D@@zDCR:Y5LHfbFRPlc2I1
+Z75 !s108 1367533824.306490
+Z76 !s107 /filespace/people/v/vennard/551projectCBC/verilog/datapathcontrol.v|
+Z77 !s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/verilog/datapathcontrol.v|
+!s85 0
+vdc_datapath
+Z78 IRjbiHdOXdg<4P`=]l?`L10
+Z79 V6JNA586e;_jJdV8PTa7>H3
+R3
+Z80 w1367168222
+Z81 8/filespace/people/v/vennard/551projectCBC/verilog/dc_datapath.v
+Z82 F/filespace/people/v/vennard/551projectCBC/verilog/dc_datapath.v
+L0 1
+R7
+r1
+31
+R8
+R9
+Z83 !s100 BjkiR]N0ZTX^1=@^O0zO?2
+Z84 !s108 1367533824.640410
+Z85 !s107 /filespace/people/v/vennard/551projectCBC/verilog/dc_datapath.v|
+Z86 !s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/verilog/dc_datapath.v|
+!s85 0
+veep
+Z87 IEM=blL51khPX@j:>MZi7A1
+Z88 VKA0:WO?<D0Ge83eJ5z<XB2
+R3
+Z89 w1366821577
+Z90 8/filespace/people/v/vennard/551projectCBC/verilog/eep.v
+Z91 F/filespace/people/v/vennard/551projectCBC/verilog/eep.v
+L0 3
+R7
+r1
+31
+R8
+R9
+Z92 !s100 OkkPEBT7@0ZSHi7E9hWMe3
+Z93 !s108 1367533825.141530
+Z94 !s107 /filespace/people/v/vennard/551projectCBC/verilog/eep.v|
+Z95 !s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/verilog/eep.v|
+!s85 0
+vsaturator
+Z96 I0e>N:zLB0`]cckSz7<SU@2
+Z97 V5G<?@WZ2BYXYMjFoHZ8]I3
+R3
+Z98 w1366812964
+Z99 8/filespace/people/v/vennard/551projectCBC/verilog/saturator.v
+Z100 F/filespace/people/v/vennard/551projectCBC/verilog/saturator.v
+L0 2
+R7
+r1
+31
+R8
+R9
+Z101 !s100 E67;E_oJ@^[RA7knP17eo1
+Z102 !s108 1367533825.361700
+Z103 !s107 /filespace/people/v/vennard/551projectCBC/verilog/saturator.v|
+Z104 !s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/verilog/saturator.v|
+!s85 0
+vtest
+Z105 IJ3YhTz[`:M0ejRJPSbAP>1
+Z106 Vk<3<[f=78GX=_HO53D;7>3
+R3
+Z107 w1365463375
+Z108 8/filespace/people/v/vennard/551projectCBC/verilog/test.v
+Z109 F/filespace/people/v/vennard/551projectCBC/verilog/test.v
+L0 1
+R7
+r1
+31
+R8
+R9
+Z110 !s100 KPJ0kiP2kNQ<>k648cVEz2
+Z111 !s108 1367533825.464178
+Z112 !s107 /filespace/people/v/vennard/551projectCBC/verilog/test.v|
+Z113 !s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/verilog/test.v|
+!s85 0

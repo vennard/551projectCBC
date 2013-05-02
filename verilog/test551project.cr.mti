@@ -1,0 +1,92 @@
+/filespace/people/v/vennard/551projectCBC/verilog/cfg_mstr.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/verilog/cfg_mstr.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module cfg_mstr
+
+Top level modules:
+	cfg_mstr
+
+} {} {}} /filespace/people/v/vennard/551projectCBC/verilog/datapathcontrol.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/verilog/datapathcontrol.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module datapath_control
+
+Top level modules:
+	datapath_control
+
+} {} {}} /filespace/people/v/vennard/551projectCBC/verilog/bit14_reg.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/verilog/bit14_reg.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module bit14_reg
+
+Top level modules:
+	bit14_reg
+
+} {} {}} /filespace/people/v/vennard/551projectCBC/verilog/control.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/verilog/control.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module control
+
+Top level modules:
+	control
+
+} {} {}} /filespace/people/v/vennard/551projectCBC/verilog/eep.v {2 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/verilog/eep.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+** Warning: /filespace/people/v/vennard/551projectCBC/verilog/eep.v(1): (vlog-2283) Extra semicolon in $unit (global) scope.
+-- Compiling module eep
+
+Top level modules:
+	eep
+
+} {} {}} /filespace/people/v/vennard/551projectCBC/verilog/dc_datapath.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/verilog/dc_datapath.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module dc_datapath
+
+Top level modules:
+	dc_datapath
+
+} {} {}} /filespace/people/v/vennard/551projectCBC/verilog/saturator.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/verilog/saturator.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module saturator
+
+Top level modules:
+	saturator
+
+} {} {}} /filespace/people/v/vennard/551projectCBC/verilog/test.v {0 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/verilog/test.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module test
+** Error: /filespace/people/v/vennard/551projectCBC/verilog/test.v(6): near "EOF": syntax error, unexpected end of source code, expecting IDENTIFIER or TYPE_IDENTIFIER
+
+} {4.0 5.0} {}} /filespace/people/v/vennard/551projectCBC/verilog/cbc_dig_tb.v {2 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/verilog/cbc_dig_tb.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+** Warning: /filespace/people/v/vennard/551projectCBC/verilog/cbc_dig_tb.v(8): (vlog-2283) Extra semicolon in $unit (global) scope.
+-- Compiling module cbc_dig_tb
+
+Top level modules:
+	cbc_dig_tb
+
+} {} {}} /filespace/people/v/vennard/551projectCBC/verilog/bit14_reg_clr.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/verilog/bit14_reg_clr.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module bit14_reg_clr
+
+Top level modules:
+	bit14_reg_clr
+
+} {} {}} /filespace/people/v/vennard/551projectCBC/verilog/bit14_reg_rst.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/verilog/bit14_reg_rst.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module bit14_reg_rst
+
+Top level modules:
+	bit14_reg_rst
+
+} {} {}} /filespace/people/v/vennard/551projectCBC/verilog/accelGen.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/verilog/accelGen.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module accelGen
+
+Top level modules:
+	accelGen
+
+} {} {}} /filespace/people/v/vennard/551projectCBC/verilog/cbc_dig.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/verilog/cbc_dig.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module cbc_dig
+
+Top level modules:
+	cbc_dig
+
+} {} {}}
