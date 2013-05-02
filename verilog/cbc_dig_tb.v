@@ -28,7 +28,7 @@ wire [13:0] eep_rd_data;
 wire [13:0] dst;
 wire [15:0] rsp;
 wire [13:0] duty;
-wire sendCfgData,rsp,rsp_rdy;
+wire rsp,rsp_rdy;
 wire [23:0] cmd_data;
 
 
@@ -48,10 +48,10 @@ wire [1:0] in_cmd;
 // Define any registers used in testbench //
 ///////////////////////////////////////////
 reg [23:0] cmd_data;		// used to provide commands/data to cfg_UART of DUT
-reg initiate;			// kicks off command/data transmission to DUT 
+reg sendCfgData;			// kicks off command/data transmission to DUT 
 reg clk,rst_n;
 //Added Registers
-reg [2:0] test;		//holds destination of next test\
+reg [2:0] test;		//holds destination of next test
 
 /////////////////////
 // File I/O values //	
@@ -132,6 +132,16 @@ always
 ///////////////////////////////////////////////////////////////
 initial
   begin    
+	//Initialize files for I/O variables
+	//XSet File init
+	
+	count1 = 0;
+	xsetFile = $fopen("xsetVals.txt","r");
+	if(xsetFile!=1) $display("failed to load xsetVals.txt");
+	count2 = 0;
+ 	cmdFile = $fopen("cmdVals.txt","r");
+	if(cmdFile!=1) $display("failed to load cmdVals.txt");
+
 	//Initialize Test Variables
 	newCmd = 0;
 	match = 0;
@@ -151,15 +161,6 @@ initial
 	repeat(2) @ (posedge clk);
 	rst_n = 1;
 
-	//Initialize files for I/O variables
-	//XSet File init
-	
-	count1 = 0;
-	xsetFile = $fopen("xsetVals.txt","r");
-	if(xsetFile!=1) $display("failed to load xsetVals.txt");
-	count2 = 0;
- 	cmdFile = $fopen("cmdVals.txt","r");
-	if(cmdFile!=1) $display("failed to load cmdVals.txt");
 
   end
 
@@ -256,10 +257,10 @@ always @(posedge clk) begin
 			end
 			
 /**************************************************************** 
-*Xset Test ---- TODO
+*Xset Test
 ****************************************************************/
 	if(test == XSET) begin
-	    //Start process to send data to the config UART	-- TODO check
+	    //Start process to send data to the config UART
 		 //implementation with cfg_mstr
 		  if(loadXset==0) begin
 			 match = $fscanf(xsetFile,"%h",cmd_data);
