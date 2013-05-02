@@ -28,16 +28,21 @@ wire [13:0] eep_rd_data;
 wire [13:0] dst;
 wire [15:0] rsp;
 wire [13:0] duty;
+wire sendCfgData,rsp,rsp_rdy;
+wire [23:0] cmd_data;
+
+
 //Added pull out wires
 wire [13:0] sumerr;
 wire [13:0] preverr;
 wire [13:0] xset;
 wire [13:0] p,i,d;
-wire [13:0] xmeas;
-wire [13:0] err,duty,diferr;
+wire [13:0] xmeas,cfg_data;
+wire [13:0] err,duty,diferr,accelData;
 wire accel_vld,frm_rdy,c_duty;
 wire [3:0] state;
 wire [1:0] in_cmd;
+
 
 /////////////////////////////////////////////
 // Define any registers used in testbench //
@@ -51,10 +56,12 @@ reg [2:0] test;		//holds destination of next test\
 /////////////////////
 // File I/O values //	
 /////////////////////
-integer eepromFile,eepromTestData,i;
-integer pTest,iTest,dTest,xsetTest;
+integer eepromFile,eepromTestData,count1;
 integer count,testSumErr,testDuty;
 integer xSetIndex,cmdIndex;
+integer testErr,testDifErr,testPrevErr;
+integer loadXset,match;
+integer newCmd;
 
 ////////////////////
 //Pull Out Values //
@@ -72,9 +79,14 @@ assign diferr = DUT.iDIG.diferr;
 assign xmeas = DUT.iDIG.xmeas;
 assign frm_rdy = DUT.iDIG.frm_rdy; //TODO check value
 assign wrt_duty = DUT.iDIG.wrt_duty; //TODO check
+
 assign state = DUT.iDIG.ctrl.state;  
 assign c_duty = DUT.iDIG.ctrl.c_duty;
 assign in_cmd = DUT.iDIG.ctrl.in_cmd;
+assign prod_vld = DUT.iDIG.ctrl.prod_vld;
+assign cfg_data = DUT.iDIG.ctrl.cfg_data;
+
+assign accelData = iACCEL.tx_data;
 
 //////////////////////
 // Instantiate DUT //
@@ -93,7 +105,7 @@ eep iEEP(.clk(clk), .por_n(rst_n), .eep_addr(eep_addr), .wrt_data(dst),  .rd_dat
 ////////////////////////////////
 // Instantiate Config Master //
 //////////////////////////////
-cfg_mstr iCFG(.clk(clk), .rst_n(rst_n), .cmd_data(cmd_data), .initiate(initiate),
+cfg_mstr iCFG(.clk(clk), .rst_n(rst_n), .cmd_data(cmd_data), .initiate(sendCfgData),
 	      .RX_C(TX_C), .TX_C(RX_C), .rsp(rsp), .rsp_rdy(rsp_rdy));
 
 /////////////////////////////////////
@@ -121,6 +133,12 @@ always
 initial
   begin    
 	//Initialize Test Variables
+	newCmd = 0;
+	match = 0;
+	loadXset = 0;
+	testErr = 0;
+	testDifErr = 0;
+	testPrevErr = 0;
 	testDuty = 0;
     cmdIndex = 0;
     xSetIndex = 0;
@@ -133,16 +151,16 @@ initial
 	repeat(2) @ (posedge clk);
 	rst_n = 1;
 
-	//Initialize file I/O variables
-	i = 0;
-	eepromFile = $fopen("eeprom.txt","r");
-	for(i = 0;i < 4;i = i+1) begin
-	  	if (i == 0) eepromTestData = $fscanf(eepromFile,"%b\n",xsetTest);
-	  	if (i == 1) eepromTestData = $fscanf(eepromFile,"%b\n",pTest);
-	  	if (i == 2) eepromTestData = $fscanf(eepromFile,"%b\n",iTest);
-	  	if (i == 3) eepromTestData = $fscanf(eepromFile,"%b\n",dTest);
-	 end
-  	$fclose(eepromFile);
+	//Initialize files for I/O variables
+	//XSet File init
+	
+	count1 = 0;
+	xsetFile = $fopen("xsetVals.txt","r");
+	if(xsetFile!=1) $display("failed to load xsetVals.txt");
+	count2 = 0;
+ 	cmdFile = $fopen("cmdVals.txt","r");
+	if(cmdFile!=1) $display("failed to load cmdVals.txt");
+
   end
 
 always @(posedge clk) begin
@@ -198,9 +216,39 @@ always @(posedge clk) begin
 			 end			  
 		  	
 			 //Check Calculation data
-			        //TODO implement 
-
-			 //Check again that duty is correct when sending out to PWM
+					 if(state==4'h2)  //in state CALC_ERR
+					  	 	testErr = xmeas - xset;
+					 if(state==4'h3)	begin //in state PMULT
+						if(prod_vld) begin
+						 	   testDuty = ((p*testErr)[25:12]);	//TODO potential problem	
+								//OVERFLOW & UNDERFLOW CHECKING
+							 	if(((p[28])==0)&(|(p[27:25]))) testDuty = 16'h1FFF; //overflow
+								if((p[28])&(~(&(p[27:25])))) testDuty = 16'h2000; //underflow			
+							 end
+						end
+					 if(state==4'h5) //in state CALC_SUMERR
+								testSumErr = testSumErr + testErr;
+					 if(state==4'h6) begin //in state IMULT
+						if(prod_vld) begin
+						      testDuty = testDuty + ((i*testSumErr)[25:12]);
+								//OVERFLOW & UNDERFLOW CHECKING
+							 	if(((i[28])==0)&(|(i[27:25]))) testDuty = 16'h1FFF; //overflow
+								if((i[28])&(~(&(i[27:25])))) testDuty = 16'h2000; //underflow			
+							 end
+						end
+	 				 if(state==4'h8) //in state CALC_DERR
+	  							testDifErr = testErr - testPrevErr;
+					 if(state==4'h9) begin //in state DMULT
+						if(prod_vld) begin
+						  testDuty = testDuty + ((d*testDifErr)[25:12]);
+									//OVERFLOW & UNDERFLOW CHECKING
+							 	if(((d[28])==0)&(|(d[27:25]))) testDuty = 16'h1FFF; //overflow
+								if((d[28])&(~(&(d[27:25])))) testDuty = 16'h2000; //underflow			
+							 end
+						end
+					 if(state==4'hA) //in state SET_PREVERR
+								testPrevErr = testErr;					
+			 //Check that duty is correct when sending out to PWM
 			 	 if(wrt_duty) begin
 					 if(dst != testDuty) $display("ERROR - Sent incorrect value out to the PWM");
 				  end
@@ -211,13 +259,20 @@ always @(posedge clk) begin
 *Xset Test ---- TODO
 ****************************************************************/
 	if(test == XSET) begin
-	    //Start process to send data to the config UART
-        //IE load data from file then increment index       --xsetvals.txt
-        xSetIndex = xSetIndex + 1;
+	    //Start process to send data to the config UART	-- TODO check
+		 //implementation with cfg_mstr
+		  if(loadXset==0) begin
+			 match = $fscanf(xsetFile,"%h",cmd_data);
+			 sndCfgData = 1;
+			 loadXset = 1;
+          xSetIndex = xSetIndex + 1;
+			else sndCfgData = 0;
+
         if (frm_rdy) begin
             if(state==4'hB) begin //in NEW_XSET state
-                //TODO check xset value against loaded value
-            else begin
+  						if(xset != (cmd_data[13:0])) $display("ERROR - xset value not set correctly");
+	  					loadXset = 0;					
+  				  else begin
             $display("ERROR -- did not detect new Xset load correctly");
             $stop;
                 end
@@ -238,46 +293,79 @@ always @(posedge clk) begin
 *****************************************************************/
 	if(test = CMDMODE) begin
         //Start process by sending invalid commands         --cmdvals.txt
-        cmdIndex = cmdIndex + 1;
+		  if(newCmd==0) begin
+		 		match = $fscanf(cmdFile, "%h", cmd_data);
+				sndCfgData = 1;
+				newCmd = 1;
+				cmdIndex = cmdIndex + 1;
+			else sndCfgData = 0;
+		  
         if(state==4'hC) $display("Entered into command mode aka ALL Zone"); //state is CMDINTR
         //First 10 iterations invalid commands
         if(cmdIndex<11) begin
             //Look for neg acknowledge
-            if((strt_tx)&(dst==14'h05A5)) $display("NEGACK sent out of iDIG");
+				if((strt_tx)&(dst==14'h05A5)) newCmd = 0;
             else $display("ERROR - didn't send NEGACK in response to invalid command");
            end
         //10th iteration is a write EEPROM command test
         if(cmdIndex==10) begin
-            //Check command was correct (cfg_data[19:18]) TODO
-            //Check that CHRG_PMP is asserted for long enough
+			 	if((cfg_data[19:18])!=(2'b10)) $display("Read command bits not read in correctly");
+            //Check that CHRG_PMP is asserted for long enough TODO add?
             //Check that sends positive acknowledge
-            if((strt_tx)&(dst==14'h0A5A)) $display("POSACK sent out of iDIG -- write eeprom");
-            else $display("ERROR - did not send back POSACK response to write eeprom cmd");
+            if((strt_tx)&(dst==14'h0A5A)) newCmd = 0;
+  				  else $display("ERROR - did not send back POSACK response to write eeprom cmd");
           end
         //11th iteration is a read EEPROM command test
         if(cmdIndex==11) begin
-            //Check that command was correct (cfg_data[19:18) TODO
-            //Check that dst bus contains EEPDATA!
-            //if((strt_tx)&(dst==EEPDATA)) 
-           end
+            //Check that command was correct
+			 	if((cfg_data[19:18])!=(2'b01)) $display("write command bits not read in correctly");
+            //Check that dst bus contains data that is being read
+					if(strt_tx) begin
+				  newCmd = 0;
+				  case(cmd_data[17:16])
+					 2'b00 : if(xset!= dst) $display("ERROR - dst != eeprom[0]");
+					 2'b01 : if(p != dst) $display("ERROR - dst != eeprom[1]");
+					 2'b10 : if(i != dst) $display("ERROR - dst != eeprom[2]");
+					 2'b11 : if(d != dst) $display("ERROR - dst != eeprom[3]");
+				  endcase
+				  end
         //12 iteration is a start_CM check 
         if(cmdIndex==12) begin
-            //Check detected correctly
-            //Check sends out positive acknowledge
-            end
-
-        //TODO set cmdIndex to randomly repeat 10-12 for X number of times --
-        //repeat 5 times if it fails
-
-        //TODO RESET everything to return to normal operation -- test
-        //initialization again
-                
+			 	if((~(|cfg_data[19:18]))&(&cfg_data[17:16])) begin
+				  $display("entered command mode correctly");
+					if(dst!=14'h0A5A) $display("ERROR positive acknowledge not sent from command mode start");
+				  newCmd = 0;
+				  else $display("ERROR - did not enter start command mode correctly");
+				end
+	            end
+		
+					//Repeats correct commands each 5 times, then resets and moves
+					//on to advanced tests	
+					if(cmdIndex > 12) begin
+			  				count1 = count1 + 1;
+				   		if(count1<5) cmdIndex = 10;
+			 				if(count1==5) begin
+							  if(TESTHANDLE == 4) begin
+			  						$display("End of testing");
+			  					   $done;
+							  else begin
+		 							test = ADVANCE;
+		  							$display("Ending command operation tests...");
+									//RESET!!!!
+									rst_n = 0;
+									repeat(2) @(posedge clk);
+									rst_n = 1;
+							  end
+  						end
+				 end						
+                        
 		end
 
 /**************************************************************** 
 *Advanced Operation Test
 ****************************************************************/
 	if(test = ADVANCE) begin
+	  $done; //TODO not added yet
 	 end
 				
   end
