@@ -2,17 +2,11 @@ JLV ALL KPB
 ------ECE 551 Collaboration-------
 
 
-Tue Apr  9 22:43:56 CDT 2013
-Added HW5 folder ----
+Thu May  2 15:12:56 CDT 2013
+Added TestBench code -- uncompiled
+Also Added input data - should check that contains corner cases
 
-I added my UART_rx UART_tx and UART files along with the SHELLS of cfg_mstr
-and cfg_UART.
-
-Most importantly I added the test bench with code that compiles.
-	--You do not have to hold input signals in testbench
-	--DOES NOT TEST CORNER CASES
-
-Useful GVIM Stuff:
+TODO - put all the code together
 
 //Add a time stamp
 :r! date

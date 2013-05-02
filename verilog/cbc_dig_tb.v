@@ -302,7 +302,7 @@ always @(posedge clk) begin
 		  
         if(state==4'hC) $display("Entered into command mode aka ALL Zone"); //state is CMDINTR
         //First 10 iterations invalid commands
-        if(cmdIndex<11) begin
+        if(cmdIndex<10) begin
             //Look for neg acknowledge
 				if((strt_tx)&(dst==14'h05A5)) newCmd = 0;
             else $display("ERROR - didn't send NEGACK in response to invalid command");
