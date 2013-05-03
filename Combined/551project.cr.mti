@@ -1,0 +1,135 @@
+/filespace/people/v/vennard/Desktop/Combined/pwm_monitor.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/Desktop/Combined/pwm_monitor.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module pwm_monitor
+
+Top level modules:
+	pwm_monitor
+
+} {} {}} /filespace/people/v/vennard/Desktop/Combined/accel_UART.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/Desktop/Combined/accel_UART.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module accel_UART
+
+Top level modules:
+	accel_UART
+
+} {} {}} /filespace/people/v/vennard/Desktop/Combined/dig_core.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/Desktop/Combined/dig_core.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module dig_core
+
+Top level modules:
+	dig_core
+
+} {} {}} /filespace/people/v/vennard/Desktop/Combined/dc_datapath.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/Desktop/Combined/dc_datapath.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module dc_datapath
+
+Top level modules:
+	dc_datapath
+
+} {} {}} /filespace/people/v/vennard/Desktop/Combined/saturator.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/Desktop/Combined/saturator.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module saturator
+
+Top level modules:
+	saturator
+
+} {} {}} /filespace/people/v/vennard/Desktop/Combined/cfg_mstr.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/Desktop/Combined/cfg_mstr.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module cfg_mstr
+
+Top level modules:
+	cfg_mstr
+
+} {} {}} /filespace/people/v/vennard/Desktop/Combined/bit14_reg_clr.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/Desktop/Combined/bit14_reg_clr.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module bit14_reg_clr
+
+Top level modules:
+	bit14_reg_clr
+
+} {} {}} /filespace/people/v/vennard/Desktop/Combined/bit14_reg_rst.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/Desktop/Combined/bit14_reg_rst.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module bit14_reg_rst
+
+Top level modules:
+	bit14_reg_rst
+
+} {} {}} /filespace/people/v/vennard/Desktop/Combined/cbc_dig.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/Desktop/Combined/cbc_dig.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module cbc_dig
+
+Top level modules:
+	cbc_dig
+
+} {} {}} /filespace/people/v/vennard/Desktop/Combined/cfg_UART.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/Desktop/Combined/cfg_UART.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module cfg_UART
+
+Top level modules:
+	cfg_UART
+
+} {} {}} /filespace/people/v/vennard/Desktop/Combined/PWM.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/Desktop/Combined/PWM.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module PWM
+
+Top level modules:
+	PWM
+
+} {} {}} /filespace/people/v/vennard/Desktop/Combined/UART.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/Desktop/Combined/UART.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module UART
+
+Top level modules:
+	UART
+
+} {} {}} /filespace/people/v/vennard/Desktop/Combined/UART_rx.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/Desktop/Combined/UART_rx.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module UART_rx
+
+Top level modules:
+	UART_rx
+
+} {} {}} /filespace/people/v/vennard/Desktop/Combined/accel_mstr.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/Desktop/Combined/accel_mstr.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module accel_mstr
+
+Top level modules:
+	accel_mstr
+
+} {} {}} /filespace/people/v/vennard/Desktop/Combined/UART_tx.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/Desktop/Combined/UART_tx.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module UART_tx
+
+Top level modules:
+	UART_tx
+
+} {} {}} /filespace/people/v/vennard/Desktop/Combined/datapathcontrol.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/Desktop/Combined/datapathcontrol.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module datapath_control
+
+Top level modules:
+	datapath_control
+
+} {} {}} /filespace/people/v/vennard/Desktop/Combined/control.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/Desktop/Combined/control.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module control
+
+Top level modules:
+	control
+
+} {} {}} /filespace/people/v/vennard/Desktop/Combined/bit14_reg.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/Desktop/Combined/bit14_reg.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module bit14_reg
+
+Top level modules:
+	bit14_reg
+
+} {} {}} /filespace/people/v/vennard/Desktop/Combined/eep.v {2 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/Desktop/Combined/eep.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+** Warning: /filespace/people/v/vennard/Desktop/Combined/eep.v(1): (vlog-2283) Extra semicolon in $unit (global) scope.
+-- Compiling module eep
+
+Top level modules:
+	eep
+
+} {} {}}

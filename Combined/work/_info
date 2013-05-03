@@ -1,0 +1,392 @@
+m255
+K3
+13
+cModel Technology
+d/filespace/people/v/vennard/551projectCBC/verilog
+vaccel_mstr
+VQe?8S`4Z=E0JHY:keIhlY2
+r1
+31
+IFU=S;UBM9VFdD@A86hC]k2
+Z0 d/filespace/people/v/vennard/Desktop/Combined
+w1367536915
+8/filespace/people/v/vennard/Desktop/Combined/accel_mstr.v
+F/filespace/people/v/vennard/Desktop/Combined/accel_mstr.v
+L0 1
+Z1 OE;L;10.0c_1;49
+Z2 !s102 -nocovercells
+Z3 o-work work -nocovercells -L mtiAvm -L mtiOvm -L mtiUvm -L mtiUPF
+!s100 ?=l2Fkz5O_c[HFM1`7[7k0
+!s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/Desktop/Combined/accel_mstr.v|
+!s108 1367547930.155933
+!s107 /filespace/people/v/vennard/Desktop/Combined/accel_mstr.v|
+!s85 0
+vaccel_UART
+V[2SgcL[:H1l26]>>INfPQ3
+r1
+31
+I6U=3E:MQV]?78<3NQP6562
+Z4 d/filespace/people/v/vennard/Desktop/Combined
+w1365631110
+8/filespace/people/v/vennard/Desktop/Combined/accel_UART.v
+F/filespace/people/v/vennard/Desktop/Combined/accel_UART.v
+L0 1
+R1
+R2
+R3
+naccel_@u@a@r@t
+!s100 [0a3?zn@Zfhm?kM;8Uoa=1
+!s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/Desktop/Combined/accel_UART.v|
+!s108 1367547931.346016
+!s107 /filespace/people/v/vennard/Desktop/Combined/accel_UART.v|
+!s85 0
+vbit14_reg
+V_ZfgJh0:NE^>5USWNf`>G3
+r1
+31
+I2Y91j9Fz>LeZPml^:PR6U3
+R4
+w1366661084
+8/filespace/people/v/vennard/Desktop/Combined/bit14_reg.v
+F/filespace/people/v/vennard/Desktop/Combined/bit14_reg.v
+L0 2
+R1
+R2
+R3
+!s100 NBJGjD3c@TXMOAiOfbeUT1
+!s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/Desktop/Combined/bit14_reg.v|
+!s108 1367547932.074582
+!s107 /filespace/people/v/vennard/Desktop/Combined/bit14_reg.v|
+!s85 0
+vbit14_reg_clr
+V>zk:3ZX2[aJ`7?O`^JJ[Y2
+r1
+31
+I;WF]B=l1ZG6bJMfIBM>VF3
+R4
+w1366660304
+8/filespace/people/v/vennard/Desktop/Combined/bit14_reg_clr.v
+F/filespace/people/v/vennard/Desktop/Combined/bit14_reg_clr.v
+L0 2
+R1
+R2
+R3
+!s100 3`ZE=_I^KK5B]fU63iod;2
+!s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/Desktop/Combined/bit14_reg_clr.v|
+!s108 1367547932.430922
+!s107 /filespace/people/v/vennard/Desktop/Combined/bit14_reg_clr.v|
+!s85 0
+vbit14_reg_rst
+VPbX6DJn5^Pd=@mz5^FSoV1
+r1
+31
+I@M1M_gj=clKB;3TNKlaTQ3
+R4
+w1366660306
+8/filespace/people/v/vennard/Desktop/Combined/bit14_reg_rst.v
+F/filespace/people/v/vennard/Desktop/Combined/bit14_reg_rst.v
+L0 2
+R1
+R2
+R3
+!s100 Z0iAhOJ67[]GKHfhH8i@`3
+!s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/Desktop/Combined/bit14_reg_rst.v|
+!s108 1367547932.778176
+!s107 /filespace/people/v/vennard/Desktop/Combined/bit14_reg_rst.v|
+!s85 0
+vcbc_dig
+Va=`Kifi=FXmEh0E34W=jl3
+r1
+31
+IAN1RgLziTh:F;JhHiE<Ig0
+R4
+w1367541126
+8/filespace/people/v/vennard/Desktop/Combined/cbc_dig.v
+F/filespace/people/v/vennard/Desktop/Combined/cbc_dig.v
+L0 1
+R1
+R2
+R3
+!s100 RKgX[U_ZacUzGJ`LmKz_Z1
+!s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/Desktop/Combined/cbc_dig.v|
+!s108 1367547933.092697
+!s107 /filespace/people/v/vennard/Desktop/Combined/cbc_dig.v|
+!s85 0
+vcbc_dig_tb
+V;TmL1AR`U8?ERVZlD32VG2
+r1
+!s85 0
+31
+IHd=bh2P:YBTbbW>N<_TdN1
+R4
+w1367548440
+8/filespace/people/v/vennard/Desktop/Combined/cbc_dig_tb.v
+F/filespace/people/v/vennard/Desktop/Combined/cbc_dig_tb.v
+L0 9
+R1
+!s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/Desktop/Combined/cbc_dig_tb.v|
+R2
+R3
+!s100 KE]6Wg8i2Ob:W;5IL8Cc@3
+!s108 1367548452.650857
+!s107 /filespace/people/v/vennard/Desktop/Combined/cbc_dig_tb.v|
+vcfg_mstr
+VOAJHgfN:Yj95b7>@Vz[zm1
+r1
+31
+I`<WDDDJ<>KjL^?I3DmI^F1
+R4
+w1365617100
+8/filespace/people/v/vennard/Desktop/Combined/cfg_mstr.v
+F/filespace/people/v/vennard/Desktop/Combined/cfg_mstr.v
+L0 1
+R1
+R2
+R3
+!s100 KdXK=O7Z9YLCBZ=kOaRZ83
+!s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/Desktop/Combined/cfg_mstr.v|
+!s108 1367547935.167270
+!s107 /filespace/people/v/vennard/Desktop/Combined/cfg_mstr.v|
+!s85 0
+vcfg_UART
+V]2i2W[<jf?<1Mf17f_S6<2
+r1
+31
+I`B^mSM;0eZJT0l];nXe373
+R4
+w1365617152
+8/filespace/people/v/vennard/Desktop/Combined/cfg_UART.v
+F/filespace/people/v/vennard/Desktop/Combined/cfg_UART.v
+L0 4
+R1
+R2
+R3
+ncfg_@u@a@r@t
+!s100 dfE0RX7;f4aSLPLlZAPRd1
+!s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/Desktop/Combined/cfg_UART.v|
+!s108 1367547936.019971
+!s107 /filespace/people/v/vennard/Desktop/Combined/cfg_UART.v|
+!s85 0
+vcontrol
+V?MBmh4JDcUlP^SL:jVVBJ0
+r1
+31
+I1E9A258VTWBbIPaF;eO>@2
+R4
+w1367548156
+8/filespace/people/v/vennard/Desktop/Combined/control.v
+F/filespace/people/v/vennard/Desktop/Combined/control.v
+L0 1
+R1
+R2
+R3
+!s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/Desktop/Combined/control.v|
+!s100 S:Q9m:_m;>jRNgah3MmIz1
+!s108 1367548288.257666
+!s107 /filespace/people/v/vennard/Desktop/Combined/control.v|
+!s85 0
+vdatapath_control
+I=efYEDoQDLP><14dL1Ni@2
+VakHIQWXzDgfK2SEeHKzzk2
+R4
+w1367168224
+8/filespace/people/v/vennard/Desktop/Combined/datapathcontrol.v
+F/filespace/people/v/vennard/Desktop/Combined/datapathcontrol.v
+L0 2
+R1
+r1
+31
+R2
+R3
+!s100 D@@zDCR:Y5LHfbFRPlc2I1
+!s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/Desktop/Combined/datapathcontrol.v|
+!s108 1367547938.167236
+!s107 /filespace/people/v/vennard/Desktop/Combined/datapathcontrol.v|
+!s85 0
+vdc_datapath
+V6JNA586e;_jJdV8PTa7>H3
+r1
+31
+I<k@;>W8zRYLK0la988]Pn1
+R4
+w1367540366
+8/filespace/people/v/vennard/Desktop/Combined/dc_datapath.v
+F/filespace/people/v/vennard/Desktop/Combined/dc_datapath.v
+L0 1
+R1
+R2
+R3
+!s100 hREb^l@[CDLOalNZiVgJE1
+!s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/Desktop/Combined/dc_datapath.v|
+!s108 1367547938.851586
+!s107 /filespace/people/v/vennard/Desktop/Combined/dc_datapath.v|
+!s85 0
+vdig_core
+Vn:f<UeXMF0f4UNhW5el6n0
+r1
+31
+IF^HmFcCPI5VonA6FZmd`^3
+R4
+w1367544381
+8/filespace/people/v/vennard/Desktop/Combined/dig_core.v
+F/filespace/people/v/vennard/Desktop/Combined/dig_core.v
+L0 1
+R1
+R2
+R3
+!s100 ?GDCzO5J?3MFeEe3_ZAA]0
+!s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/Desktop/Combined/dig_core.v|
+!s108 1367547939.104977
+!s107 /filespace/people/v/vennard/Desktop/Combined/dig_core.v|
+!s85 0
+veep
+VKA0:WO?<D0Ge83eJ5z<XB2
+r1
+31
+I4[3W@1jXU<8gA8Dj^7BEl3
+R4
+w1367538958
+8/filespace/people/v/vennard/Desktop/Combined/eep.v
+F/filespace/people/v/vennard/Desktop/Combined/eep.v
+L0 3
+R1
+R2
+R3
+!s100 YMM7EX0nAK;?J;;l3b`U`3
+!s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/Desktop/Combined/eep.v|
+!s108 1367547939.263041
+!s107 /filespace/people/v/vennard/Desktop/Combined/eep.v|
+!s85 0
+vPWM
+I]gc?AY[3:R8La_]<OC8]63
+VW9Y<S51l]1FBS4XkX3IUz1
+R4
+w1367539482
+8/filespace/people/v/vennard/Desktop/Combined/PWM.v
+F/filespace/people/v/vennard/Desktop/Combined/PWM.v
+L0 6
+R1
+r1
+31
+R2
+R3
+n@p@w@m
+!s100 g7M92I5MUlH;Vj9hEg7LB3
+!s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/Desktop/Combined/PWM.v|
+!s108 1367547940.222597
+!s107 /filespace/people/v/vennard/Desktop/Combined/PWM.v|
+!s85 0
+vpwm
+DXx6 sv_std 3 std 0 22 :CP]PHbGOHGT_H:3KF`8L2
+Vg<2<81I?j0_bi^110LE_70
+r1
+31
+I>6F`Vbm>f_UjPE1?nAX4c0
+S1
+R4
+w1367448902
+8/filespace/people/v/vennard/Desktop/Combined/pwm.sv
+F/filespace/people/v/vennard/Desktop/Combined/pwm.sv
+L0 1
+R1
+R2
+o-work work -sv -nocovercells -L mtiAvm -L mtiOvm -L mtiUvm -L mtiUPF
+!s100 E7NdX6^K;];W48HPegz^R3
+!s105 pwm_sv_unit
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-nocovercells|/filespace/people/v/vennard/Desktop/Combined/pwm.sv|
+!s108 1367539628.484724
+!s107 /filespace/people/v/vennard/Desktop/Combined/pwm.sv|
+!s85 0
+vpwm_monitor
+V26m_aboW=T3EZ=[D[3]J<2
+r1
+31
+I]N<j@fgR:4jma0IU]gV@f1
+R4
+w1366821644
+8/filespace/people/v/vennard/Desktop/Combined/pwm_monitor.v
+F/filespace/people/v/vennard/Desktop/Combined/pwm_monitor.v
+L0 1
+R1
+R2
+R3
+!s100 kTI`o[G0=J73h6agN@5XB0
+!s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/Desktop/Combined/pwm_monitor.v|
+!s108 1367547939.504008
+!s107 /filespace/people/v/vennard/Desktop/Combined/pwm_monitor.v|
+!s85 0
+vsaturator
+V5G<?@WZ2BYXYMjFoHZ8]I3
+r1
+31
+I0e>N:zLB0`]cckSz7<SU@2
+R4
+w1366812964
+8/filespace/people/v/vennard/Desktop/Combined/saturator.v
+F/filespace/people/v/vennard/Desktop/Combined/saturator.v
+L0 2
+R1
+R2
+R3
+!s100 E67;E_oJ@^[RA7knP17eo1
+!s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/Desktop/Combined/saturator.v|
+!s108 1367547939.635090
+!s107 /filespace/people/v/vennard/Desktop/Combined/saturator.v|
+!s85 0
+vUART
+V4Vem3jdf05mGH40RX?;j72
+r1
+31
+IZk=`dQ4MTDic`<53Lz;F^0
+R4
+w1365600016
+8/filespace/people/v/vennard/Desktop/Combined/UART.v
+F/filespace/people/v/vennard/Desktop/Combined/UART.v
+L0 4
+R1
+R2
+R3
+n@u@a@r@t
+!s100 9DMNL>@QXD__^B_g6<cM<2
+!s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/Desktop/Combined/UART.v|
+!s108 1367547939.760837
+!s107 /filespace/people/v/vennard/Desktop/Combined/UART.v|
+!s85 0
+vUART_rx
+VWAZhS9=>`[0lk3h4lJ[1K2
+r1
+31
+I?NRo67_cWFA^:^Wh1EB>81
+R4
+w1365599912
+8/filespace/people/v/vennard/Desktop/Combined/UART_rx.v
+F/filespace/people/v/vennard/Desktop/Combined/UART_rx.v
+L0 4
+R1
+R2
+R3
+n@u@a@r@t_rx
+!s100 ;[N4lWR?AgPL?B4<G6_G^1
+!s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/Desktop/Combined/UART_rx.v|
+!s108 1367547939.876157
+!s107 /filespace/people/v/vennard/Desktop/Combined/UART_rx.v|
+!s85 0
+vUART_tx
+VTj8K>T00K`J:=Uf[T_c^]2
+r1
+31
+IK>1NV[8J8g^3`@OKEz:<=1
+R4
+w1367540398
+8/filespace/people/v/vennard/Desktop/Combined/UART_tx.v
+F/filespace/people/v/vennard/Desktop/Combined/UART_tx.v
+L0 6
+R1
+R2
+R3
+n@u@a@r@t_tx
+!s100 nVe[D=;1``RVAkzJK_L^m2
+!s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/Desktop/Combined/UART_tx.v|
+!s108 1367547940.001130
+!s107 /filespace/people/v/vennard/Desktop/Combined/UART_tx.v|
+!s85 0

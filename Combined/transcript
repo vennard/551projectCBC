@@ -1,0 +1,165 @@
+# //  ModelSim SE 10.0c_1 Aug 26 2011 Linux 2.6.42-0.bpo.4-amd64
+# //
+# //  Copyright 1991-2011 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION
+# //  WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
+# //  LICENSORS AND IS SUBJECT TO LICENSE TERMS.
+# //
+# Loading project Final_Project
+#  
+# Compile of accel_UART.v was successful.
+# Compile of bit14_reg.v was successful.
+# Compile of bit14_reg_clr.v was successful.
+# Compile of bit14_reg_rst.v was successful.
+# Compile of cbc_dig.v was successful.
+# Compile of cbc_dig_tb.v failed with 1 errors.
+# Compile of cfg_mstr.v was successful.
+# Compile of cfg_UART.v was successful.
+# Compile of control.v was successful.
+# Compile of datapathcontrol.v was successful.
+# Compile of dc_datapath.v was successful.
+# Compile of dig_core.v was successful.
+# Compile of eep.v was successful with warnings.
+# Compile of pwm.sv was successful with warnings.
+# Compile of pwm_monitor.v was successful.
+# Compile of saturator.v was successful.
+# Compile of UART.v was successful.
+# Compile of UART_rx.v was successful.
+# Compile of UART_tx.v was successful.
+# 19 compiles, 1 failed with 1 error. 
+# Compile of cbc_dig_tb.v was successful with warnings.
+# Compile of cfg_mstr.v was successful.
+# 2 compiles, 0 failed with no errors. 
+# Compile of cbc_dig_tb.v was successful.
+# Compile of accel_mstr.v failed with 1 errors.
+# Compile of accel_mstr.v was successful.
+vsim -novopt work.cbc_dig_tb
+# vsim -novopt work.cbc_dig_tb 
+# Refreshing /filespace/people/a/allarson/ece551/modelsim/project/work.cbc_dig_tb
+# Loading work.cbc_dig_tb
+# Refreshing /filespace/people/a/allarson/ece551/modelsim/project/work.cbc_dig
+# Loading work.cbc_dig
+# Refreshing /filespace/people/a/allarson/ece551/modelsim/project/work.dig_core
+# Loading work.dig_core
+# Refreshing /filespace/people/a/allarson/ece551/modelsim/project/work.control
+# Loading work.control
+# Refreshing /filespace/people/a/allarson/ece551/modelsim/project/work.dc_datapath
+# Loading work.dc_datapath
+# Refreshing /filespace/people/a/allarson/ece551/modelsim/project/work.bit14_reg
+# Loading work.bit14_reg
+# Refreshing /filespace/people/a/allarson/ece551/modelsim/project/work.bit14_reg_clr
+# Loading work.bit14_reg_clr
+# Refreshing /filespace/people/a/allarson/ece551/modelsim/project/work.bit14_reg_rst
+# Loading work.bit14_reg_rst
+# Refreshing /filespace/people/a/allarson/ece551/modelsim/project/work.saturator
+# Loading work.saturator
+# Refreshing /filespace/people/a/allarson/ece551/modelsim/project/work.cfg_UART
+# Loading work.cfg_UART
+# Refreshing /filespace/people/a/allarson/ece551/modelsim/project/work.UART
+# Loading work.UART
+# Refreshing /filespace/people/a/allarson/ece551/modelsim/project/work.UART_tx
+# Loading work.UART_tx
+# Refreshing /filespace/people/a/allarson/ece551/modelsim/project/work.UART_rx
+# Loading work.UART_rx
+# Refreshing /filespace/people/a/allarson/ece551/modelsim/project/work.accel_UART
+# Loading work.accel_UART
+# Refreshing /filespace/people/a/allarson/ece551/modelsim/project/work.pwm
+# Loading sv_std.std
+# Loading work.pwm
+# Refreshing /filespace/people/a/allarson/ece551/modelsim/project/work.eep
+# Loading work.eep
+# Refreshing /filespace/people/a/allarson/ece551/modelsim/project/work.cfg_mstr
+# Loading work.cfg_mstr
+# ** Error: (vsim-3033) /filespace/people/a/allarson/ece551/modelsim/project/cbc_dig_tb.v(116): Instantiation of 'accelGen' failed. The design unit was not found.
+#         Region: /cbc_dig_tb
+#         Searched libraries:
+#             /filespace/people/a/allarson/ece551/modelsim/project/work
+# Refreshing /filespace/people/a/allarson/ece551/modelsim/project/work.pwm_monitor
+# Loading work.pwm_monitor
+# Error loading design
+# Compile of cbc_dig_tb.v was successful.
+vsim -novopt work.cbc_dig_tb
+# vsim -novopt work.cbc_dig_tb 
+# Refreshing /filespace/people/a/allarson/ece551/modelsim/project/work.cbc_dig_tb
+# Loading work.cbc_dig_tb
+# Loading work.cbc_dig
+# Loading work.dig_core
+# Loading work.control
+# Loading work.dc_datapath
+# Loading work.bit14_reg
+# Loading work.bit14_reg_clr
+# Loading work.bit14_reg_rst
+# Loading work.saturator
+# Loading work.cfg_UART
+# Loading work.UART
+# Loading work.UART_tx
+# Loading work.UART_rx
+# Loading work.accel_UART
+# Loading sv_std.std
+# Loading work.pwm
+# Loading work.eep
+# Loading work.cfg_mstr
+# Refreshing /filespace/people/a/allarson/ece551/modelsim/project/work.accel_mstr
+# Loading work.accel_mstr
+# Loading work.pwm_monitor
+# ** Warning: (vsim-PLI-3003) /filespace/people/a/allarson/ece551/modelsim/project/cbc_dig_tb.v(218): [TOFD] - System task or function '$done' is not defined.
+#         Region: /cbc_dig_tb
+# ** Warning: (vsim-3008) /filespace/people/a/allarson/ece551/modelsim/project/cbc_dig_tb.v(84): [CNNODP] - Component name (ctrl) is not on a downward path.
+#         Region: /cbc_dig_tb
+# ** Error: (vsim-3043) /filespace/people/a/allarson/ece551/modelsim/project/cbc_dig_tb.v(84): Unresolved reference to 'ctrl' in DUT.iDIG.ctrl.
+#         Region: /cbc_dig_tb
+# ** Warning: (vsim-3008) /filespace/people/a/allarson/ece551/modelsim/project/cbc_dig_tb.v(75): [CNNODP] - Component name (d) is not on a downward path.
+#         Region: /cbc_dig_tb
+# ** Error: (vsim-3043) /filespace/people/a/allarson/ece551/modelsim/project/cbc_dig_tb.v(75): Unresolved reference to 'd' in DUT.iDIG.d.
+#         Region: /cbc_dig_tb
+# ** Warning: (vsim-3008) /filespace/people/a/allarson/ece551/modelsim/project/cbc_dig_tb.v(79): [CNNODP] - Component name (diferr) is not on a downward path.
+#         Region: /cbc_dig_tb
+# ** Error: (vsim-3043) /filespace/people/a/allarson/ece551/modelsim/project/cbc_dig_tb.v(79): Unresolved reference to 'diferr' in DUT.iDIG.diferr.
+#         Region: /cbc_dig_tb
+# ** Warning: (vsim-3008) /filespace/people/a/allarson/ece551/modelsim/project/cbc_dig_tb.v(78): [CNNODP] - Component name (duty) is not on a downward path.
+#         Region: /cbc_dig_tb
+# ** Error: (vsim-3043) /filespace/people/a/allarson/ece551/modelsim/project/cbc_dig_tb.v(78): Unresolved reference to 'duty' in DUT.iDIG.duty.
+#         Region: /cbc_dig_tb
+# ** Warning: (vsim-3008) /filespace/people/a/allarson/ece551/modelsim/project/cbc_dig_tb.v(77): [CNNODP] - Component name (err) is not on a downward path.
+#         Region: /cbc_dig_tb
+# ** Error: (vsim-3043) /filespace/people/a/allarson/ece551/modelsim/project/cbc_dig_tb.v(77): Unresolved reference to 'err' in DUT.iDIG.err.
+#         Region: /cbc_dig_tb
+# ** Warning: (vsim-3008) /filespace/people/a/allarson/ece551/modelsim/project/cbc_dig_tb.v(74): [CNNODP] - Component name (i) is not on a downward path.
+#         Region: /cbc_dig_tb
+# ** Error: (vsim-3043) /filespace/people/a/allarson/ece551/modelsim/project/cbc_dig_tb.v(74): Unresolved reference to 'i' in DUT.iDIG.i.
+#         Region: /cbc_dig_tb
+# ** Warning: (vsim-3008) /filespace/people/a/allarson/ece551/modelsim/project/cbc_dig_tb.v(73): [CNNODP] - Component name (p) is not on a downward path.
+#         Region: /cbc_dig_tb
+# ** Error: (vsim-3043) /filespace/people/a/allarson/ece551/modelsim/project/cbc_dig_tb.v(73): Unresolved reference to 'p' in DUT.iDIG.p.
+#         Region: /cbc_dig_tb
+# ** Warning: (vsim-3008) /filespace/people/a/allarson/ece551/modelsim/project/cbc_dig_tb.v(71): [CNNODP] - Component name (preverr) is not on a downward path.
+#         Region: /cbc_dig_tb
+# ** Error: (vsim-3043) /filespace/people/a/allarson/ece551/modelsim/project/cbc_dig_tb.v(71): Unresolved reference to 'preverr' in DUT.iDIG.preverr.
+#         Region: /cbc_dig_tb
+# ** Warning: (vsim-3008) /filespace/people/a/allarson/ece551/modelsim/project/cbc_dig_tb.v(70): [CNNODP] - Component name (sumerr) is not on a downward path.
+#         Region: /cbc_dig_tb
+# ** Error: (vsim-3043) /filespace/people/a/allarson/ece551/modelsim/project/cbc_dig_tb.v(70): Unresolved reference to 'sumerr' in DUT.iDIG.sumerr.
+#         Region: /cbc_dig_tb
+# ** Warning: (vsim-3008) /filespace/people/a/allarson/ece551/modelsim/project/cbc_dig_tb.v(80): [CNNODP] - Component name (xmeas) is not on a downward path.
+#         Region: /cbc_dig_tb
+# ** Error: (vsim-3043) /filespace/people/a/allarson/ece551/modelsim/project/cbc_dig_tb.v(80): Unresolved reference to 'xmeas' in DUT.iDIG.xmeas.
+#         Region: /cbc_dig_tb
+# ** Warning: (vsim-3008) /filespace/people/a/allarson/ece551/modelsim/project/cbc_dig_tb.v(72): [CNNODP] - Component name (xset) is not on a downward path.
+#         Region: /cbc_dig_tb
+# ** Error: (vsim-3043) /filespace/people/a/allarson/ece551/modelsim/project/cbc_dig_tb.v(72): Unresolved reference to 'xset' in DUT.iDIG.xset.
+#         Region: /cbc_dig_tb
+# ** Warning: (vsim-3015) /filespace/people/a/allarson/ece551/modelsim/project/Combined/cbc_dig.v(33): [PCDPC] - Port size (12 or 12) does not match connection size (14) for port 'eep_rd_data'. The port definition is at: /filespace/people/a/allarson/ece551/modelsim/project/Combined/dig_core.v(3).
+#         Region: /cbc_dig_tb/DUT/iDIG
+# ** Warning: (vsim-3015) /filespace/people/a/allarson/ece551/modelsim/project/Combined/dig_core.v(71): [PCDPC] - Port size (2 or 2) does not match connection size (1) for port 'c_prod'. The port definition is at: /filespace/people/a/allarson/ece551/modelsim/project/Combined/control.v(1).
+#         Region: /cbc_dig_tb/DUT/iDIG/icntrl
+# ** Warning: (vsim-3015) /filespace/people/a/allarson/ece551/modelsim/project/Combined/dig_core.v(96): [PCDPC] - Port size (2 or 2) does not match connection size (1) for port 'c_prod'. The port definition is at: /filespace/people/a/allarson/ece551/modelsim/project/Combined/dc_datapath.v(1).
+#         Region: /cbc_dig_tb/DUT/iDIG/idatapath
+# ** Warning: (vsim-3015) /filespace/people/a/allarson/ece551/modelsim/project/Combined/dig_core.v(96): [PCDPC] - Port size (14 or 14) does not match connection size (12) for port 'eep_rd_data'. The port definition is at: /filespace/people/a/allarson/ece551/modelsim/project/Combined/dc_datapath.v(1).
+#         Region: /cbc_dig_tb/DUT/iDIG/idatapath
+# ** Error: (vsim-3063) /filespace/people/a/allarson/ece551/modelsim/project/Combined/cbc_dig.v(40): Port 'RX_C' not found in the connected module (3rd connection).
+#         Region: /cbc_dig_tb/DUT/iCFG
+# ** Error: (vsim-3063) /filespace/people/a/allarson/ece551/modelsim/project/Combined/cbc_dig.v(40): Port 'TX_C' not found in the connected module (4th connection).
+#         Region: /cbc_dig_tb/DUT/iCFG
+# Error loading design
