@@ -12,7 +12,7 @@ entity control is
         chrg_pmp_en     : out    vl_logic;
         eep_r_w_n       : out    vl_logic;
         clr_rdy         : out    vl_logic;
-        strt_tx         : out    vl_logic;
+        strt_tx_true    : out    vl_logic;
         eep_cs_n        : out    vl_logic;
         wrt_duty        : out    vl_logic;
         c_err           : out    vl_logic;

@@ -229,3 +229,244 @@ run -all
 # Break in Module pwm at /filespace/people/v/vennard/Desktop/Combined/pwm.sv line 33
 # Error opening /filespace/people/v/vennard/Desktop/Combined/pwm.sv
 # Path name '/filespace/people/v/vennard/Desktop/Combined/pwm.sv' doesn't exist.
+# Compile of cbc_dig_tb.v was successful.
+restart
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.cbc_dig_tb
+# Loading work.cbc_dig_tb
+# Loading sv_std.std
+# Loading work.pwm
+run -all
+# Initialization test running...
+# Finishing Initialization...
+# Basic test running...
+#          1 duty written correctly
+# ERROR - dst = x0065 -- should be =x0000
+#          3 duty written correctly
+#          4 duty written correctly
+#          5 duty written correctly
+#          6 duty written correctly
+#          7 duty written correctly
+#          8 duty written correctly
+#          9 duty written correctly
+#         10 duty written correctly
+#         11 duty written correctly
+#         12 duty written correctly
+#         13 duty written correctly
+#         14 duty written correctly
+#         15 duty written correctly
+#         16 duty written correctly
+#         17 duty written correctly
+#         18 duty written correctly
+#         19 duty written correctly
+#         20 duty written correctly
+#         21 duty written correctly
+# Finishing Basic Test...
+# Starting Xset testing
+# Sending new xset value...
+# Break key hit 
+# Simulation stop requested.
+# Compile of cbc_dig_tb.v was successful.
+add wave sim:/cbc_dig_tb/DUT/iCFG/*
+write format wave -window .main_pane.wave.interior.cs.body.pw.wf /filespace/people/v/vennard/551projectCBC/Combined/wave.do
+restart
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.cbc_dig_tb
+# Loading work.cbc_dig_tb
+# Loading sv_std.std
+# Loading work.pwm
+run -all
+# Initialization test running...
+# Finishing Initialization...
+# Basic test running...
+#          1 duty written correctly
+# ERROR - dst = x0065 -- should be =x0000
+#          3 duty written correctly
+#          4 duty written correctly
+#          5 duty written correctly
+#          6 duty written correctly
+#          7 duty written correctly
+#          8 duty written correctly
+#          9 duty written correctly
+#         10 duty written correctly
+#         11 duty written correctly
+#         12 duty written correctly
+#         13 duty written correctly
+#         14 duty written correctly
+#         15 duty written correctly
+#         16 duty written correctly
+#         17 duty written correctly
+#         18 duty written correctly
+#         19 duty written correctly
+#         20 duty written correctly
+#         21 duty written correctly
+# Finishing Basic Test...
+# Starting Xset testing
+# Sending new xset value...
+# Break key hit 
+# Compile of control.v failed with 1 errors.
+# Compile of control.v was successful.
+restart
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.control
+# Loading work.control
+# Loading sv_std.std
+# Loading work.pwm
+# ** Error: (vsim-3063) /filespace/people/v/vennard/551projectCBC/Combined/dig_core.v(74): Port 'strt_tx' not found in the connected module (11th connection).
+#         Region: /cbc_dig_tb/DUT/iDIG/icntrl
+# Compile of dig_core.v was successful.
+# Compile of dig_core.v was successful.
+# Break key hit 
+# Break key hit 
+# Break key hit 
+# Break key hit 
+# Break key hit 
+# Break key hit 
+# Break key hit 
+# Break key hit 
+# Break key hit 
+# Compile of accel_mstr.v was successful.
+# Compile of accel_UART.v was successful.
+# Compile of bit14_reg.v was successful.
+# Compile of bit14_reg_clr.v was successful.
+# Compile of bit14_reg_rst.v was successful.
+# Compile of cbc_dig.v was successful.
+# Compile of cbc_dig_tb.v was successful.
+# Compile of cfg_mstr.v was successful.
+# Compile of cfg_UART.v was successful.
+# Compile of control.v was successful.
+# Compile of datapathcontrol.v was successful.
+# Compile of dc_datapath.v was successful.
+# Compile of dig_core.v was successful.
+# Compile of eep.v was successful with warnings.
+# Compile of PWM.v was successful.
+# Compile of pwm_monitor.v was successful.
+# Compile of saturator.v was successful.
+# Compile of UART.v was successful.
+# Compile of UART_rx.v was successful.
+# Compile of UART_tx.v was successful.
+# 20 compiles, 0 failed with no errors. 
+write format wave -window .main_pane.wave.interior.cs.body.pw.wf /filespace/people/v/vennard/551projectCBC/Combined/wave.do
+# Break key hit 
+vsim -novopt work.cbc_dig_tb
+# vsim -novopt work.cbc_dig_tb 
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.cbc_dig_tb
+# Loading work.cbc_dig_tb
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.cbc_dig
+# Loading work.cbc_dig
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.dig_core
+# Loading work.dig_core
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.control
+# Loading work.control
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.dc_datapath
+# Loading work.dc_datapath
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.bit14_reg
+# Loading work.bit14_reg
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.bit14_reg_clr
+# Loading work.bit14_reg_clr
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.bit14_reg_rst
+# Loading work.bit14_reg_rst
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.saturator
+# Loading work.saturator
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.cfg_UART
+# Loading work.cfg_UART
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.UART
+# Loading work.UART
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.UART_tx
+# Loading work.UART_tx
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.UART_rx
+# Loading work.UART_rx
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.accel_UART
+# Loading work.accel_UART
+# Loading sv_std.std
+# Loading work.pwm
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.eep
+# Loading work.eep
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.cfg_mstr
+# Loading work.cfg_mstr
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.accel_mstr
+# Loading work.accel_mstr
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.pwm_monitor
+# Loading work.pwm_monitor
+do /filespace/people/v/vennard/551projectCBC/Combined/wave.do
+quit -sim
+vsim -novopt work.cbc_dig_tb
+# vsim -novopt work.cbc_dig_tb 
+# Loading work.cbc_dig_tb
+# Loading work.cbc_dig
+# Loading work.dig_core
+# Loading work.control
+# Loading work.dc_datapath
+# Loading work.bit14_reg
+# Loading work.bit14_reg_clr
+# Loading work.bit14_reg_rst
+# Loading work.saturator
+# Loading work.cfg_UART
+# Loading work.UART
+# Loading work.UART_tx
+# Loading work.UART_rx
+# Loading work.accel_UART
+# Loading sv_std.std
+# Loading work.pwm
+# Loading work.eep
+# Loading work.cfg_mstr
+# Loading work.accel_mstr
+# Loading work.pwm_monitor
+do /filespace/people/v/vennard/551projectCBC/Combined/wave.do
+# Causality operation skipped due to absense of debug database file
+run -all
+# Initialization test running...
+# Finishing Initialization...
+# Basic test running...
+#          1 duty written correctly
+# ERROR - dst = x0065 -- should be =x0000
+#          3 duty written correctly
+#          4 duty written correctly
+#          5 duty written correctly
+#          6 duty written correctly
+#          7 duty written correctly
+#          8 duty written correctly
+#          9 duty written correctly
+#         10 duty written correctly
+#         11 duty written correctly
+#         12 duty written correctly
+#         13 duty written correctly
+#         14 duty written correctly
+#         15 duty written correctly
+#         16 duty written correctly
+#         17 duty written correctly
+#         18 duty written correctly
+#         19 duty written correctly
+#         20 duty written correctly
+#         21 duty written correctly
+# Finishing Basic Test...
+# Starting Xset testing
+# Sending new xset value...
+# Checking xset response...
+# ERROR - #          0 xset response value not correct
+# Sending new xset value...
+# Checking xset response...
+# ERROR - #          1 xset response value not correct
+# Sending new xset value...
+# Checking xset response...
+# ERROR - #          2 xset response value not correct
+# Sending new xset value...
+# Checking xset response...
+# ERROR - #          3 xset response value not correct
+# Sending new xset value...
+# Checking xset response...
+# ERROR - #          4 xset response value not correct
+# Sending new xset value...
+# Checking xset response...
+# ERROR - #          5 xset response value not correct
+# Sending new xset value...
+# Checking xset response...
+# ERROR - #          6 xset response value not correct
+# Sending new xset value...
+# Checking xset response...
+# ERROR - #          7 xset response value not correct
+# Sending new xset value...
+# Checking xset response...
+# ERROR - #          8 xset response value not correct
+# Sending new xset value...
+# Checking xset response...
+# ERROR - #          9 xset response value not correct
+# End of Testing
+# Break in Module cbc_dig_tb at /filespace/people/v/vennard/551projectCBC/Combined/cbc_dig_tb.v line 247

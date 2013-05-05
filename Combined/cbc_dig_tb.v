@@ -223,9 +223,8 @@ always @(posedge clk) begin
 
 	    //Start process to send data to the config UART
 		if(xsetNew==0) begin
-            //Load and Send data to DUT TODO add back below
+            //Load and Send data to DUT 
             cmd_data = xsetVals[xcnt][23:0];
-				//cmd_data = 24'h0c0024;
             snd_frm = 1;
             $display("Sending new xset value...");
             xsetNew = 1;

@@ -1,5 +1,5 @@
 module control(accel_vld, frm_rdy, clk, rst_n, cfg_data, c_prod, eep_addr,
-               chrg_pmp_en, eep_r_w_n, clr_rdy, strt_tx, eep_cs_n, wrt_duty,
+               chrg_pmp_en, eep_r_w_n, clr_rdy, strt_tx_true, eep_cs_n, wrt_duty,
                c_err, c_duty, c_sumerr, c_diferr, c_xset, c_preverr, c_pid,
                c_init_prod, c_subtract, c_multsat, c_clr_duty, asrcsel, bsrcsel);
                
@@ -14,7 +14,8 @@ output reg [1:0] eep_addr;
 output reg chrg_pmp_en;
 output reg eep_r_w_n;
 output reg clr_rdy;
-output reg strt_tx;
+output strt_tx_true; //JOHN changed TODO also in sensitivity list ^ ^
+//output reg strt_tx_true;
 output reg eep_cs_n;
 output reg wrt_duty;
 
@@ -89,7 +90,19 @@ localparam	XSET		= 3'b000,
 				POSACKA5A= 3'b101,
 				PROD2512	= 3'b110,
 				EEPDATA	= 3'b111;
-				
+
+			
+//JOHN ADDED CODE TODO -- fixing response problem - strt tx held for 2 clk
+reg txCheck;
+reg strt_tx;
+always @(posedge clk, negedge rst_n)
+	if(!rst_n)
+	  txCheck <= 1'b0;
+	else
+	  txCheck <= strt_tx;
+
+assign strt_tx_true = (strt_tx | txCheck);
+		  
 
 always @(posedge clk, negedge rst_n)
    if(!rst_n)
