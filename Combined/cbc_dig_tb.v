@@ -234,7 +234,7 @@ always @(posedge clk) begin
         if(rsp_rdy) begin
             //Check that control echo's xset back
             $display("Checking xset response...");
-            if(xset != resp) $display("ERROR - #%d xset response value not correct",xcnt);
+            if(cmd_data[13:0] != resp) $display("ERROR - resp is =x%x -- should be x%x",resp,cmd_data[13:0]);
             //Prep to send another xset value
             xsetNew = 0;
             xcnt = xcnt + 1;
