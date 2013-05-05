@@ -1,0 +1,101 @@
+/afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/PWM.v {0 {vlog -work work /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/PWM.v
+Model Technology ModelSim SE vlog 5.8b Compiler 2004.01 Jan 26 2004
+** Error: (vlog-19) Failed to access library 'work' at "work".
+No such file or directory. (errno = ENOENT)
+
+} {3.0 4.0} {}} /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/dig_core.v {0 {vlog -work work /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/dig_core.v
+Model Technology ModelSim SE vlog 5.8b Compiler 2004.01 Jan 26 2004
+** Error: (vlog-19) Failed to access library 'work' at "work".
+No such file or directory. (errno = ENOENT)
+
+} {3.0 4.0} {}} /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/UART_rx.v {0 {vlog -work work /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/UART_rx.v
+Model Technology ModelSim SE vlog 5.8b Compiler 2004.01 Jan 26 2004
+** Error: (vlog-19) Failed to access library 'work' at "work".
+No such file or directory. (errno = ENOENT)
+
+} {3.0 4.0} {}} /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/cfg_mstr.v {0 {vlog -work work /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/cfg_mstr.v
+Model Technology ModelSim SE vlog 5.8b Compiler 2004.01 Jan 26 2004
+** Error: (vlog-19) Failed to access library 'work' at "work".
+No such file or directory. (errno = ENOENT)
+
+} {3.0 4.0} {}} /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/UART_tx.v {0 {vlog -work work /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/UART_tx.v
+Model Technology ModelSim SE vlog 5.8b Compiler 2004.01 Jan 26 2004
+** Error: (vlog-19) Failed to access library 'work' at "work".
+No such file or directory. (errno = ENOENT)
+
+} {3.0 4.0} {}} /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/datapathcontrol.v {0 {vlog -work work /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/datapathcontrol.v
+Model Technology ModelSim SE vlog 5.8b Compiler 2004.01 Jan 26 2004
+** Error: (vlog-19) Failed to access library 'work' at "work".
+No such file or directory. (errno = ENOENT)
+
+} {3.0 4.0} {}} /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/bit14_reg.v {0 {vlog -work work /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/bit14_reg.v
+Model Technology ModelSim SE vlog 5.8b Compiler 2004.01 Jan 26 2004
+** Error: (vlog-19) Failed to access library 'work' at "work".
+No such file or directory. (errno = ENOENT)
+
+} {3.0 4.0} {}} /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/control.v {0 {vlog -work work /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/control.v
+Model Technology ModelSim SE vlog 5.8b Compiler 2004.01 Jan 26 2004
+** Error: (vlog-19) Failed to access library 'work' at "work".
+No such file or directory. (errno = ENOENT)
+
+} {3.0 4.0} {}} /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/eep.v {0 {vlog -work work /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/eep.v
+Model Technology ModelSim SE vlog 5.8b Compiler 2004.01 Jan 26 2004
+** Error: (vlog-19) Failed to access library 'work' at "work".
+No such file or directory. (errno = ENOENT)
+
+} {3.0 4.0} {}} /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/pwm_monitor.v {0 {vlog -work work /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/pwm_monitor.v
+Model Technology ModelSim SE vlog 5.8b Compiler 2004.01 Jan 26 2004
+** Error: (vlog-19) Failed to access library 'work' at "work".
+No such file or directory. (errno = ENOENT)
+
+} {3.0 4.0} {}} /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/cfg_UART.v {0 {vlog -work work /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/cfg_UART.v
+Model Technology ModelSim SE vlog 5.8b Compiler 2004.01 Jan 26 2004
+** Error: (vlog-19) Failed to access library 'work' at "work".
+No such file or directory. (errno = ENOENT)
+
+} {3.0 4.0} {}} /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/UART.v {0 {vlog -work work /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/UART.v
+Model Technology ModelSim SE vlog 5.8b Compiler 2004.01 Jan 26 2004
+** Error: (vlog-19) Failed to access library 'work' at "work".
+No such file or directory. (errno = ENOENT)
+
+} {3.0 4.0} {}} /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/saturator.v {0 {vlog -work work /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/saturator.v
+Model Technology ModelSim SE vlog 5.8b Compiler 2004.01 Jan 26 2004
+** Error: (vlog-19) Failed to access library 'work' at "work".
+No such file or directory. (errno = ENOENT)
+
+} {3.0 4.0} {}} /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/accel_mstr.v {0 {vlog -work work /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/accel_mstr.v
+Model Technology ModelSim SE vlog 5.8b Compiler 2004.01 Jan 26 2004
+** Error: (vlog-19) Failed to access library 'work' at "work".
+No such file or directory. (errno = ENOENT)
+
+} {3.0 4.0} {}} /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/dc_datapath.v {0 {vlog -work work /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/dc_datapath.v
+Model Technology ModelSim SE vlog 5.8b Compiler 2004.01 Jan 26 2004
+** Error: (vlog-19) Failed to access library 'work' at "work".
+No such file or directory. (errno = ENOENT)
+
+} {3.0 4.0} {}} /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/cbc_dig_tb.v {0 {vlog -work work /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/cbc_dig_tb.v
+Model Technology ModelSim SE vlog 5.8b Compiler 2004.01 Jan 26 2004
+** Error: (vlog-19) Failed to access library 'work' at "work".
+No such file or directory. (errno = ENOENT)
+
+} {3.0 4.0} {}} /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/bit14_reg_clr.v {0 {vlog -work work /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/bit14_reg_clr.v
+Model Technology ModelSim SE vlog 5.8b Compiler 2004.01 Jan 26 2004
+** Error: (vlog-19) Failed to access library 'work' at "work".
+No such file or directory. (errno = ENOENT)
+
+} {3.0 4.0} {}} /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/bit14_reg_rst.v {0 {vlog -work work /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/bit14_reg_rst.v
+Model Technology ModelSim SE vlog 5.8b Compiler 2004.01 Jan 26 2004
+** Error: (vlog-19) Failed to access library 'work' at "work".
+No such file or directory. (errno = ENOENT)
+
+} {3.0 4.0} {}} /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/accel_UART.v {0 {vlog -work work /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/accel_UART.v
+Model Technology ModelSim SE vlog 5.8b Compiler 2004.01 Jan 26 2004
+** Error: (vlog-19) Failed to access library 'work' at "work".
+No such file or directory. (errno = ENOENT)
+
+} {3.0 4.0} {}} /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/cbc_dig.v {0 {vlog -work work /afs/cs.wisc.edu/u/v/e/vennard/551projectCBC/Combined/cbc_dig.v
+Model Technology ModelSim SE vlog 5.8b Compiler 2004.01 Jan 26 2004
+** Error: (vlog-19) Failed to access library 'work' at "work".
+No such file or directory. (errno = ENOENT)
+
+} {3.0 4.0} {}}

@@ -48,10 +48,14 @@ wire [1:0] in_cmd;
 // Define any registers used in testbench //
 ///////////////////////////////////////////
 reg [23:0] cmd_data;		// used to provide commands/data to cfg_UART of DUT
-reg sendCfgData;			// kicks off command/data transmission to DUT 
 reg clk,rst_n;
+reg snd_frm;
 //Added Registers
 reg [2:0] test;		//holds destination of next test
+reg [23:0] xsetVals[0:255];
+reg [23:0] cmdVals[0:255];
+reg [13:0] dutyCheck[0:255];
+reg [13:0] eepCheck[0:3];
 
 /////////////////////
 // File I/O values //	
@@ -64,6 +68,10 @@ integer loadXset,match;
 integer newCmd,xsetFile,count2,cmdFile,xsetTest;
 integer temp,sndCfgData,accelMode;
 integer strtTest;
+integer checkCount;
+integer xsetNew,xcnt;
+integer cmdNew,cmdCnt;
+integer runningAdvanced;
 
 ////////////////////
 //Pull Out Values //
@@ -88,6 +96,7 @@ assign in_cmd = DUT.iDIG.icntrl.in_cmd;
 assign prod_vld = DUT.iDIG.icntrl.prod_vld;
 assign cfg_data = DUT.iDIG.cfg_data;
 assign strt_tx = DUT.iDIG.icntrl.strt_tx;
+assign in_cmd = DUT.iDIG.icntrl.in_cmd;
 
 assign accelData = iACCEL.tx_data;
 
@@ -108,7 +117,7 @@ eep iEEP(.clk(clk), .por_n(rst_n), .eep_addr(eep_addr), .wrt_data(dst),  .rd_dat
 ////////////////////////////////
 // Instantiate Config Master //
 //////////////////////////////
-cfg_mstr iCFG(.clk(clk), .rst_n(rst_n), .cmd_data(cmd_data), .snd_frm(sendCfgData),
+cfg_mstr iCFG(.clk(clk), .rst_n(rst_n), .cmd_data(cmd_data), .snd_frm(snd_frm),
 	      .RX_C(TX_C), .TX_C(RX_C), .resp(rsp), .rsp_rdy(rsp_rdy));
 
 /////////////////////////////////////
@@ -138,30 +147,27 @@ pwm_monitor iMON(.clk(clk), .rst_n(rst_n), .CH_A(CH_A), .CH_B(CH_B),
 ///////////////////////////////////////////////////////////////
 initial
   begin    
-	//Initialize files for I/O variables
-	//XSet File init
+    //Load Files
+    $readmemh("xsetVals.txt",xsetVals);
+    $readmemh("cmdVals.txt",cmdVals);
+    $readmemh("checkVals.txt",checkVals);
+    $readmemh("eep_init.txt",eepCheck);
+    checkCount = 0;
+    cmdNew = 0;
+    cmdCnt = 0;
+    xsetNew = 0;
+    xcnt = 0;
 	strtTest = 0;
 		temp = 0;
-	count1 = 0;
-	xsetFile = $fopen("xsetVals.txt");
-	if(xsetFile!=1) $display("failed to load xsetVals.txt");
-	count2 = 0;
- 	cmdFile = $fopen("cmdVals.txt");
-	if(cmdFile!=1) $display("failed to load cmdVals.txt");
-
+    runningAdvanced = 0;
+	
 	//Initialize Test Variables
 	newCmd = 0;
 	match = 0;
 	loadXset = 0;
-	testErr = 0;
-	testDifErr = 0;
-	testPrevErr = 0;
-	testDuty = 0;
     cmdIndex = 0;
     xSetIndex = 0;
 	count = 0;
-	testSumErr = 0;
-	accelMode = 0; //Defaults to sending zero's as accel data
 	//Start with 2 clock cycle reset & INIT check
 	test = 0;
 	rst_n = 0;
@@ -179,10 +185,7 @@ always @(posedge clk) begin
 	  		$display("Initialization test running...");
 			if(sumerr!=0) $display("ERROR - sumerr != 0");
 			if(preverr!=0) $display("ERROR - preverr != 0");
-			if(xset!=xsetTest) $display("ERROR - xset value should = x%x - actual xset = x%x",xsetTest,xset);
-		//	if(p != 0) $display("ERROR - p does not initialize to zero");
-		//	if(i != 0) $display("ERROR - i does not initialize to zero");
-		//	if(d != 0) $display("ERROR - d does not initialize to zero");
+			if(xset!=eepCheck[0]) $display("ERROR - xset value should = x%x - actual xset = x%x",xsetTest,xset);
 			//Set up for next test
 		 if(TESTHANDLE == 1) begin
 			$display("End of Testing");
@@ -202,11 +205,17 @@ always @(posedge clk) begin
 	  	 		$display("Basic test running...");
 				strtTest = 1;
 			 end
-
-			//Test when accel data is zero	- Run through 5 times
-		   //	if(accel_vld) count = count + 1;
+		   	
+            if(accel_vld) count = count + 1;
 					
-				if(count>20) begin			
+			 //Check Calculation data 
+             if(wrt_duty) begin
+                if((checkVals[count]) != dst) $display("ERROR - duty written to PWM incorrect");
+                else $display("#%d duty written correctly");
+             end
+			
+            //Ending Test Check - ends after 20 iterations
+           	if(count>20) begin			
 			//Set up for next test
 			  count = 0;
 			  if(TESTHANDLE == 2) begin
@@ -218,56 +227,7 @@ always @(posedge clk) begin
   					test = XSET;
 					strtTest = 0;
 			  end
-			 end			  
-		  	
-			 //Check Calculation data
-			 /*
-					 if(state==4'h2)  //in state CALC_ERR
-					  	 	testErr = xmeas - xset;
-					 if(state==4'h3)	begin //in state PMULT
-						if(prod_vld) begin
-						 	   temp = (p*testErr);	//TODO potential problem	
-						 	   testDuty = temp[25:12];
-								//OVERFLOW & UNDERFLOW CHECKING
-							 	if(((p[28])==0)&(|(p[27:25]))) testDuty = 16'h1FFF; //overflow
-								if((p[28])&(~(&(p[27:25])))) testDuty = 16'h2000; //underflow			
-							 end
-						end
-					 if(state==4'h5) //in state CALC_SUMERR
-								testSumErr = testSumErr + testErr;
-					 if(state==4'h6) begin //in state IMULT
-						if(prod_vld) begin
-						      temp = (i*testSumErr);
-						      testDuty = testDuty + (temp[25:12]);
-						      
-								//OVERFLOW & UNDERFLOW CHECKING
-							 	if(((i[28])==0)&(|(i[27:25]))) testDuty = 16'h1FFF; //overflow
-								if((i[28])&(~(&(i[27:25])))) testDuty = 16'h2000; //underflow			
-							 end
-						end
-	 				 if(state==4'h8) //in state CALC_DERR
-	  							testDifErr = testErr - testPrevErr;
-					 if(state==4'h9) begin //in state DMULT
-						if(prod_vld) begin
-						  temp = (d*testDifErr);
-						  testDuty = testDuty + (temp[25:12]);
-									//OVERFLOW & UNDERFLOW CHECKING
-							 	if(((d[28])==0)&(|(d[27:25]))) testDuty = 16'h1FFF; //overflow
-								if((d[28])&(~(&(d[27:25])))) testDuty = 16'h2000; //underflow			
-							 end
-						end
-					 if(state==4'hA) //in state SET_PREVERR
-								testPrevErr = testErr;					
-								*/
-			 //Check that duty is correct when sending out to PWM
-			 	// if(wrt_duty) begin
-					if(accel_vld) begin	
-			 	  //if(dst != testDuty) $display("ERROR - Sent incorrect value out to the PWM");
-					 $display("Value to be written to PWM = %h",dst);
-					 count = count + 1;
-
-				  end
-
+			 end	
 			end
 			
 /**************************************************************** 
@@ -278,35 +238,35 @@ always @(posedge clk) begin
 			$display("Starting Xset testing");
 			strtTest = 1;
 		 end
-	    //Start process to send data to the config UART
-		 //implementation with cfg_mstr
-		  if(loadXset==0) begin
-			 match = $fscanf(xsetFile,"%h",cmd_data);
-			 sndCfgData = 1;
-			 loadXset = 1;
-          xSetIndex = xSetIndex + 1;
-        end
-			else sndCfgData = 0;
 
-        if (frm_rdy) begin
-            if(state==4'hB) begin //in NEW_XSET state
-  						if(xset != (cmd_data[13:0])) $display("ERROR - xset value not set correctly");
-	  					loadXset = 0;			
-	  					end		
-  				  else begin
-            $display("ERROR -- did not detect new Xset load correctly");
-            $stop;
-                end
+	    //Start process to send data to the config UART
+		if(xsetNew==0) begin
+            //Load and Send data to DUT
+            cmd_data = xsetVals[xcnt];
+            snd_frm = 1;
+            $display("Sending new xset value...");
+            xsetNew = 1;
             end
+        else snd_frm = 0;
+
+        if(rsp_rdy) begin
+            //Check that control echo's xset back
+            $display("Checking xset response...");
+            if(xset != resp) $display("ERROR - #%d xset response value not correct",xcnt);
+            //Prep to send another xset value
+            xsetNew = 0;
+            xcnt = xcnt + 1;
+            end
+
             //End Xset test after 20 iterations
-            if(xSetIndex==20) begin
+            if(xCnt==20) begin
                 if(TESTHANDLE == 3) begin
                     $display("End of Testing");
                     $stop;
                   end
                 else begin
                     $display("Finishing Xset test...");
-						  strtTest = 0;
+				    strtTest = 0;
                     test = CMDMODE;
                     end
                 end
@@ -315,96 +275,131 @@ always @(posedge clk) begin
 *Command Mode operation tests
 *****************************************************************/
 	if(test == CMDMODE) begin
-		  if(strtTest == 0) begin
+		    if(strtTest == 0) begin
 			 $display("starting command mode tests");
 			 strtTest = 1;
-		  end
-	  	  
-        //Start process by sending invalid commands         --cmdvals.txt
-		  if(newCmd==0) begin
-		 		match = $fscanf(cmdFile, "%h", cmd_data);
-				sndCfgData = 1;
-				newCmd = 1;
-				cmdIndex = cmdIndex + 1;
-				end
-			  else begin
-			   sndCfgData = 0;
 		    end
-		    
-      if(state==4'hC) $display("Entered into command mode aka ALL Zone"); //state is CMDINTR
-          //First 10 iterations invalid commands
-        if(cmdIndex<10) begin
-            //Look for neg acknowledge
-				  if((strt_tx)&(dst==14'h05A5)) newCmd = 0;
-            else $display("ERROR - didn't send NEGACK in response to invalid command");
-           end
-        //10th iteration is a write EEPROM command test
-        if(cmdIndex==10) begin
-			 	if((cfg_data[19:18])!=(2'b10)) $display("Read command bits not read in correctly");
-            //Check that CHRG_PMP is asserted for long enough TODO add?
-            //Check that sends positive acknowledge
-            if((strt_tx)&(dst==14'h0A5A)) 
-            newCmd = 0;
-            end
-  				  else $display("ERROR - did not send back POSACK response to write eeprom cmd");
-          end
-        //11th iteration is a read EEPROM command test
-        if(cmdIndex==11) begin
-            //Check that command was correct
-			 	if((cfg_data[19:18])!=(2'b01)) $display("write command bits not read in correctly");
-            //Check that dst bus contains data that is being read
-					if(strt_tx) begin
-				  newCmd = 0;
-				  case(cmd_data[17:16])
-					 2'b00 : if(xset!= dst) $display("ERROR - dst != eeprom[0]");
-					 2'b01 : if(p != dst) $display("ERROR - dst != eeprom[1]");
-					 2'b10 : if(i != dst) $display("ERROR - dst != eeprom[2]");
-					 2'b11 : if(d != dst) $display("ERROR - dst != eeprom[3]");
-				  endcase
-				  end
-        //12 iteration is a start_CM check 
-        if(cmdIndex==12) begin
-			 	if((~(|cfg_data[19:18]))&(&cfg_data[17:16])) begin
-				  $display("entered command mode correctly");
-					if(dst!=14'h0A5A) $display("ERROR positive acknowledge not sent from command mode start");
-				  newCmd = 0;
-				  end
-				  else $display("ERROR - did not enter start command mode correctly");
-				end
-	            end
-		
-					//Repeats correct commands each 5 times, then resets and moves
-					//on to advanced tests	
-					if(cmdIndex > 12) begin
-			  				count1 = count1 + 1;
-				   		if(count1<5) cmdIndex = 10;
-			 				if(count1==5) begin
-							  if(TESTHANDLE == 4) begin
-			  						$display("End of testing");
-			  					   $stop;
-			  					   end
-							  else begin
-		 							test = ADVANCE;
-		  							$display("Ending command operation tests...");
-									//RESET!!!!
-									rst_n = 0;
-									repeat(2) @(posedge clk);
-									rst_n = 1;
-									$stop;
+	        
+            //Send command data
+            if(cmdNew==0) begin
+                cmd_data = cmdVals[cmdCnt];
+                snd_frm = 1;
+                $display("Sending new command...");
+                cmdNew = 1;
+                end
+            else snd_frm = 0;
+
+            //Check response
+            if(rsp_rdy) begin
+               //First 10 invalid
+               if(cmdCnt<10) begin
+                    if(rsp != 14'h05A5) $display("ERROR - did not send correct response to invalid command");
+                    else $display("detected invalid command correctly");
+                  end
+               //The rest should be valid
+               if(cmdCnt>9) begin
+                    if(rsp == 14'h0A5A) $display("Correctly returned positive acknowledge");
+                    else $display("ERROR - did not return positive acknowledge");
+               end
+                //Check that we entered command mode correctly
+                if((cmd_data[19:16])==4'h3) begin
+                    if(in_cmd) $display("entered command mode correctly");
+                    else $display("ERROR - in_cmd flop not set after enter command sent");
+                   end
+                //Prep and send new command
+                cmdCnt = cmdCnt + 1;
+                cmdNew = 0;
+             end
+
+       		 //Check for write command
+             if((in_cmd)&((cmd_data[19:18])==2'b10)) begin
+                  //Check data is presented to the eeprom correctly
+                    if((~eep_r_w_n)&(~eep_cs_n)) begin
+                        //check data got sent through
+                        if(dst == (cmd_data[13:0])) $display("wrote correct data to eeprom"); 
+                        else $display("ERROR - failed to write correct data out to eeprom");
+                        //check address
+                        if(eep_addr == (cmd_data[17:16])) $display("correct address");
+                        else $display("ERROR - incorrect address");
+                    end
+              end
+
+              //Check for read command
+              if((in_cmd)&((cmd_data[19:18])==2'b01)) begin
+                    //check eeprom was presented with correct data
+                    if((eep_r_w_n)&(~eep_cs_n)) begin
+                        if(eep_rd_data == eepCheck[(cmd_data[17:16])])
+                            $display("correctly read data from eeprom addr %d",cmd_data[17:16]);
+                        else $display("ERROR - failed to read data from eeprom");
+                    end
+             end
+
+              //End test conditions -- gives 10 invalid commands and 20 valid
+              if(cmdCnt > 20) begin
+                  if(TESTHANDLE == 4) begin
+    					$display("End of testing");
+                        $stop;
+			   		   end
+				  else begin
+                        test = ADVANCE;
+		  				$display("Ending command operation tests...");
+						//RESET!!
+                        rst_n = 0;
+						repeat(2) @(posedge clk);
+						rst_n = 1;
 							  end
   						end
 				 end						
                         
-		end
-
 /**************************************************************** 
 *Advanced Operation Test
 ****************************************************************/
-	//if(test == ADVANCE) begin
-	//  $stop; //TODO not added yet
-	// end
-				
-  //end
+	    if((test == ADVANCE)|(runningAdvanced>0)) begin
+            if(runningAdvanced == 0) runningAdvanced = 1; 
+            //Place new Xset then run 10 accel_Val iterations through
+            if(runningAdvanced == 1) begin
+                test = XSET;
+                xsetNew = 0;
+                xcnt = $random % 20; //pick a random value out of xsetVals.txt
+                if(accel_vld) begin  //then run basic tests
+                    test = BASIC;
+                    strtTest = 0;
+                    runningAdvanced = 2;
+                end
+             end
+
+             //End running new xset test, write new p value and reset and run
+             if(runningAdvanced == 2) begin
+                if(count==10) begin
+                    test = CMDMODE;
+                    cmdCnt = 10;
+                    cmdNew = 0;
+                    runningAdvanced = 3;
+                end
+             end
+             //execute two commands then reset and run basic tests again
+             if(runningAdvanced == 3) begin
+                    if(cmdCnt > 12) begin
+                        test = BASIC;
+                        strtTest = 0;
+                        rst_n = 0;
+                        repeat(1) @(posedge clk);
+                        @(negedge clk);
+                        rst_n = 1;
+                        runningAdvanced = 4;
+                    end
+             end
+             //run basic tests and finish
+             if(runningAdvanced == 4) begin
+                    if(count > 5) begin
+                        $display("SUCCESS! Finishing advanced test");
+                        $stop
+                    end
+             end
+
+        end	
+
+    end
 			//Test random accel data
 			//Test high and low corner cases for accel data
 
