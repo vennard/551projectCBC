@@ -15,7 +15,7 @@ output reg chrg_pmp_en;
 output reg eep_r_w_n;
 output reg clr_rdy;
 output strt_tx_true; //JOHN changed TODO also in sensitivity list ^ ^
-//output reg strt_tx_true;
+//output reg strt_tx;
 output reg eep_cs_n;
 output reg wrt_duty;
 
@@ -102,7 +102,8 @@ always @(posedge clk, negedge rst_n)
 	  txCheck <= strt_tx;
 
 assign strt_tx_true = (strt_tx | txCheck);
-		  
+
+
 
 always @(posedge clk, negedge rst_n)
    if(!rst_n)
@@ -163,6 +164,7 @@ begin
 	c_xset = 1'b0; 
 	c_preverr = 1'b0; 
 	c_pid = 1'b0;
+
 	c_init_prod = 1'b0;
  
 	c_subtract = 1'b0;
@@ -376,14 +378,16 @@ begin
          c_preverr = 1'b1;
          if(~frm_rdy)
             next_state = WAIT_ACCEL_VLD;
-         else if (cfg_data[19:18] == 2'b11)
-            next_state = NEW_XSET;
+			 else if (cfg_data[19:18] == 2'b11) begin
+            //clr_rdy = 1'b1;
+				next_state = NEW_XSET;
+			 end
          else
             next_state = CMDINTR;           
       end //end SET_PREVERR
 
       NEW_XSET : begin
-         clr_rdy = 1'b1;
+     		clr_rdy = 1'b1;
          asrcsel = CFGDATA;
          bsrcsel = ZEROB;
          c_xset = 1'b1;
@@ -435,7 +439,7 @@ begin
                end
             end // end READ_EEP
             STRT_CMD : begin
-               if(cfg_data[17:16]) begin
+               if(&cfg_data[17:16]) begin
                   //set cmd mode send Posack
                   set_in_cmd = 1'b1;
                   asrcsel = ZEROA;

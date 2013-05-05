@@ -72,7 +72,7 @@ control icntrl(.accel_vld(accel_vld),
                .c_clr_duty(c_clr_duty),
                .asrcsel(asrcsel),
                .bsrcsel(bsrcsel));
-               
+
 
 ///////////////////////////////
 // Instantiate Datapath

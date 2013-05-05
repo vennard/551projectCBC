@@ -9,7 +9,7 @@
 module cbc_dig_tb();
 
 //TODO should be defaulted to 5 -- 2 is as far as it is currently
-localparam TESTHANDLE = 3;		//see above for functionality
+localparam TESTHANDLE = 4;		//see above for functionality
 
 //////////////////
 // Local Params //
@@ -64,6 +64,7 @@ integer strtTest;
 integer xsetNew,xcnt;
 integer cmdNew,cmdCnt;
 integer runningAdvanced;
+integer dontCheck;
 
 ////////////////////
 //Pull Out Values //
@@ -88,6 +89,7 @@ assign prod_vld = DUT.iDIG.icntrl.prod_vld;
 assign cfg_data = DUT.iDIG.cfg_data;
 assign strt_tx = DUT.iDIG.icntrl.strt_tx;
 assign in_cmd = DUT.iDIG.icntrl.in_cmd;
+assign eq_3ms = DUT.iDIG.icntrl.eq_3ms;
 
 //////////////////////
 // Instantiate DUT //
@@ -147,7 +149,7 @@ initial
 	 strtTest = 0;
     runningAdvanced = 0;
 	 snd_frm = 0;
-	
+	 dontCheck = 0;
 	//Initialize Test Variables
 	count = 0;
 	//Start with 2 clock cycle reset & INIT check
@@ -158,6 +160,13 @@ initial
 	rst_n = 1;
 
   end
+
+  reg rspRdyTemp;
+always @(posedge clk,negedge rst_n)
+	if(!rst_n)
+		rspRdyTemp <= 1'b0;
+   else
+ 		rspRdyTemp <= rsp_rdy;	  
 
 always @(posedge clk) begin
 /**************************************************************** 
@@ -230,11 +239,12 @@ always @(posedge clk) begin
             xsetNew = 1;
             end
         else snd_frm = 0;
-
-        if(rsp_rdy) begin
+		 		  
+        if((rsp_rdy)&(!rspRdyTemp)) begin
             //Check that control echo's xset back
             $display("Checking xset response...");
             if(cmd_data[13:0] != resp) $display("ERROR - resp is =x%x -- should be x%x",resp,cmd_data[13:0]);
+				else $display("correct resp (x%x) matches xset (x%x)",resp,cmd_data[13:0]);
             //Prep to send another xset value
             xsetNew = 0;
             xcnt = xcnt + 1;
@@ -248,7 +258,7 @@ always @(posedge clk) begin
                   end
                 else begin
                     $display("Finishing Xset test...");
-				    strtTest = 0;
+				    	  strtTest = 0;
                     test = CMDMODE;
                     end
                 end
@@ -256,12 +266,14 @@ always @(posedge clk) begin
 /**************************************************************** 
 *Command Mode operation tests
 *****************************************************************/
-	if(test == CMDMODE) begin
+	if(test == CMDMODE) begin	
 		    if(strtTest == 0) begin
 			 $display("starting command mode tests");
 			 strtTest = 1;
 		    end
-	        
+	       
+			 dontCheck = dontCheck + 1; 
+			 
             //Send command data
             if(cmdNew==0) begin
                 cmd_data = cmdVals[cmdCnt][23:0];
@@ -272,16 +284,16 @@ always @(posedge clk) begin
             else snd_frm = 0;
 
             //Check response
-            if(rsp_rdy) begin
+            if(((rsp_rdy)&(!rspRdyTemp))&(dontCheck>3)) begin
                //First 10 invalid
                if(cmdCnt<10) begin
-                    if(resp != 14'h05A5) $display("ERROR - did not send correct response to invalid command");
+                    if(resp != 14'h35A6) $display("ERROR - should be 35A6 -- resp = x%x",resp);
                     else $display("detected invalid command correctly");
                   end
                //The rest should be valid
-               if(cmdCnt>9) begin
-                    if(resp == 14'h0A5A) $display("Correctly returned positive acknowledge");
-                    else $display("ERROR - did not return positive acknowledge");
+               if((cmdCnt>9)&(cmd_data[19:18] != 2'b01)) begin
+                    if(resp != 14'h0A5A) $display("ERROR - should be 0A5A  -- resp = x%x",resp);
+                    else $display("Correct - sent out positive acknowledge");
                end
                 //Check that we entered command mode correctly
                 if((cmd_data[19:16])==4'h3) begin
@@ -294,7 +306,7 @@ always @(posedge clk) begin
              end
 
        		 //Check for write command
-             if((in_cmd)&((cmd_data[19:18])==2'b10)) begin
+             if(((in_cmd)&((cmd_data[19:18])==2'b10))&(eq_3ms)) begin
                   //Check data is presented to the eeprom correctly
                     if((~eep_r_w_n)&(~eep_cs_n)) begin
                         //check data got sent through
@@ -314,10 +326,15 @@ always @(posedge clk) begin
                             $display("correctly read data from eeprom addr %d",cmd_data[17:16]);
                         else $display("ERROR - failed to read data from eeprom");
                     end
+						  //Check sends correct response data
+						  if((rsp_rdy)&(!rspRdyTemp)) begin
+							  if(resp == eepCheck[cmd_data[17:16]]) $display("correct response (x%x) = (x%x)",resp, eepCheck[cmd_data[17:16]]);
+							  else $display("ERROR - read response failed -- resp = (x%x) should be (x%x)",resp, eepCheck[cmd_data[17:16]]);
+						  end
              end
-
+				
               //End test conditions -- gives 10 invalid commands and 20 valid
-              if(cmdCnt > 20) begin
+              if(cmdCnt == 14) begin
                   if(TESTHANDLE == 4) begin
     					$display("End of testing");
                         $stop;
@@ -329,6 +346,7 @@ always @(posedge clk) begin
                         rst_n = 0;
 						repeat(2) @(posedge clk);
 						rst_n = 1;
+						dontCheck = 0;
 							  end
   						end
 				 end						

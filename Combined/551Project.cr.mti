@@ -1,4 +1,11 @@
-/filespace/people/v/vennard/551projectCBC/Combined/pwm_monitor.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/Combined/pwm_monitor.v
+{/filespace/people/v/vennard/551projectCBC/Combined/removed for testing/UART_rx.v} {1 {vlog -work work -vopt -nocovercells {/filespace/people/v/vennard/551projectCBC/Combined/removed for testing/UART_rx.v}
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module UART_rx
+
+Top level modules:
+	UART_rx
+
+} {} {}} /filespace/people/v/vennard/551projectCBC/Combined/pwm_monitor.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/Combined/pwm_monitor.v
 Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
 -- Compiling module pwm_monitor
 
@@ -82,13 +89,6 @@ Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
 Top level modules:
 	PWM
 
-} {} {}} /filespace/people/v/vennard/551projectCBC/Combined/UART_rx.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/Combined/UART_rx.v
-Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
--- Compiling module UART_rx
-
-Top level modules:
-	UART_rx
-
 } {} {}} /filespace/people/v/vennard/551projectCBC/Combined/accel_mstr.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/Combined/accel_mstr.v
 Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
 -- Compiling module accel_mstr
@@ -110,19 +110,19 @@ Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
 Top level modules:
 	datapath_control
 
-} {} {}} /filespace/people/v/vennard/551projectCBC/Combined/bit14_reg.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/Combined/bit14_reg.v
-Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
--- Compiling module bit14_reg
-
-Top level modules:
-	bit14_reg
-
 } {} {}} /filespace/people/v/vennard/551projectCBC/Combined/control.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/Combined/control.v
 Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
 -- Compiling module control
 
 Top level modules:
 	control
+
+} {} {}} /filespace/people/v/vennard/551projectCBC/Combined/bit14_reg.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/Combined/bit14_reg.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module bit14_reg
+
+Top level modules:
+	bit14_reg
 
 } {} {}} /filespace/people/v/vennard/551projectCBC/Combined/eep.v {2 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/Combined/eep.v
 Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
