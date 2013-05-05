@@ -24,25 +24,6 @@ wire accel_vld;
 wire frm_rdy,clr_rdy;
 wire wrt_duty;
 wire snd_rsp;
-reg temprsp;
-reg [13:0] tempRspData;
-
-
-always @ (posedge clk,negedge rst_n) 
-  if(!rst_n)
-	 	temprsp <= 1'b0;
-  else 
-	 	temprsp <= snd_rsp;
-
-//added for delaying response data
-always @ (posedge clk,negedge rst_n) 
-  if(!rst_n)
-	 	tempRspData <= 14'h0000;
-  else if(snd_rsp & (~temprsp))
-	   tempRspData <= dst;
-  else 
-	 	tempRspData <= tempRspData;
-
 
 ///////////////////////////////
 // Instantiate digital core //
@@ -59,7 +40,7 @@ dig_core iDIG(.clk(clk), .rst_n(rst_n), .Xmeas(Xmeas), .accel_vld(accel_vld),
 /////////////////////////
 cfg_UART iCFG(.clk(clk), .rst_n(rst_n), .RX(RX_C), .TX(TX_C),
 	.frm_rdy(frm_rdy), .clr_frm_rdy(clr_rdy), .cfg_data(cfg_data),
-	.rsp_data({2'b00,tempRspData}), .snd_rsp(snd_rsp));
+	.rsp_data({2'b00,dst}), .snd_rsp(snd_rsp));
 
 /////////////////////////////
 // Instantiate accel_UART //

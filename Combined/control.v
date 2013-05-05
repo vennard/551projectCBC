@@ -1,5 +1,5 @@
 module control(accel_vld, frm_rdy, clk, rst_n, cfg_data, c_prod, eep_addr,
-               chrg_pmp_en, eep_r_w_n, clr_rdy, strt_tx_true, eep_cs_n, wrt_duty,
+               chrg_pmp_en, eep_r_w_n, clr_rdy, strt_tx, eep_cs_n, wrt_duty,
                c_err, c_duty, c_sumerr, c_diferr, c_xset, c_preverr, c_pid,
                c_init_prod, c_subtract, c_multsat, c_clr_duty, asrcsel, bsrcsel);
                
@@ -14,8 +14,7 @@ output reg [1:0] eep_addr;
 output reg chrg_pmp_en;
 output reg eep_r_w_n;
 output reg clr_rdy;
-output strt_tx_true; //JOHN changed TODO also in sensitivity list ^ ^
-//output reg strt_tx;
+output reg strt_tx;
 output reg eep_cs_n;
 output reg wrt_duty;
 
@@ -64,7 +63,8 @@ localparam  INIT           = 4'h0,
             NEW_XSET       = 4'hB,
             CMDINTR        = 4'hC,
             CHRG_PMP       = 4'hD,
-            WAIT_CMD       = 4'hE;
+            WAIT_CMD       = 4'hE,
+            CLR_RDY        = 4'hF;
 
 //CMD params
 localparam  STRT_CMD    = 2'b00,
@@ -90,20 +90,7 @@ localparam	XSET		= 3'b000,
 				POSACKA5A= 3'b101,
 				PROD2512	= 3'b110,
 				EEPDATA	= 3'b111;
-
-			
-//JOHN ADDED CODE TODO -- fixing response problem - strt tx held for 2 clk
-reg txCheck;
-reg strt_tx;
-always @(posedge clk, negedge rst_n)
-	if(!rst_n)
-	  txCheck <= 1'b0;
-	else
-	  txCheck <= strt_tx;
-
-assign strt_tx_true = (strt_tx | txCheck);
-
-
+  
 
 always @(posedge clk, negedge rst_n)
    if(!rst_n)
@@ -164,7 +151,6 @@ begin
 	c_xset = 1'b0; 
 	c_preverr = 1'b0; 
 	c_pid = 1'b0;
-
 	c_init_prod = 1'b0;
  
 	c_subtract = 1'b0;
@@ -378,16 +364,16 @@ begin
          c_preverr = 1'b1;
          if(~frm_rdy)
             next_state = WAIT_ACCEL_VLD;
-			 else if (cfg_data[19:18] == 2'b11) begin
-            //clr_rdy = 1'b1;
-				next_state = NEW_XSET;
-			 end
+         /*else if (cfg_data[19:18] == 2'b11) begin //TODO CHANGED
+            clr_rdy = 1'b1;
+            next_state = NEW_XSET;
+            end*/
          else
-            next_state = CMDINTR;           
+            next_state = CLR_RDY/*CMDINTR*/;  //TODO CHANGED         
       end //end SET_PREVERR
 
       NEW_XSET : begin
-     		clr_rdy = 1'b1;
+         //clr_rdy = 1'b1;
          asrcsel = CFGDATA;
          bsrcsel = ZEROB;
          c_xset = 1'b1;
@@ -397,7 +383,7 @@ begin
       end //end NEW_XSET
 
       CMDINTR : begin
-         clr_rdy = 1'b1;
+        // clr_rdy = 1'b1; TODO CHANGED
          clr_cnt = 1'b1;
          case(cfg_data[19:18])
             WRITE_EEP : begin
@@ -486,7 +472,7 @@ begin
 
       WAIT_CMD : begin
          if(frm_rdy)
-            next_state = CMDINTR;
+            next_state = CLR_RDY/*CMDINTR*/;
          else begin
             //PWM Duty = 0
             c_clr_duty = 1'b1;
@@ -496,6 +482,17 @@ begin
             next_state = WAIT_CMD;
          end
       end // end WAIT_CMD
+      
+      CLR_RDY : begin
+         clr_rdy = 1'b1;
+         if (in_cmd)
+            next_state = CMDINTR;
+         else if (cfg_data[19:18] == 2'b11)
+            next_state = NEW_XSET;
+         else
+            next_state = CMDINTR;
+      end // CLR_RDY
+      
       default : next_state = INIT;
    endcase
 end
