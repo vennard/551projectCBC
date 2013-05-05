@@ -26,7 +26,7 @@ localparam ADVANCE = 3'b100;
 wire [1:0] eep_addr;
 wire [13:0] eep_rd_data;
 wire [13:0] dst;
-wire [15:0] rsp;
+wire [15:0] resp;
 wire [13:0] duty;
 wire rsp_rdy;
 wire [23:0] cfg_data;
@@ -36,12 +36,10 @@ wire [23:0] cfg_data;
 wire [13:0] sumerr;
 wire [13:0] preverr;
 wire [13:0] xset;
-wire [13:0] p,i,d;
-wire [13:0] xmeas;
-wire [13:0] err,diferr,accelData;
+wire [13:0] err;
 wire accel_vld,frm_rdy,c_duty;
 wire [3:0] state;
-wire [1:0] in_cmd;
+wire in_cmd;
 
 
 /////////////////////////////////////////////
@@ -56,19 +54,13 @@ reg [23:0] xsetVals[0:255];
 reg [23:0] cmdVals[0:255];
 reg [13:0] dutyCheck[0:255];
 reg [13:0] eepCheck[0:3];
+reg [13:0] checkVals[0:255];
 
 /////////////////////
 // File I/O values //	
 /////////////////////
-integer eepromFile,eepromTestData,count1;
-integer count,testSumErr,testDuty;
-integer xSetIndex,cmdIndex;
-integer testErr,testDifErr,testPrevErr;
-integer loadXset,match;
-integer newCmd,xsetFile,count2,cmdFile,xsetTest;
-integer temp,sndCfgData,accelMode;
+integer count;
 integer strtTest;
-integer checkCount;
 integer xsetNew,xcnt;
 integer cmdNew,cmdCnt;
 integer runningAdvanced;
@@ -76,20 +68,19 @@ integer runningAdvanced;
 ////////////////////
 //Pull Out Values //
 ////////////////////
-//assign sumerr = DUT.iDIG.sumerr;
-//assign preverr = DUT.iDIG.preverr;
+//Pull outs of datapath
+assign sumerr = DUT.iDIG.idatapath.sumerr;
+assign preverr = DUT.iDIG.idatapath.preverr;
 assign xset = DUT.iDIG.idatapath.xset;
-//assign p = DUT.iDIG.p;
-//assign i = DUT.iDIG.i;
-//assign d = DUT.iDIG.d;
+
+//General Pull Outs
 assign accel_vld = DUT.iDIG.accel_vld;
 assign err = DUT.iDIG.idatapath.err;
 assign duty = DUT.iDIG.idatapath.duty;
-//assign diferr = DUT.iDIG.diferr;
-assign xmeas = DUT.iDIG.Xmeas;
 assign frm_rdy = DUT.iDIG.frm_rdy; 
 assign wrt_duty = DUT.iDIG.wrt_duty; 
 
+//Control Pull Outs
 assign state = DUT.iDIG.icntrl.state;  
 assign c_duty = DUT.iDIG.icntrl.c_duty;
 assign in_cmd = DUT.iDIG.icntrl.in_cmd;
@@ -97,8 +88,6 @@ assign prod_vld = DUT.iDIG.icntrl.prod_vld;
 assign cfg_data = DUT.iDIG.cfg_data;
 assign strt_tx = DUT.iDIG.icntrl.strt_tx;
 assign in_cmd = DUT.iDIG.icntrl.in_cmd;
-
-assign accelData = iACCEL.tx_data;
 
 //////////////////////
 // Instantiate DUT //
@@ -118,12 +107,11 @@ eep iEEP(.clk(clk), .por_n(rst_n), .eep_addr(eep_addr), .wrt_data(dst),  .rd_dat
 // Instantiate Config Master //
 //////////////////////////////
 cfg_mstr iCFG(.clk(clk), .rst_n(rst_n), .cmd_data(cmd_data), .snd_frm(snd_frm),
-	      .RX_C(TX_C), .TX_C(RX_C), .resp(rsp), .rsp_rdy(rsp_rdy));
+	      .RX_C(TX_C), .TX_C(RX_C), .resp(resp), .rsp_rdy(rsp_rdy));
 
 /////////////////////////////////////
 // Instantiate Accel Data Generator//
 /////////////////////////////////////
-//accelGen iACCEL(.clk(clk),.rst_n(rst_n),.TX_A(RX_A),.mode(accelMode));
 accel_mstr iACCEL(.clk(clk), .rst_n(rst_n), .TX_A(RX_A));
 
 //////////////////////////////
@@ -152,21 +140,15 @@ initial
     $readmemh("cmdVals.txt",cmdVals);
     $readmemh("checkVals.txt",checkVals);
     $readmemh("eep_init.txt",eepCheck);
-    checkCount = 0;
     cmdNew = 0;
     cmdCnt = 0;
     xsetNew = 0;
     xcnt = 0;
-	strtTest = 0;
-		temp = 0;
+	 strtTest = 0;
     runningAdvanced = 0;
+	 snd_frm = 0;
 	
 	//Initialize Test Variables
-	newCmd = 0;
-	match = 0;
-	loadXset = 0;
-    cmdIndex = 0;
-    xSetIndex = 0;
 	count = 0;
 	//Start with 2 clock cycle reset & INIT check
 	test = 0;
@@ -185,7 +167,7 @@ always @(posedge clk) begin
 	  		$display("Initialization test running...");
 			if(sumerr!=0) $display("ERROR - sumerr != 0");
 			if(preverr!=0) $display("ERROR - preverr != 0");
-			if(xset!=eepCheck[0]) $display("ERROR - xset value should = x%x - actual xset = x%x",xsetTest,xset);
+			if(xset!=eepCheck[0]) $display("ERROR - xset value should = x%x - actual xset = x%x",eepCheck[0],xset);
 			//Set up for next test
 		 if(TESTHANDLE == 1) begin
 			$display("End of Testing");
@@ -206,12 +188,12 @@ always @(posedge clk) begin
 				strtTest = 1;
 			 end
 		   	
-            if(accel_vld) count = count + 1;
+            if(wrt_duty) count = count + 1;
 					
 			 //Check Calculation data 
              if(wrt_duty) begin
-                if((checkVals[count]) != dst) $display("ERROR - duty written to PWM incorrect");
-                else $display("#%d duty written correctly");
+                if((checkVals[count]) != dst) $display("ERROR - dst = x%x -- should be =x%x",dst,checkVals[count]);
+                else $display("#%d duty written correctly",count);
              end
 			
             //Ending Test Check - ends after 20 iterations
@@ -241,8 +223,9 @@ always @(posedge clk) begin
 
 	    //Start process to send data to the config UART
 		if(xsetNew==0) begin
-            //Load and Send data to DUT
-            cmd_data = xsetVals[xcnt];
+            //Load and Send data to DUT TODO add back below
+            cmd_data = xsetVals[xcnt][23:0];
+				//cmd_data = 24'h0c0024;
             snd_frm = 1;
             $display("Sending new xset value...");
             xsetNew = 1;
@@ -258,8 +241,8 @@ always @(posedge clk) begin
             xcnt = xcnt + 1;
             end
 
-            //End Xset test after 20 iterations
-            if(xCnt==20) begin
+            //End Xset test after 10 iterations
+            if(xcnt==10) begin
                 if(TESTHANDLE == 3) begin
                     $display("End of Testing");
                     $stop;
@@ -282,7 +265,7 @@ always @(posedge clk) begin
 	        
             //Send command data
             if(cmdNew==0) begin
-                cmd_data = cmdVals[cmdCnt];
+                cmd_data = cmdVals[cmdCnt][23:0];
                 snd_frm = 1;
                 $display("Sending new command...");
                 cmdNew = 1;
@@ -293,12 +276,12 @@ always @(posedge clk) begin
             if(rsp_rdy) begin
                //First 10 invalid
                if(cmdCnt<10) begin
-                    if(rsp != 14'h05A5) $display("ERROR - did not send correct response to invalid command");
+                    if(resp != 14'h05A5) $display("ERROR - did not send correct response to invalid command");
                     else $display("detected invalid command correctly");
                   end
                //The rest should be valid
                if(cmdCnt>9) begin
-                    if(rsp == 14'h0A5A) $display("Correctly returned positive acknowledge");
+                    if(resp == 14'h0A5A) $display("Correctly returned positive acknowledge");
                     else $display("ERROR - did not return positive acknowledge");
                end
                 //Check that we entered command mode correctly
@@ -393,17 +376,13 @@ always @(posedge clk) begin
              if(runningAdvanced == 4) begin
                     if(count > 5) begin
                         $display("SUCCESS! Finishing advanced test");
-                        $stop
+                        $stop;
                     end
              end
 
         end	
 
     end
-			//Test random accel data
-			//Test high and low corner cases for accel data
-
-
  
 //`include "/filespace/people/e/ejhoffman/ece551/project/project/cbc_dig/tb_tasks.v"
 

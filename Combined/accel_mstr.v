@@ -1,6 +1,5 @@
 module accel_mstr(clk,rst_n,TX_A);
 //Sends accel data for testbench
-//Data sent is dependent on mode value
 
 input clk,rst_n;
 output TX_A;
@@ -103,7 +102,6 @@ end
 // Select data to drive to UART based on sel_high from SM and accel_ptr //
 /////////////////////////////////////////////////////////////////////////
 assign tx_data = (sel_high) ? accel_vals[accel_ptr][15:8] : accel_vals[accel_ptr][7:0];
-//assign tx_data = (sel_high) ? outHigh : outLow ;
 
 initial
   $readmemh("accel_vals.txt",accel_vals);

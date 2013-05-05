@@ -1,54 +1,231 @@
-# //  ModelSim SE 5.8b Jan 01 2004 Linux 2.6.32-358.0.1.el6.x86_64
+# //  ModelSim SE 10.0c_1 Aug 26 2011 Linux 2.6.42-0.bpo.4-amd64
 # //
-# //  Copyright Model Technology, a Mentor Graphics Corporation company, 2004
-# //                         All Rights Reserved.
-# //                   UNPUBLISHED, LICENSED SOFTWARE.
-# //         CONFIDENTIAL AND PROPRIETARY INFORMATION WHICH IS THE
-# //        PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS LICENSORS.
+# //  Copyright 1991-2011 Mentor Graphics Corporation
+# //  All Rights Reserved.
 # //
-# Loading project oldversion551project
-# Compile of accel_mstr.v failed with 1 errors.
-# Compile of accel_UART.v failed with 1 errors.
-# Compile of bit14_reg.v failed with 1 errors.
-# Compile of bit14_reg_clr.v failed with 1 errors.
-# Compile of bit14_reg_rst.v failed with 1 errors.
-# Compile of cbc_dig.v failed with 1 errors.
-# Compile of cbc_dig_tb.v failed with 1 errors.
-# Compile of cfg_mstr.v failed with 1 errors.
-# Compile of cfg_UART.v failed with 1 errors.
-# Compile of control.v failed with 1 errors.
-# Compile of datapathcontrol.v failed with 1 errors.
-# Compile of dc_datapath.v failed with 1 errors.
-# Compile of dig_core.v failed with 1 errors.
-# Compile of eep.v failed with 1 errors.
-# Compile of PWM.v failed with 1 errors.
-# Compile of pwm_monitor.v failed with 1 errors.
-# Compile of saturator.v failed with 1 errors.
-# Compile of UART.v failed with 1 errors.
-# Compile of UART_rx.v failed with 1 errors.
-# Compile of UART_tx.v failed with 1 errors.
-# 20 compiles, 20 failed with 20 errors. 
-# reading /afs/cs.wisc.edu/s/mentor-2004/common/modeltech-5.8b/linux/../modelsim.ini
-# Loading project 551newoldversion
-# Compile of accel_mstr.v failed with 1 errors.
-# Compile of accel_UART.v failed with 1 errors.
-# Compile of bit14_reg.v failed with 1 errors.
-# Compile of bit14_reg_clr.v failed with 1 errors.
-# Compile of bit14_reg_rst.v failed with 1 errors.
-# Compile of cbc_dig.v failed with 1 errors.
-# Compile of cbc_dig_tb.v failed with 1 errors.
-# Compile of cfg_mstr.v failed with 1 errors.
-# Compile of cfg_UART.v failed with 1 errors.
-# Compile of control.v failed with 1 errors.
-# Compile of datapathcontrol.v failed with 1 errors.
-# Compile of dc_datapath.v failed with 1 errors.
-# Compile of dig_core.v failed with 1 errors.
-# Compile of eep.v failed with 1 errors.
-# Compile of PWM.v failed with 1 errors.
-# Compile of pwm_monitor.v failed with 1 errors.
-# Compile of saturator.v failed with 1 errors.
-# Compile of UART.v failed with 1 errors.
-# Compile of UART_rx.v failed with 1 errors.
-# Compile of UART_tx.v failed with 1 errors.
-# 20 compiles, 20 failed with 20 errors. 
-# Compile of cbc_dig.v failed with 1 errors.
+# //  THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION
+# //  WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
+# //  LICENSORS AND IS SUBJECT TO LICENSE TERMS.
+# //
+# Loading project 551Project
+#  
+# Compile of accel_mstr.v was successful.
+# Compile of accel_UART.v was successful.
+# Compile of bit14_reg.v was successful.
+# Compile of bit14_reg_clr.v was successful.
+# Compile of bit14_reg_rst.v was successful.
+# Compile of cbc_dig.v was successful.
+# Compile of cbc_dig_tb.v was successful.
+# Compile of cfg_mstr.v was successful.
+# Compile of cfg_UART.v was successful.
+# Compile of control.v was successful.
+# Compile of datapathcontrol.v was successful.
+# Compile of dc_datapath.v was successful.
+# Compile of dig_core.v was successful.
+# Compile of eep.v was successful with warnings.
+# Compile of PWM.v was successful.
+# Compile of pwm_monitor.v was successful.
+# Compile of saturator.v was successful.
+# Compile of UART.v was successful.
+# Compile of UART_rx.v was successful.
+# Compile of UART_tx.v was successful.
+# 20 compiles, 0 failed with no errors. 
+vsim -novopt work.cbc_dig_tb
+# vsim -novopt work.cbc_dig_tb 
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.cbc_dig_tb
+# Loading work.cbc_dig_tb
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.cbc_dig
+# Loading work.cbc_dig
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.dig_core
+# Loading work.dig_core
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.control
+# Loading work.control
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.dc_datapath
+# Loading work.dc_datapath
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.bit14_reg
+# Loading work.bit14_reg
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.bit14_reg_clr
+# Loading work.bit14_reg_clr
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.bit14_reg_rst
+# Loading work.bit14_reg_rst
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.saturator
+# Loading work.saturator
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.cfg_UART
+# Loading work.cfg_UART
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.UART
+# Loading work.UART
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.UART_tx
+# Loading work.UART_tx
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.UART_rx
+# Loading work.UART_rx
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.accel_UART
+# Loading work.accel_UART
+# Loading sv_std.std
+# Loading work.pwm
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.eep
+# Loading work.eep
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.cfg_mstr
+# Loading work.cfg_mstr
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.accel_mstr
+# Loading work.accel_mstr
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.pwm_monitor
+# Loading work.pwm_monitor
+add wave sim:/cbc_dig_tb/*
+run -all
+# Initialization test running...
+# Finishing Initialization...
+# Basic test running...
+# Finishing Basic Test...
+# Starting Xset testing
+# Sending new xset value...
+do /filespace/people/v/vennard/551projectCBC/Combined/wave.do
+restart
+# Loading sv_std.std
+# Loading work.pwm
+run
+run
+run
+run
+run
+run
+run
+run
+run -all
+# Initialization test running...
+# Finishing Initialization...
+# Basic test running...
+# Finishing Basic Test...
+# Starting Xset testing
+# Sending new xset value...
+# Break key hit 
+# Break in Module UART_tx at /filespace/people/v/vennard/551projectCBC/Combined/UART_tx.v line 53
+# Compile of cbc_dig_tb.v was successful.
+restart
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.cbc_dig_tb
+# Loading work.cbc_dig_tb
+# Loading sv_std.std
+# Loading work.pwm
+run -all
+# Initialization test running...
+# Finishing Initialization...
+# Basic test running...
+# Finishing Basic Test...
+# Starting Xset testing
+# Sending new xset value...
+# Compile of cbc_dig_tb.v was successful.
+restart
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.cbc_dig_tb
+# Loading work.cbc_dig_tb
+# Loading sv_std.std
+# Loading work.pwm
+run -all
+# Initialization test running...
+# Finishing Initialization...
+# Basic test running...
+#          1 duty written correctly
+# ERROR - duty written to PWM incorrect
+#          3 duty written correctly
+#          4 duty written correctly
+#          5 duty written correctly
+#          6 duty written correctly
+#          7 duty written correctly
+#          8 duty written correctly
+#          9 duty written correctly
+#         10 duty written correctly
+#         11 duty written correctly
+#         12 duty written correctly
+#         13 duty written correctly
+#         14 duty written correctly
+#         15 duty written correctly
+#         16 duty written correctly
+#         17 duty written correctly
+#         18 duty written correctly
+#         19 duty written correctly
+#         20 duty written correctly
+#         21 duty written correctly
+# Finishing Basic Test...
+# Starting Xset testing
+# Sending new xset value...
+# Break key hit 
+# Simulation stop requested.
+# Compile of cbc_dig_tb.v was successful.
+restart
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.cbc_dig_tb
+# Loading work.cbc_dig_tb
+# Loading sv_std.std
+# Loading work.pwm
+# Break key hit 
+run -all
+# Initialization test running...
+# Finishing Initialization...
+# Basic test running...
+#          1 duty written correctly
+# ERROR - dst = x0065 -- should be =x0000
+#          3 duty written correctly
+#          4 duty written correctly
+#          5 duty written correctly
+#          6 duty written correctly
+#          7 duty written correctly
+#          8 duty written correctly
+#          9 duty written correctly
+#         10 duty written correctly
+#         11 duty written correctly
+#         12 duty written correctly
+#         13 duty written correctly
+#         14 duty written correctly
+#         15 duty written correctly
+#         16 duty written correctly
+#         17 duty written correctly
+#         18 duty written correctly
+#         19 duty written correctly
+#         20 duty written correctly
+#         21 duty written correctly
+# Finishing Basic Test...
+# Starting Xset testing
+# Sending new xset value...
+# Break key hit 
+# Simulation stop requested.
+run -all
+# Break key hit 
+# Simulation stop requested.
+run -all
+# Break key hit 
+# Simulation stop requested.
+# Compile of cbc_dig_tb.v was successful.
+restart
+# Refreshing /filespace/people/v/vennard/551projectCBC/Combined/work.cbc_dig_tb
+# Loading work.cbc_dig_tb
+# Loading sv_std.std
+# Loading work.pwm
+run -all
+# Initialization test running...
+# Finishing Initialization...
+# Basic test running...
+#          1 duty written correctly
+# ERROR - dst = x0065 -- should be =x0000
+#          3 duty written correctly
+#          4 duty written correctly
+#          5 duty written correctly
+#          6 duty written correctly
+#          7 duty written correctly
+#          8 duty written correctly
+#          9 duty written correctly
+#         10 duty written correctly
+#         11 duty written correctly
+#         12 duty written correctly
+#         13 duty written correctly
+#         14 duty written correctly
+#         15 duty written correctly
+#         16 duty written correctly
+#         17 duty written correctly
+#         18 duty written correctly
+#         19 duty written correctly
+#         20 duty written correctly
+#         21 duty written correctly
+# Finishing Basic Test...
+# Starting Xset testing
+# Sending new xset value...
+# Break key hit 
+# Break in Module pwm at /filespace/people/v/vennard/Desktop/Combined/pwm.sv line 33
+# Error opening /filespace/people/v/vennard/Desktop/Combined/pwm.sv
+# Path name '/filespace/people/v/vennard/Desktop/Combined/pwm.sv' doesn't exist.
