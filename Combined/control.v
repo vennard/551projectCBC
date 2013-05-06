@@ -1,7 +1,8 @@
 module control(accel_vld, frm_rdy, clk, rst_n, cfg_data, c_prod, eep_addr,
                chrg_pmp_en, eep_r_w_n, clr_rdy, strt_tx, eep_cs_n, wrt_duty,
                c_err, c_duty, c_sumerr, c_diferr, c_xset, c_preverr, c_pid,
-               c_init_prod, c_subtract, c_multsat, c_clr_duty, asrcsel, bsrcsel);
+               c_init_prod, c_subtract, c_multsat, c_clr_duty, asrcsel, bsrcsel,
+					c_eep_reg);
                
 input accel_vld;
 input frm_rdy;
@@ -30,6 +31,8 @@ output reg c_subtract;
 output reg c_multsat;
 output reg c_clr_duty;
 
+output reg c_eep_reg;
+
 output reg [2:0] asrcsel;
 output reg [2:0] bsrcsel;
 
@@ -42,6 +45,8 @@ reg [21:0] cnt;
 reg clr_cnt;
 reg inc_cnt;
 reg accel_vld_reg;
+
+//reg [3:0] mult_cnt;
 
 wire accel_became_vld;
 wire eq_3ms;
@@ -116,7 +121,18 @@ always @(posedge clk, negedge rst_n)
       cnt <= cnt + 1;
    else
       cnt <= cnt;
-      
+
+/*
+always @(posedge clk, negedge rst_n)
+	if(!rst_n)
+		mult_cnt <= 4'h0;
+	else if (clr_cnt)
+		mult_cnt <= 4'h0;
+	else if(inc_cnt)
+		mult_cnt <= mult_cnt + 1;
+	else
+		mult_cnt <= cnt;
+*/      
 // @800Mhz 3ms = 0x249F00 // TODO: CHECK THIS NUMBER
 assign eq_3ms = (cnt == 22'h249F00) ? 1'b1 : 1'b0;
 
@@ -124,6 +140,8 @@ assign eq_3ms = (cnt == 22'h249F00) ? 1'b1 : 1'b0;
 assign prod_vld = (cnt == 22'h00000E);
 assign mult_sat = (cnt == 22'h00000F);
 
+//assign prod_vld = (mult_cnt == 4'hE);
+//assign mult_sat = (mult_cnt == 4'hF);
 
 ////////////////////////////////////
 // Accel_vld posedge detection    //
@@ -166,6 +184,8 @@ begin
 
 	wrt_duty = 1'b0;
 
+	c_eep_reg = 1'b0;
+
 	set_in_cmd = 1'b0;
 	
    asrcsel = ZEROA;
@@ -180,6 +200,7 @@ begin
          eep_r_w_n = 1'b1;
          eep_cs_n = 1'b0;
          c_xset = 1'b1;
+			c_eep_reg = 1'b1;
          asrcsel = ZEROA;
          bsrcsel = EEPDATA;
          next_state = WAIT_ACCEL_VLD;
@@ -193,6 +214,7 @@ begin
             eep_r_w_n = 1'b1;
             eep_cs_n = 1'b0;
             c_pid = 1'b1;
+				c_eep_reg = 1'b1;
             asrcsel = ZEROA;
             bsrcsel = EEPDATA;
             next_state = CALC_ERR;
@@ -251,6 +273,7 @@ begin
          eep_r_w_n = 1'b1;
          eep_cs_n = 1'b0;
          c_pid = 1'b1;
+			c_eep_reg = 1'b1;
          asrcsel = ZEROA;
          bsrcsel = EEPDATA;
          next_state = CALC_SUMERR;
@@ -305,6 +328,7 @@ begin
          eep_r_w_n = 1'b1;
          eep_cs_n = 1'b0;
          c_pid = 1'b1;
+			c_eep_reg = 1'b1;
          asrcsel = ZEROA;
          bsrcsel = EEPDATA;
          next_state = CALC_DERR;
@@ -389,8 +413,8 @@ begin
             WRITE_EEP : begin
                if(in_cmd) begin
                   eep_addr = cfg_data[17:16];
-                  asrcsel = cfg_data[13:0];
-                  bsrcsel = ZEROB;
+                  //asrcsel = cfg_data[13:0];
+                  //bsrcsel = ZEROB;
                   eep_cs_n = 1'b0;
                   eep_r_w_n = 1'b0;
                   chrg_pmp_en = 1'b1;
@@ -411,8 +435,8 @@ begin
                   eep_addr = cfg_data[17:16];
                   eep_cs_n = 1'b0;
                   eep_r_w_n = 1'b1;
-                  asrcsel = ZEROA;
-                  bsrcsel = EEPDATA;
+                  //asrcsel = ZEROA;
+                  //bsrcsel = EEPDATA;
                   strt_tx = 1'b1;
                   next_state = WAIT_CMD;
                end

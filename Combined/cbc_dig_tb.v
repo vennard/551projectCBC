@@ -8,8 +8,7 @@
 `timescale 1 ns / 100 ps
 module cbc_dig_tb();
 
-//TODO should be defaulted to 5 -- 2 is as far as it is currently
-localparam TESTHANDLE = 4;		//see above for functionality
+localparam TESTHANDLE = 5;		//see above for functionality
 
 //////////////////
 // Local Params //
@@ -40,7 +39,6 @@ wire [13:0] err;
 wire accel_vld,frm_rdy,c_duty;
 wire [3:0] state;
 wire in_cmd;
-
 
 /////////////////////////////////////////////
 // Define any registers used in testbench //
@@ -162,7 +160,6 @@ initial
 	repeat(1) @ (posedge clk);
 	@(negedge clk);
 	rst_n = 1;
-
   end
 
   reg rspRdyTemp;
@@ -201,13 +198,13 @@ always @(posedge clk) begin
 				strtTest = 1;
 			 end
 		   	
-			 if(wrt_duty) begin
+			 if(wrt_duty) begin //TODO change to duty valid
 			  		count = count + 1;
 					checkIndex = checkIndex + 1;
 				end
 
 			 //Check Calculation data 
-             if(wrt_duty) begin
+             if(wrt_duty) begin		//TODO same as above
                 if((checkVals[checkIndex]) != dst) $display("ERROR - dst = x%x -- should be =x%x",dst,checkVals[checkIndex]);
                 else $display("#%d duty written correctly",count);
              end
@@ -247,7 +244,7 @@ always @(posedge clk) begin
             end
         else snd_frm = 0;
 		 		  
-        if((rsp_rdy)&(!rspRdyTemp)) begin
+        if(((rsp_rdy)&(!rspRdyTemp))&(runningAdvanced==0)) begin
             //Check that control echo's xset back
             $display("Checking xset response...");
             if(cmd_data[13:0] != resp) $display("ERROR - resp is =x%x -- should be x%x",resp,cmd_data[13:0]);
@@ -258,7 +255,7 @@ always @(posedge clk) begin
             end
 
             //End Xset test after 10 iterations
-            if(xcnt==10) begin
+            if((xcnt==10)&(runningAdvanced==0)) begin
                 if(TESTHANDLE == 3) begin
                     $display("End of Testing");
                     $stop;
@@ -312,7 +309,7 @@ always @(posedge clk) begin
                 cmdNew = 0;
              end
 
-       		 //Check for write command
+       		 //Check for write command//TODO WILL NOT HAVE in_cmd
              if(((in_cmd)&((cmd_data[19:18])==2'b10))&(eq_3ms)) begin
                   //Check data is presented to the eeprom correctly
                     if((~eep_r_w_n)&(~eep_cs_n)) begin
@@ -326,9 +323,9 @@ always @(posedge clk) begin
               end
 
               //Check for read command
-              if((in_cmd)&((cmd_data[19:18])==2'b01)) begin
-                    //check eeprom was presented with correct data
-                    if((eep_r_w_n)&(~eep_cs_n)) begin
+              if((in_cmd)&((cmd_data[19:18])==2'b01)) begin	//TODO WILL NOT HAVE in_cmd
+                    //check eeprom was presented with correct data 
+                    if((eep_r_w_n)&(~eep_cs_n)) begin	
                         if(eep_rd_data == eepCheck[(cmd_data[17:16])])
                             $display("correctly read data from eeprom addr %d",cmd_data[17:16]);
                         else $display("ERROR - failed to read data from eeprom");
@@ -351,8 +348,9 @@ always @(posedge clk) begin
 				  else begin
                         test = ADVANCE;
 		  				$display("Ending command operation tests...");
+		  				$display("reseting...");
 						//RESET!!
-                        rst_n = 0;
+                  rst_n = 0;
 						repeat(2) @(posedge clk);
 						@(negedge clk);
 						rst_n = 1;
@@ -367,46 +365,61 @@ always @(posedge clk) begin
 	    if((test == ADVANCE)|(runningAdvanced>0)) begin
             //Place new Xset then run 10 accel_Val iterations through
 				if(runningAdvanced == 0) begin
+				  			$display("reseting...");
+							rst_n = 0;				//RESET!!!!!! needed for correct check duty values (clears sumerr)
+							@(posedge clk);
+							@(negedge clk);
+							rst_n = 1;
+						$display("Advanced test starting...");
 				  		runningAdvanced = 1; 
 						test = XSET;
 						xsetNew = 0;
 						xcnt = 10;
+						$display("Advanced test -- setting xset to be = x%x",xsetVals[10]);
 					 end
-
 				//End first new xset test --> move to second xset value
-            if(runningAdvanced == 1) begin
+            else if(runningAdvanced == 1) begin
 					 	if(accel_vld) begin  //then run basic tests
                     test = BASIC;
 						  count = 0;
                     strtTest = 0;
                     runningAdvanced = 2;
-						  checkIndex = 22;
+						  checkIndex = 25;
+						  $display("Checking duty values against new xset value...");
                 	end
              end
-
 				 //Run second new xset test
-             if(runningAdvanced == 2) begin
-                if(count==10) begin
+             else if(runningAdvanced == 2) begin
+                if(count>=10) begin
+		  					$display("reseting...");
+							rst_n = 0;				//RESET!!!!!! needed for correct check duty values (clears sumerr)
+							@(posedge clk);
+							@(negedge clk);
+							rst_n = 1;
                     	test = XSET;
 							xsetNew = 0;
 							xcnt = 11;
 							count = 0;
-                    runningAdvanced = 3;
+							                    runningAdvanced = 3;
+						$display("Advanced test #2 -- setting xset to be = x%x",xsetVals[11]);
                 end
              end
              //execute two commands then reset and run basic tests again
-             if(runningAdvanced == 3) begin
-                    if(count==10) begin
+             else if(runningAdvanced == 3) begin
+                    if(accel_vld) begin
                         test = BASIC;
   								strtTest = 0;
   								runningAdvanced = 4;
-								checkIndex = 46; 								
+								checkIndex = 50;
+								$display("Checking duty values against #2 xset value");								
   							 end
              end
              //run basic tests and finish
-             if(runningAdvanced == 4) begin
+             else if(runningAdvanced == 4) begin
+						if(count>=10) begin
                         $display("SUCCESS! Finishing advanced test");
                         $stop;
+							end
              end
 
         end	

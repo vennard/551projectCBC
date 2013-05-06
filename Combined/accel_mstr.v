@@ -101,7 +101,7 @@ end
 ///////////////////////////////////////////////////////////////////////////
 // Select data to drive to UART based on sel_high from SM and accel_ptr //
 /////////////////////////////////////////////////////////////////////////
-assign tx_data = (sel_high) ? accel_vals[accel_ptr][15:8] : accel_vals[accel_ptr][7:0];
+assign tx_data = (sel_high) ?  accel_vals[accel_ptr][15:8] : accel_vals[accel_ptr][7:0];
 
 initial
   $readmemh("accelValsReadIn.txt",accel_vals);

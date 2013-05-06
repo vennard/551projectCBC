@@ -36,6 +36,7 @@ wire c_init_prod;
 wire c_subtract;
 wire c_multsat;
 wire c_clr_duty;
+wire c_eep_reg;
 wire [2:0] asrcsel;
 wire [2:0] bsrcsel;
 
@@ -70,6 +71,7 @@ control icntrl(.accel_vld(accel_vld),
                .c_subtract(c_subtract),
                .c_multsat(c_multsat),
                .c_clr_duty(c_clr_duty),
+					.c_eep_reg(c_eep_reg),
                .asrcsel(asrcsel),
                .bsrcsel(bsrcsel));
 
@@ -96,7 +98,8 @@ dc_datapath idatapath(.dst(dst),
 				          .c_init_prod(c_init_prod),
 				          .c_subtract(c_subtract),
 				          .c_multsat(c_multsat), 
-				          .c_clr_duty(c_clr_duty));
+				          .c_clr_duty(c_clr_duty),
+							 .c_eep_reg(c_eep_reg));
 				         
 
 

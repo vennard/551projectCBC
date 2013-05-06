@@ -25,22 +25,30 @@ wire frm_rdy,clr_rdy;
 wire wrt_duty;
 wire snd_rsp;
 
+wire [13:0] dst_internal;
+
+wire [15:0] uart_rsp_data;
+
 ///////////////////////////////
 // Instantiate digital core //
 /////////////////////////////
 dig_core iDIG(.clk(clk), .rst_n(rst_n), .Xmeas(Xmeas), .accel_vld(accel_vld),
 	.cfg_data(cfg_data), .frm_rdy(frm_rdy), .clr_rdy(clr_rdy),
 	.eep_rd_data(eep_rd_data), .eep_cs_n(eep_cs_n), .eep_r_w_n(eep_r_w_n),
-	.eep_addr(eep_addr), .chrg_pmp_en(chrg_pmp_en), .dst(dst),
+	.eep_addr(eep_addr), .chrg_pmp_en(chrg_pmp_en), .dst(dst_internal),
 	.wrt_duty(wrt_duty), .snd_rsp(snd_rsp));
 
  
 ///////////////////////////
 // Instantiate cfg_UART //
 /////////////////////////
+assign uart_rsp_data = ((~eep_cs_n)&eep_r_w_n) ? {2'b00,eep_rd_data}:{2'b00,dst_internal};
+
+assign dst = cfg_data[13:0];
+
 cfg_UART iCFG(.clk(clk), .rst_n(rst_n), .RX(RX_C), .TX(TX_C),
 	.frm_rdy(frm_rdy), .clr_frm_rdy(clr_rdy), .cfg_data(cfg_data),
-	.rsp_data({2'b00,dst}), .snd_rsp(snd_rsp));
+	.rsp_data(uart_rsp_data), .snd_rsp(snd_rsp));
 
 /////////////////////////////
 // Instantiate accel_UART //
@@ -51,7 +59,7 @@ accel_UART iACCEL(.clk(clk), .rst_n(rst_n), .RX_A(RX_A), .Xmeas(Xmeas),
 //////////////////////////
 // Instatiate PWM Unit //
 ////////////////////////
-pwm iPWM(.clk(clk), .rst_n(rst_n), .duty(dst), .wrt_duty(wrt_duty), .CH_A(CH_A),
+PWM iPWM(.clk(clk), .rst_n(rst_n), .duty(dst), .wrt_duty(wrt_duty), .CH_A(CH_A),
 	.CH_B(CH_B));
 
 endmodule

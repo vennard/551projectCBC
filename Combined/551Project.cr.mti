@@ -89,12 +89,8 @@ Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
 Top level modules:
 	UART
 
-} {} {}} /filespace/people/v/vennard/551projectCBC/Combined/accel_mstr.v {2 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/Combined/accel_mstr.v
+} {} {}} /filespace/people/v/vennard/551projectCBC/Combined/accel_mstr.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/Combined/accel_mstr.v
 Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
-** Warning: (vlog-6) -- Waiting for lock by "vennard@tux-45, pid = 29021". Lockfile is "/filespace/people/v/vennard/551projectCBC/Combined/work/_lock".
-
-Top level modules:
-	cbc_dig_tb
 -- Compiling module accel_mstr
 
 Top level modules:
@@ -106,6 +102,13 @@ Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
 
 Top level modules:
 	UART_tx
+
+} {} {}} /filespace/people/v/vennard/551projectCBC/Combined/cbc_dig_tb.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/Combined/cbc_dig_tb.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module cbc_dig_tb
+
+Top level modules:
+	cbc_dig_tb
 
 } {} {}} /filespace/people/v/vennard/551projectCBC/Combined/datapathcontrol.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/Combined/datapathcontrol.v
 Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011

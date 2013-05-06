@@ -1,4 +1,4 @@
-@0 0066   // Xset value 
+@0 0066	 // Xset value 0066 
 @1 0C00   // Pterm 
 @2 0009   // Iterm
 @3 3ffc   // Dterm
