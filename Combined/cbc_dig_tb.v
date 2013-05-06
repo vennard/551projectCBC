@@ -65,6 +65,8 @@ integer xsetNew,xcnt;
 integer cmdNew,cmdCnt;
 integer runningAdvanced;
 integer dontCheck;
+integer checkIndex;
+integer skip;
 
 ////////////////////
 //Pull Out Values //
@@ -143,6 +145,7 @@ initial
     $readmemh("checkVals.txt",checkVals);
     $readmemh("eep_init.txt",eepCheck);
     cmdNew = 0;
+	 skip = 0;
     cmdCnt = 0;
     xsetNew = 0;
     xcnt = 0;
@@ -150,6 +153,7 @@ initial
     runningAdvanced = 0;
 	 snd_frm = 0;
 	 dontCheck = 0;
+	 checkIndex = 0;
 	//Initialize Test Variables
 	count = 0;
 	//Start with 2 clock cycle reset & INIT check
@@ -197,11 +201,14 @@ always @(posedge clk) begin
 				strtTest = 1;
 			 end
 		   	
-            if(wrt_duty) count = count + 1;
-					
+			 if(wrt_duty) begin
+			  		count = count + 1;
+					checkIndex = checkIndex + 1;
+				end
+
 			 //Check Calculation data 
              if(wrt_duty) begin
-                if((checkVals[count]) != dst) $display("ERROR - dst = x%x -- should be =x%x",dst,checkVals[count]);
+                if((checkVals[checkIndex]) != dst) $display("ERROR - dst = x%x -- should be =x%x",dst,checkVals[checkIndex]);
                 else $display("#%d duty written correctly",count);
              end
 			
@@ -328,8 +335,10 @@ always @(posedge clk) begin
                     end
 						  //Check sends correct response data
 						  if((rsp_rdy)&(!rspRdyTemp)) begin
-							  if(resp == eepCheck[cmd_data[17:16]]) $display("correct response (x%x) = (x%x)",resp, eepCheck[cmd_data[17:16]]);
-							  else $display("ERROR - read response failed -- resp = (x%x) should be (x%x)",resp, eepCheck[cmd_data[17:16]]);
+							  if(resp == eepCheck[cmd_data[17:16]]) $display("correct response (x%x) = (x%x)"
+								 ,resp, eepCheck[cmd_data[17:16]]);
+							  else $display("ERROR - read response failed -- resp = (x%x) should be (x%x)"
+								 ,resp, eepCheck[cmd_data[17:16]]);
 						  end
              end
 				
@@ -345,6 +354,7 @@ always @(posedge clk) begin
 						//RESET!!
                         rst_n = 0;
 						repeat(2) @(posedge clk);
+						@(negedge clk);
 						rst_n = 1;
 						dontCheck = 0;
 							  end
@@ -355,46 +365,48 @@ always @(posedge clk) begin
 *Advanced Operation Test
 ****************************************************************/
 	    if((test == ADVANCE)|(runningAdvanced>0)) begin
-            if(runningAdvanced == 0) runningAdvanced = 1; 
             //Place new Xset then run 10 accel_Val iterations through
+				if(runningAdvanced == 0) begin
+				  		runningAdvanced = 1; 
+						test = XSET;
+						xsetNew = 0;
+						xcnt = 10;
+					 end
+
+				//End first new xset test --> move to second xset value
             if(runningAdvanced == 1) begin
-                test = XSET;
-                xsetNew = 0;
-                xcnt = $random % 20; //pick a random value out of xsetVals.txt
-                if(accel_vld) begin  //then run basic tests
+					 	if(accel_vld) begin  //then run basic tests
                     test = BASIC;
+						  count = 0;
                     strtTest = 0;
                     runningAdvanced = 2;
-                end
+						  checkIndex = 22;
+                	end
              end
 
-             //End running new xset test, write new p value and reset and run
+				 //Run second new xset test
              if(runningAdvanced == 2) begin
                 if(count==10) begin
-                    test = CMDMODE;
-                    cmdCnt = 10;
-                    cmdNew = 0;
+                    	test = XSET;
+							xsetNew = 0;
+							xcnt = 11;
+							count = 0;
                     runningAdvanced = 3;
                 end
              end
              //execute two commands then reset and run basic tests again
              if(runningAdvanced == 3) begin
-                    if(cmdCnt > 12) begin
+                    if(count==10) begin
                         test = BASIC;
-                        strtTest = 0;
-                        rst_n = 0;
-                        repeat(1) @(posedge clk);
-                        @(negedge clk);
-                        rst_n = 1;
-                        runningAdvanced = 4;
-                    end
+  								strtTest = 0;
+  								runningAdvanced = 4;
+								checkIndex = 46; 								
+  							 end
              end
              //run basic tests and finish
              if(runningAdvanced == 4) begin
-                    if(count > 5) begin
                         $display("SUCCESS! Finishing advanced test");
                         $stop;
-                    end
              end
 
         end	

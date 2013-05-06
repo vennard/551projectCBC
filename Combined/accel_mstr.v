@@ -104,6 +104,6 @@ end
 assign tx_data = (sel_high) ? accel_vals[accel_ptr][15:8] : accel_vals[accel_ptr][7:0];
 
 initial
-  $readmemh("accel_vals.txt",accel_vals);
+  $readmemh("accelValsReadIn.txt",accel_vals);
 
 endmodule

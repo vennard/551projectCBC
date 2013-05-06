@@ -56,7 +56,7 @@ control icntrl(.accel_vld(accel_vld),
                .chrg_pmp_en(chrg_pmp_en),
                .eep_r_w_n(eep_r_w_n),
                .clr_rdy(clr_rdy),
-               .strt_tx_true(snd_rsp),		//JOHN Changed TODO snd_rsp held 2 clks
+               .strt_tx(snd_rsp),		
                .eep_cs_n(eep_cs_n),
                .wrt_duty(wrt_duty),
                .c_err(c_err),
