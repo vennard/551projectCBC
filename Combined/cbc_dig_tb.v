@@ -199,8 +199,10 @@ always @(posedge clk) begin
 			 end
 
 			 //Check Calculation data 
-             if(duty_valid) begin		
-                if((checkVals[checkIndex]) != duty) $display("ERROR - duty = x%x -- should be =x%x",duty,checkVals[checkIndex]);
+             //if((~duty_valid)&(duty_valid_strt)) begin		
+					if(~duty_valid) begin
+					 @(posedge duty_valid); 
+				  	if((checkVals[checkIndex]) != duty) $display("ERROR - duty = x%x -- should be =x%x",duty,checkVals[checkIndex]);
                 else $display("#%d duty written correctly",count);
 					count = count + 1;
 					checkIndex = checkIndex + 1;
@@ -313,13 +315,14 @@ always @(posedge clk) begin
             	if(cmd_data[19:18]==2'b10) begin   
 					//Check data is presented to the eeprom correctly
                     if((~eep_r_w_n)&(~eep_cs_n)) begin
+							 	//check address
+                        if(eep_addr == (cmd_data[17:16])) $display("correct address");
+                        else $display("ERROR - incorrect address");
+
                         //check data got sent through WAIT UNTIL AFTER CHRGPMP
 								@(negedge chrg_pmp_en);
                         if(dst == (cmd_data[13:0])) $display("wrote correct data to eeprom"); 
                         else $display("ERROR - failed to write correct data out to eeprom");
-                        //check address
-                        if(eep_addr == (cmd_data[17:16])) $display("correct address");
-                        else $display("ERROR - incorrect address");
                     end
               end
 
@@ -364,8 +367,8 @@ always @(posedge clk) begin
 *Advanced Operation Test
 ****************************************************************/
 	    if((test == ADVANCE)|(runningAdvanced>0)) begin
-            //Place new Xset then run 10 accel_Val iterations through
-				/*
+         /*   
+			//Place new Xset then run 10 accel_Val iterations through
 				if(runningAdvanced == 0) begin
 						strtTest = 0;
 				  		$display("Advanced test starting...");

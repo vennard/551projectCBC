@@ -59,7 +59,7 @@ accel_UART iACCEL(.clk(clk), .rst_n(rst_n), .RX_A(RX_A), .Xmeas(Xmeas),
 //////////////////////////
 // Instatiate PWM Unit //
 ////////////////////////
-PWM iPWM(.clk(clk), .rst_n(rst_n), .duty(dst), .wrt_duty(wrt_duty), .CH_A(CH_A),
+pwm iPWM(.clk(clk), .rst_n(rst_n), .duty(dst_internal), .wrt_duty(wrt_duty), .CH_A(CH_A),
 	.CH_B(CH_B));
 
 endmodule
