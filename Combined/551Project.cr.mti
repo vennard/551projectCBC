@@ -1,4 +1,11 @@
-{/filespace/people/v/vennard/551projectCBC/Combined/removed for testing/UART_rx.v} {1 {vlog -work work -vopt -nocovercells {/filespace/people/v/vennard/551projectCBC/Combined/removed for testing/UART_rx.v}
+/filespace/people/v/vennard/551projectCBC/Combined/accel_UART.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/Combined/accel_UART.v
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module accel_UART
+
+Top level modules:
+	accel_UART
+
+} {} {}} {/filespace/people/v/vennard/551projectCBC/Combined/removed for testing/UART_rx.v} {1 {vlog -work work -vopt -nocovercells {/filespace/people/v/vennard/551projectCBC/Combined/removed for testing/UART_rx.v}
 Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
 -- Compiling module UART_rx
 
@@ -11,13 +18,6 @@ Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
 
 Top level modules:
 	pwm_monitor
-
-} {} {}} /filespace/people/v/vennard/551projectCBC/Combined/accel_UART.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/Combined/accel_UART.v
-Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
--- Compiling module accel_UART
-
-Top level modules:
-	accel_UART
 
 } {} {}} /filespace/people/v/vennard/551projectCBC/Combined/dig_core.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/Combined/dig_core.v
 Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
@@ -33,13 +33,6 @@ Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
 Top level modules:
 	saturator
 
-} {} {}} /filespace/people/v/vennard/551projectCBC/Combined/cfg_mstr.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/Combined/cfg_mstr.v
-Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
--- Compiling module cfg_mstr
-
-Top level modules:
-	cfg_mstr
-
 } {} {}} /filespace/people/v/vennard/551projectCBC/Combined/dc_datapath.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/Combined/dc_datapath.v
 Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
 -- Compiling module dc_datapath
@@ -47,12 +40,12 @@ Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
 Top level modules:
 	dc_datapath
 
-} {} {}} /filespace/people/v/vennard/551projectCBC/Combined/bit14_reg_clr.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/Combined/bit14_reg_clr.v
+} {} {}} /filespace/people/v/vennard/551projectCBC/Combined/cfg_mstr.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/Combined/cfg_mstr.v
 Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
--- Compiling module bit14_reg_clr
+-- Compiling module cfg_mstr
 
 Top level modules:
-	bit14_reg_clr
+	cfg_mstr
 
 } {} {}} /filespace/people/v/vennard/551projectCBC/Combined/bit14_reg_rst.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/Combined/bit14_reg_rst.v
 Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
@@ -61,12 +54,12 @@ Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
 Top level modules:
 	bit14_reg_rst
 
-} {} {}} /filespace/people/v/vennard/551projectCBC/Combined/cbc_dig.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/Combined/cbc_dig.v
+} {} {}} /filespace/people/v/vennard/551projectCBC/Combined/bit14_reg_clr.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/Combined/bit14_reg_clr.v
 Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
--- Compiling module cbc_dig
+-- Compiling module bit14_reg_clr
 
 Top level modules:
-	cbc_dig
+	bit14_reg_clr
 
 } {} {}} /filespace/people/v/vennard/551projectCBC/Combined/cfg_UART.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/Combined/cfg_UART.v
 Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
@@ -75,12 +68,12 @@ Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
 Top level modules:
 	cfg_UART
 
-} {} {}} /filespace/people/v/vennard/551projectCBC/Combined/PWM.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/Combined/PWM.v
+} {} {}} /filespace/people/v/vennard/551projectCBC/Combined/cbc_dig.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/Combined/cbc_dig.v
 Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
--- Compiling module PWM
+-- Compiling module cbc_dig
 
 Top level modules:
-	PWM
+	cbc_dig
 
 } {} {}} /filespace/people/v/vennard/551projectCBC/Combined/UART.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/Combined/UART.v
 Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
@@ -89,12 +82,19 @@ Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
 Top level modules:
 	UART
 
-} {} {}} /filespace/people/v/vennard/551projectCBC/Combined/accel_mstr.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/Combined/accel_mstr.v
+} {} {}} /filespace/people/v/vennard/551projectCBC/Combined/PWM.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/Combined/PWM.v
 Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
--- Compiling module accel_mstr
+-- Compiling module PWM
 
 Top level modules:
-	accel_mstr
+	PWM
+
+} {} {}} /filespace/people/v/vennard/551projectCBC/Combined/accel_mstr.v {1 {vlog -work work -vopt -nocovercells {/filespace/people/v/vennard/551projectCBC/Combined/removed for testing/UART_rx.v}
+Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+-- Compiling module UART_rx
+
+Top level modules:
+	UART_rx
 
 } {} {}} /filespace/people/v/vennard/551projectCBC/Combined/UART_tx.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/Combined/UART_tx.v
 Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
@@ -103,8 +103,12 @@ Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
 Top level modules:
 	UART_tx
 
-} {} {}} /filespace/people/v/vennard/551projectCBC/Combined/cbc_dig_tb.v {1 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/Combined/cbc_dig_tb.v
+} {} {}} /filespace/people/v/vennard/551projectCBC/Combined/cbc_dig_tb.v {2 {vlog -work work -vopt -nocovercells /filespace/people/v/vennard/551projectCBC/Combined/cbc_dig_tb.v
 Model Technology ModelSim SE vlog 10.0c_1 Compiler 2011.08 Aug 26 2011
+** Warning: (vlog-6) -- Waiting for lock by "vennard@tux-54, pid = 8208". Lockfile is "/filespace/people/v/vennard/551projectCBC/Combined/work/_lock".
+
+Top level modules:
+	cbc_dig_tb
 -- Compiling module cbc_dig_tb
 
 Top level modules:

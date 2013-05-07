@@ -16,18 +16,18 @@ L0 1
 Z1 OE;L;10.0c_1;49
 Z2 !s102 -nocovercells
 Z3 o-work work -nocovercells -L mtiAvm -L mtiOvm -L mtiUvm -L mtiUPF
-!s85 0
-!s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/Combined/accel_mstr.v|
 !s100 Vk9S1ASF^7=6PdRbYfLX=0
-!s108 1367866558.374494
+!s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/Combined/accel_mstr.v|
+!s108 1367882398.983194
 !s107 /filespace/people/v/vennard/551projectCBC/Combined/accel_mstr.v|
+!s85 0
 vaccel_UART
 V[2SgcL[:H1l26]>>INfPQ3
 r1
 31
 I6U=3E:MQV]?78<3NQP6562
 Z4 d/filespace/people/v/vennard/551projectCBC/Combined
-w1365631110
+Z5 w1367860128
 8/filespace/people/v/vennard/551projectCBC/Combined/accel_UART.v
 F/filespace/people/v/vennard/551projectCBC/Combined/accel_UART.v
 L0 1
@@ -35,100 +35,100 @@ R1
 R2
 R3
 naccel_@u@a@r@t
-!s85 0
 !s100 [0a3?zn@Zfhm?kM;8Uoa=1
 !s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/Combined/accel_UART.v|
-!s108 1367866559.519000
+!s108 1367882465.195577
 !s107 /filespace/people/v/vennard/551projectCBC/Combined/accel_UART.v|
+!s85 0
 vbit14_reg
 V_ZfgJh0:NE^>5USWNf`>G3
 r1
 31
 I2Y91j9Fz>LeZPml^:PR6U3
 R4
-w1366661084
+R5
 8/filespace/people/v/vennard/551projectCBC/Combined/bit14_reg.v
 F/filespace/people/v/vennard/551projectCBC/Combined/bit14_reg.v
 L0 2
 R1
 R2
 R3
-!s85 0
 !s100 NBJGjD3c@TXMOAiOfbeUT1
 !s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/Combined/bit14_reg.v|
-!s108 1367866560.020882
+!s108 1367882466.082278
 !s107 /filespace/people/v/vennard/551projectCBC/Combined/bit14_reg.v|
+!s85 0
 vbit14_reg_clr
 V>zk:3ZX2[aJ`7?O`^JJ[Y2
 r1
 31
 I;WF]B=l1ZG6bJMfIBM>VF3
 R4
-w1366660304
+R5
 8/filespace/people/v/vennard/551projectCBC/Combined/bit14_reg_clr.v
 F/filespace/people/v/vennard/551projectCBC/Combined/bit14_reg_clr.v
 L0 2
 R1
 R2
 R3
-!s85 0
 !s100 3`ZE=_I^KK5B]fU63iod;2
 !s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/Combined/bit14_reg_clr.v|
-!s108 1367866560.314456
+!s108 1367882471.072752
 !s107 /filespace/people/v/vennard/551projectCBC/Combined/bit14_reg_clr.v|
+!s85 0
 vbit14_reg_rst
 VPbX6DJn5^Pd=@mz5^FSoV1
 r1
 31
 I@M1M_gj=clKB;3TNKlaTQ3
 R4
-w1366660306
+R5
 8/filespace/people/v/vennard/551projectCBC/Combined/bit14_reg_rst.v
 F/filespace/people/v/vennard/551projectCBC/Combined/bit14_reg_rst.v
 L0 2
 R1
 R2
 R3
-!s85 0
 !s100 Z0iAhOJ67[]GKHfhH8i@`3
 !s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/Combined/bit14_reg_rst.v|
-!s108 1367866560.407277
+!s108 1367882478.998408
 !s107 /filespace/people/v/vennard/551projectCBC/Combined/bit14_reg_rst.v|
+!s85 0
 vcbc_dig
 Va=`Kifi=FXmEh0E34W=jl3
 r1
 31
-IVPmWE856TMi]R[A[I@O:72
+I8cQVO3hOnOoahclNZNe=_0
 R4
-w1367861114
+w1367862716
 8/filespace/people/v/vennard/551projectCBC/Combined/cbc_dig.v
 F/filespace/people/v/vennard/551projectCBC/Combined/cbc_dig.v
 L0 1
 R1
 R2
 R3
-!s85 0
-!s100 BaSMND68Rn=9cYbGkz>_c2
+!s100 UW:jmMDkam;1dK0WVZ;`j2
 !s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/Combined/cbc_dig.v|
-!s108 1367866560.523729
+!s108 1367882558.364036
 !s107 /filespace/people/v/vennard/551projectCBC/Combined/cbc_dig.v|
+!s85 0
 vcbc_dig_tb
 V;TmL1AR`U8?ERVZlD32VG2
 r1
+!s85 0
 31
-IL2>@LLOA2:Do^WiH=QTYW0
+!s100 kQAXg@NS=ozP=H:3:U5PC1
+IIDHB3f0N7RKZO>KNneZ4R1
 R4
-w1367867574
+w1367890374
 8/filespace/people/v/vennard/551projectCBC/Combined/cbc_dig_tb.v
 F/filespace/people/v/vennard/551projectCBC/Combined/cbc_dig_tb.v
 L0 9
 R1
+!s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/Combined/cbc_dig_tb.v|
 R2
 R3
-!s85 0
-!s100 7P9VLPdBUfJd<55MY^Bo;3
-!s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/Combined/cbc_dig_tb.v|
-!s108 1367867580.918291
+!s108 1367890379.264456
 !s107 /filespace/people/v/vennard/551projectCBC/Combined/cbc_dig_tb.v|
 vcfg_mstr
 VOAJHgfN:Yj95b7>@Vz[zm1
@@ -143,18 +143,18 @@ L0 1
 R1
 R2
 R3
-!s85 0
 !s100 KdXK=O7Z9YLCBZ=kOaRZ83
 !s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/Combined/cfg_mstr.v|
-!s108 1367866562.875068
+!s108 1367882563.713455
 !s107 /filespace/people/v/vennard/551projectCBC/Combined/cfg_mstr.v|
+!s85 0
 vcfg_UART
 V]2i2W[<jf?<1Mf17f_S6<2
 r1
 31
 I`B^mSM;0eZJT0l];nXe373
 R4
-w1365617152
+R5
 8/filespace/people/v/vennard/551projectCBC/Combined/cfg_UART.v
 F/filespace/people/v/vennard/551projectCBC/Combined/cfg_UART.v
 L0 4
@@ -162,29 +162,29 @@ R1
 R2
 R3
 ncfg_@u@a@r@t
-!s85 0
 !s100 dfE0RX7;f4aSLPLlZAPRd1
 !s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/Combined/cfg_UART.v|
-!s108 1367866563.972960
+!s108 1367882565.498138
 !s107 /filespace/people/v/vennard/551projectCBC/Combined/cfg_UART.v|
+!s85 0
 vcontrol
-V?MBmh4JDcUlP^SL:jVVBJ0
+V?OJAHkOP3Tz4e^;2ME4]C0
 r1
 31
-I:1:64S]fz[A9O20HY5`C<3
+I5gCh;7b9an[oogDM9T4TT1
 R4
-w1367791611
+w1367864392
 8/filespace/people/v/vennard/551projectCBC/Combined/control.v
 F/filespace/people/v/vennard/551projectCBC/Combined/control.v
 L0 1
 R1
 R2
 R3
-!s85 0
-!s100 g8M=jEz^S8dcgz9DOP16o1
+!s100 ;Q11dU8=gR;2JF]P6ZQPf3
 !s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/Combined/control.v|
-!s108 1367866564.455317
+!s108 1367882566.927931
 !s107 /filespace/people/v/vennard/551projectCBC/Combined/control.v|
+!s85 0
 vdatapath_control
 I=efYEDoQDLP><14dL1Ni@2
 VakHIQWXzDgfK2SEeHKzzk2
@@ -200,45 +200,45 @@ R2
 R3
 !s100 D@@zDCR:Y5LHfbFRPlc2I1
 !s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/Combined/datapathcontrol.v|
-!s108 1367866565.232017
+!s108 1367882567.327049
 !s107 /filespace/people/v/vennard/551projectCBC/Combined/datapathcontrol.v|
 !s85 0
 vdc_datapath
-V6JNA586e;_jJdV8PTa7>H3
+V?0Po9Z2dPB0c@C`Slj6Ib1
 r1
 31
-I<k@;>W8zRYLK0la988]Pn1
+IHX4^Oe22TJiSzNkH[MBbm2
 R4
-w1367540366
+w1367863316
 8/filespace/people/v/vennard/551projectCBC/Combined/dc_datapath.v
 F/filespace/people/v/vennard/551projectCBC/Combined/dc_datapath.v
 L0 1
 R1
 R2
 R3
-!s85 0
-!s100 hREb^l@[CDLOalNZiVgJE1
+!s100 i0agZ_BM<c=5K7o25jdL`2
 !s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/Combined/dc_datapath.v|
-!s108 1367866565.484540
+!s108 1367882568.432076
 !s107 /filespace/people/v/vennard/551projectCBC/Combined/dc_datapath.v|
+!s85 0
 vdig_core
 Vn:f<UeXMF0f4UNhW5el6n0
 r1
 31
-IF^HmFcCPI5VonA6FZmd`^3
+Icb60ci:]4:MF3LOkh@ZYf0
 R4
-w1367856129
+w1367860544
 8/filespace/people/v/vennard/551projectCBC/Combined/dig_core.v
 F/filespace/people/v/vennard/551projectCBC/Combined/dig_core.v
 L0 1
 R1
 R2
 R3
-!s85 0
-!s100 ?GDCzO5J?3MFeEe3_ZAA]0
+!s100 6Z:LBL=bBJR>Z0Z=;GBc12
 !s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/Combined/dig_core.v|
-!s108 1367866566.048633
+!s108 1367882570.596622
 !s107 /filespace/people/v/vennard/551projectCBC/Combined/dig_core.v|
+!s85 0
 veep
 VKA0:WO?<D0Ge83eJ5z<XB2
 r1
@@ -252,11 +252,30 @@ L0 3
 R1
 R2
 R3
-!s85 0
 !s100 YMM7EX0nAK;?J;;l3b`U`3
 !s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/Combined/eep.v|
-!s108 1367866566.354987
+!s108 1367882572.400321
 !s107 /filespace/people/v/vennard/551projectCBC/Combined/eep.v|
+!s85 0
+vPWM
+VW9Y<S51l]1FBS4XkX3IUz1
+r1
+31
+I]gc?AY[3:R8La_]<OC8]63
+R4
+R5
+8/filespace/people/v/vennard/551projectCBC/Combined/PWM.v
+F/filespace/people/v/vennard/551projectCBC/Combined/PWM.v
+L0 6
+R1
+R2
+R3
+n@p@w@m
+!s100 g7M92I5MUlH;Vj9hEg7LB3
+!s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/Combined/PWM.v|
+!s108 1367882576.190122
+!s107 /filespace/people/v/vennard/551projectCBC/Combined/PWM.v|
+!s85 0
 vpwm
 DXx6 sv_std 3 std 0 22 :CP]PHbGOHGT_H:3KF`8L2
 Vg<2<81I?j0_bi^110LE_70
@@ -278,29 +297,9 @@ o-work work -sv -nocovercells -L mtiAvm -L mtiOvm -L mtiUvm -L mtiUPF
 !s108 1367539628.484724
 !s107 /filespace/people/v/vennard/Desktop/Combined/pwm.sv|
 !s85 0
-vPWM
-VW9Y<S51l]1FBS4XkX3IUz1
-r1
-31
-I]gc?AY[3:R8La_]<OC8]63
-R4
-w1367539482
-8/filespace/people/v/vennard/551projectCBC/Combined/PWM.v
-F/filespace/people/v/vennard/551projectCBC/Combined/PWM.v
-L0 6
-R1
-R2
-R3
-n@p@w@m
-!s85 0
-!s100 g7M92I5MUlH;Vj9hEg7LB3
-!s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/Combined/PWM.v|
-!s108 1367866566.536795
-!s107 /filespace/people/v/vennard/551projectCBC/Combined/PWM.v|
 vpwm_monitor
 V26m_aboW=T3EZ=[D[3]J<2
 r1
-!s85 0
 31
 I]N<j@fgR:4jma0IU]gV@f1
 R4
@@ -313,33 +312,34 @@ R2
 R3
 !s100 kTI`o[G0=J73h6agN@5XB0
 !s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/Combined/pwm_monitor.v|
-!s108 1367866566.639424
+!s108 1367882576.735429
 !s107 /filespace/people/v/vennard/551projectCBC/Combined/pwm_monitor.v|
+!s85 0
 vsaturator
 V5G<?@WZ2BYXYMjFoHZ8]I3
 r1
 31
 I0e>N:zLB0`]cckSz7<SU@2
 R4
-w1366812964
+R5
 8/filespace/people/v/vennard/551projectCBC/Combined/saturator.v
 F/filespace/people/v/vennard/551projectCBC/Combined/saturator.v
 L0 2
 R1
 R2
 R3
-!s85 0
 !s100 E67;E_oJ@^[RA7knP17eo1
 !s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/Combined/saturator.v|
-!s108 1367866566.969054
+!s108 1367882577.465126
 !s107 /filespace/people/v/vennard/551projectCBC/Combined/saturator.v|
+!s85 0
 vUART
 V4Vem3jdf05mGH40RX?;j72
 r1
 31
 IZk=`dQ4MTDic`<53Lz;F^0
 R4
-w1365600016
+R5
 8/filespace/people/v/vennard/551projectCBC/Combined/UART.v
 F/filespace/people/v/vennard/551projectCBC/Combined/UART.v
 L0 4
@@ -347,11 +347,11 @@ R1
 R2
 R3
 n@u@a@r@t
-!s85 0
 !s100 9DMNL>@QXD__^B_g6<cM<2
 !s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/Combined/UART.v|
-!s108 1367866567.206041
+!s108 1367882578.428442
 !s107 /filespace/people/v/vennard/551projectCBC/Combined/UART.v|
+!s85 0
 vUART_rx
 VWAZhS9=>`[0lk3h4lJ[1K2
 r1
@@ -366,18 +366,18 @@ R1
 R2
 R3
 n@u@a@r@t_rx
-!s85 0
 !s100 ;[N4lWR?AgPL?B4<G6_G^1
 !s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/Combined/removed for testing/UART_rx.v|
-!s108 1367866567.850904
+!s108 1367882579.887308
 !s107 /filespace/people/v/vennard/551projectCBC/Combined/removed for testing/UART_rx.v|
+!s85 0
 vUART_tx
 VTj8K>T00K`J:=Uf[T_c^]2
 r1
 31
 IK>1NV[8J8g^3`@OKEz:<=1
 R4
-w1367540398
+R5
 8/filespace/people/v/vennard/551projectCBC/Combined/UART_tx.v
 F/filespace/people/v/vennard/551projectCBC/Combined/UART_tx.v
 L0 6
@@ -385,8 +385,8 @@ R1
 R2
 R3
 n@u@a@r@t_tx
-!s85 0
 !s100 nVe[D=;1``RVAkzJK_L^m2
 !s90 -reportprogress|300|-work|work|-vopt|-nocovercells|/filespace/people/v/vennard/551projectCBC/Combined/UART_tx.v|
-!s108 1367866567.304978
+!s108 1367882578.905288
 !s107 /filespace/people/v/vennard/551projectCBC/Combined/UART_tx.v|
+!s85 0

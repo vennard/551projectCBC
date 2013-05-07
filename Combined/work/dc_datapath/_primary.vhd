@@ -21,6 +21,7 @@ entity dc_datapath is
         c_init_prod     : in     vl_logic;
         c_subtract      : in     vl_logic;
         c_multsat       : in     vl_logic;
-        c_clr_duty      : in     vl_logic
+        c_clr_duty      : in     vl_logic;
+        c_eep_reg       : in     vl_logic
     );
 end dc_datapath;

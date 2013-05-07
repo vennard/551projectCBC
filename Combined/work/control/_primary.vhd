@@ -27,6 +27,7 @@ entity control is
         c_multsat       : out    vl_logic;
         c_clr_duty      : out    vl_logic;
         asrcsel         : out    vl_logic_vector(2 downto 0);
-        bsrcsel         : out    vl_logic_vector(2 downto 0)
+        bsrcsel         : out    vl_logic_vector(2 downto 0);
+        c_eep_reg       : out    vl_logic
     );
 end control;

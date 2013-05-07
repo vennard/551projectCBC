@@ -24,21 +24,17 @@ localparam ADVANCE = 3'b100;
 //////////////////////////////////////////////
 wire [1:0] eep_addr;
 wire [13:0] eep_rd_data;
-wire [13:0] dst;
+wire [13:0] dst,dstActual;
 wire [15:0] resp;
 wire [13:0] duty;
 wire rsp_rdy;
-wire [23:0] cfg_data;
 
 
 //Added pull out wires
-wire [13:0] sumerr;
-wire [13:0] preverr;
-wire [13:0] xset;
-wire [13:0] err;
-wire accel_vld,frm_rdy,c_duty;
-wire [3:0] state;
-wire in_cmd;
+//wire [13:0] sumerr;
+//wire [13:0] preverr;
+//wire [13:0] xset;
+//wire in_cmd;
 
 /////////////////////////////////////////////
 // Define any registers used in testbench //
@@ -65,31 +61,23 @@ integer runningAdvanced;
 integer dontCheck;
 integer checkIndex;
 integer skip;
+integer checkingBasic;
 
 ////////////////////
 //Pull Out Values //
 ////////////////////
 //Pull outs of datapath
-assign sumerr = DUT.iDIG.idatapath.sumerr;
-assign preverr = DUT.iDIG.idatapath.preverr;
-assign xset = DUT.iDIG.idatapath.xset;
+//assign sumerr = DUT.iDIG.idatapath.sumerr;
+//assign preverr = DUT.iDIG.idatapath.preverr;
+//assign xset = DUT.iDIG.idatapath.xset;
 
 //General Pull Outs
-assign accel_vld = DUT.iDIG.accel_vld;
-assign err = DUT.iDIG.idatapath.err;
-assign duty = DUT.iDIG.idatapath.duty;
-assign frm_rdy = DUT.iDIG.frm_rdy; 
-assign wrt_duty = DUT.iDIG.wrt_duty; 
+//assign accel_vld = DUT.iDIG.accel_vld;
+assign dstActual = DUT.dst_internal;   //TODO not needed? 
 
-//Control Pull Outs
-assign state = DUT.iDIG.icntrl.state;  
-assign c_duty = DUT.iDIG.icntrl.c_duty;
-assign in_cmd = DUT.iDIG.icntrl.in_cmd;
-assign prod_vld = DUT.iDIG.icntrl.prod_vld;
-assign cfg_data = DUT.iDIG.cfg_data;
-assign strt_tx = DUT.iDIG.icntrl.strt_tx;
-assign in_cmd = DUT.iDIG.icntrl.in_cmd;
-assign eq_3ms = DUT.iDIG.icntrl.eq_3ms;
+//Control Pull Outs	-- USED FOR CHECKING COMMANDS
+//assign in_cmd = DUT.iDIG.icntrl.in_cmd;
+//assign eq_3ms = DUT.iDIG.icntrl.eq_3ms;
 
 //////////////////////
 // Instantiate DUT //
@@ -152,6 +140,7 @@ initial
 	 snd_frm = 0;
 	 dontCheck = 0;
 	 checkIndex = 0;
+	 checkingBasic = 0;
 	//Initialize Test Variables
 	count = 0;
 	//Start with 2 clock cycle reset & INIT check
@@ -162,6 +151,17 @@ initial
 	rst_n = 1;
   end
 
+	//to detect the start of duty_valid
+	reg duty_valid_strt;
+	always @(posedge clk, negedge rst_n)
+  		if(!rst_n)
+			duty_valid_strt <= 1'b0;
+  		else
+ 			duty_valid_strt <= duty_valid;		  
+
+
+
+  //to detect start of rsp_rdy
   reg rspRdyTemp;
 always @(posedge clk,negedge rst_n)
 	if(!rst_n)
@@ -174,17 +174,16 @@ always @(posedge clk) begin
 *Initialization Test  
 ****************************************************************/ 	
 	if((test==INIT)&(rst_n)) begin
-	  		$display("Initialization test running...");
-			if(sumerr!=0) $display("ERROR - sumerr != 0");
-			if(preverr!=0) $display("ERROR - preverr != 0");
-			if(xset!=eepCheck[0]) $display("ERROR - xset value should = x%x - actual xset = x%x",eepCheck[0],xset);
+	  		$display("Initializing...");
+			//REMOVED FOR POST SYNTH
+			//if(sumerr!=0) $display("ERROR - sumerr != 0");
+			//if(preverr!=0) $display("ERROR - preverr != 0");
+			//if(xset!=eepCheck[0]) $display("ERROR - xset value should = x%x - actual xset = x%x",eepCheck[0],xset);
 			//Set up for next test
 		 if(TESTHANDLE == 1) begin
-			$display("End of Testing");
 		  	$stop;
 		  	end
 			else begin
-			$display("Finishing Initialization...");
 			test = BASIC;
 		 end
 	end
@@ -192,27 +191,25 @@ always @(posedge clk) begin
 /**************************************************************** 
 *Basic Operation Test
 ****************************************************************/
-	if(test==BASIC) begin
+	if((test==BASIC)|(checkingBasic)) begin
 	  		if(strtTest == 0) begin
 	  	 		$display("Basic test running...");
+				count = 0;
 				strtTest = 1;
 			 end
-		   	
-			 if(wrt_duty) begin //TODO change to duty valid
-			  		count = count + 1;
-					checkIndex = checkIndex + 1;
-				end
 
 			 //Check Calculation data 
-             if(wrt_duty) begin		//TODO same as above
-                if((checkVals[checkIndex]) != dst) $display("ERROR - dst = x%x -- should be =x%x",dst,checkVals[checkIndex]);
+             if(duty_valid) begin		
+                if((checkVals[checkIndex]) != duty) $display("ERROR - duty = x%x -- should be =x%x",duty,checkVals[checkIndex]);
                 else $display("#%d duty written correctly",count);
+					count = count + 1;
+					checkIndex = checkIndex + 1;
+
              end
 			
             //Ending Test Check - ends after 20 iterations
-           	if(count>20) begin			
+           	if(count>19) begin			
 			//Set up for next test
-			  count = 0;
 			  if(TESTHANDLE == 2) begin
 	  				$display("End of Testing");
 	  				$stop;
@@ -301,19 +298,23 @@ always @(posedge clk) begin
                end
                 //Check that we entered command mode correctly
                 if((cmd_data[19:16])==4'h3) begin
-                    if(in_cmd) $display("entered command mode correctly");
-                    else $display("ERROR - in_cmd flop not set after enter command sent");
+                    //if(in_cmd) $display("entered command mode correctly");
+                    $display("entered command mode");
+                    //else $display("ERROR - in_cmd flop not set after enter command sent");
                    end
+					
                 //Prep and send new command
                 cmdCnt = cmdCnt + 1;
                 cmdNew = 0;
              end
 
-       		 //Check for write command//TODO WILL NOT HAVE in_cmd
-             if(((in_cmd)&((cmd_data[19:18])==2'b10))&(eq_3ms)) begin
-                  //Check data is presented to the eeprom correctly
+
+				 	//Check a write
+            	if(cmd_data[19:18]==2'b10) begin   
+					//Check data is presented to the eeprom correctly
                     if((~eep_r_w_n)&(~eep_cs_n)) begin
-                        //check data got sent through
+                        //check data got sent through WAIT UNTIL AFTER CHRGPMP
+								@(negedge chrg_pmp_en);
                         if(dst == (cmd_data[13:0])) $display("wrote correct data to eeprom"); 
                         else $display("ERROR - failed to write correct data out to eeprom");
                         //check address
@@ -323,9 +324,9 @@ always @(posedge clk) begin
               end
 
               //Check for read command
-              if((in_cmd)&((cmd_data[19:18])==2'b01)) begin	//TODO WILL NOT HAVE in_cmd
+              if(cmd_data[19:18]==2'b01) begin
                     //check eeprom was presented with correct data 
-                    if((eep_r_w_n)&(~eep_cs_n)) begin	
+                    if((eep_r_w_n)&(~eep_cs_n)) begin	 
                         if(eep_rd_data == eepCheck[(cmd_data[17:16])])
                             $display("correctly read data from eeprom addr %d",cmd_data[17:16]);
                         else $display("ERROR - failed to read data from eeprom");
@@ -364,13 +365,10 @@ always @(posedge clk) begin
 ****************************************************************/
 	    if((test == ADVANCE)|(runningAdvanced>0)) begin
             //Place new Xset then run 10 accel_Val iterations through
+				/*
 				if(runningAdvanced == 0) begin
-				  			$display("reseting...");
-							rst_n = 0;				//RESET!!!!!! needed for correct check duty values (clears sumerr)
-							@(posedge clk);
-							@(negedge clk);
-							rst_n = 1;
-						$display("Advanced test starting...");
+						strtTest = 0;
+				  		$display("Advanced test starting...");
 				  		runningAdvanced = 1; 
 						test = XSET;
 						xsetNew = 0;
@@ -392,15 +390,12 @@ always @(posedge clk) begin
              else if(runningAdvanced == 2) begin
                 if(count>=10) begin
 		  					$display("reseting...");
-							rst_n = 0;				//RESET!!!!!! needed for correct check duty values (clears sumerr)
-							@(posedge clk);
-							@(negedge clk);
-							rst_n = 1;
                     	test = XSET;
 							xsetNew = 0;
 							xcnt = 11;
 							count = 0;
-							                    runningAdvanced = 3;
+						   strtTest = 0;
+							runningAdvanced = 3;
 						$display("Advanced test #2 -- setting xset to be = x%x",xsetVals[11]);
                 end
              end
@@ -416,11 +411,11 @@ always @(posedge clk) begin
              end
              //run basic tests and finish
              else if(runningAdvanced == 4) begin
-						if(count>=10) begin
-                        $display("SUCCESS! Finishing advanced test");
+						if(count>=10) begin*/
+                        $display("Finishing advanced test");
                         $stop;
-							end
-             end
+							//end
+    //         end
 
         end	
 
