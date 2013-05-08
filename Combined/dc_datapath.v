@@ -1,5 +1,5 @@
 module dc_datapath(dst, c_prod, eep_rd_data, xmeas, cfg_data, clk, rst_n,
-				c_asel, c_bsel, c_err, c_duty, c_sumerr, c_diferr, c_xset,
+				c_asel, c_bsel, c_err, c_duty, c_sumerr, c_xset,
 				c_preverr, c_pid, c_init_prod, c_subtract, c_multsat, c_clr_duty,
 				c_eep_reg);
 
@@ -32,7 +32,7 @@ module dc_datapath(dst, c_prod, eep_rd_data, xmeas, cfg_data, clk, rst_n,
 	input c_err; 
 	input c_duty; 
 	input c_sumerr; 
-	input c_diferr; 
+//	input c_diferr; 
 	input c_xset; 
 	input c_preverr; 
 	input c_pid; 
@@ -73,7 +73,7 @@ module dc_datapath(dst, c_prod, eep_rd_data, xmeas, cfg_data, clk, rst_n,
 	//========================working registers========================
 	bit14_reg 		err_reg		(.in(dst), 		.out(err), 		.clk(clk), .en(c_err));
 	bit14_reg_clr	duty_reg		(.in(dst), 		.out(duty), 	.clk(clk), .en(c_duty), 	.clr(c_clr_duty));
-	bit14_reg 		diferr_reg	(.in(dst), 		.out(diferr),	.clk(clk), .en(c_diferr));
+//	bit14_reg 		diferr_reg	(.in(dst), 		.out(diferr),	.clk(clk), .en(c_diferr));
 	bit14_reg 		xset_reg		(.in(x_p_in),	.out(xset), 	.clk(clk), .en(c_xset));
 	bit14_reg_rst	sumerr_reg	(.in(dst), 		.out(sumerr),	.clk(clk), .en(c_sumerr),	.rst_n(rst_n));
 	bit14_reg_rst	preverr_reg	(.in(dst), 		.out(preverr),	.clk(clk), .en(c_preverr),	.rst_n(rst_n));
@@ -87,10 +87,10 @@ module dc_datapath(dst, c_prod, eep_rd_data, xmeas, cfg_data, clk, rst_n,
 			ERR:			a = err;
 			PROD2815:	a = prod[28:15];
 			DUTY:			a = duty;
-			SUMERRA:		a = sumerr;
-			DIFERR:		a = diferr;
+//			SUMERRA:		a = sumerr;
+//			DIFERR:		a = diferr;
 			ZEROA:		a = 14'h0000;
-//			default		a = 14'h0000;
+			default		a = 14'h0000;
 		endcase
 		case(c_bsel)
 			XSET:			braw = xset;

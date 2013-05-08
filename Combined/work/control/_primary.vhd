@@ -18,7 +18,6 @@ entity control is
         c_err           : out    vl_logic;
         c_duty          : out    vl_logic;
         c_sumerr        : out    vl_logic;
-        c_diferr        : out    vl_logic;
         c_xset          : out    vl_logic;
         c_preverr       : out    vl_logic;
         c_pid           : out    vl_logic;

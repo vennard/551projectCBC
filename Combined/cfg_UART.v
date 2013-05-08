@@ -36,8 +36,8 @@ module cfg_UART(clk, rst_n, TX, RX, clr_frm_rdy, snd_rsp, rsp_data, frm_rdy, cfg
 	reg msb_cfg_en;
 	reg b2_cfg_en;
 
-	reg [4:0] state;
-	reg [4:0] nxt_state;
+	reg [3:0] state;
+	reg [3:0] nxt_state;
 
 	reg [7:0] rsp_data_lsb;
 

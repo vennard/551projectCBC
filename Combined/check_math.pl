@@ -60,12 +60,6 @@ printf "Xset value = %d\n\n",$Xset;
 printf "Pterm value as decimal = %f\n\n",$Pterm/2048;
 printf "Iterm value as decimal = %f\n\n",$Iterm/2048;
 printf "Dterm value as decimal = %f\n\n",$Dterm/2048;
-# JOHN ADDED -- -- -- -- -- -- -- -- -- -- -- --
-print "\nPlease enter the prev_err value : ";
-$m1 = <STDIN>;
-print "\nPlease enter the sum_err value : ";
-$m2 = <STDIN>;
-open outfile, ">", "check_math_out.txt" or die $!;
 
 $indx=0;
 while (<INFILE2>) {
@@ -80,8 +74,7 @@ while (<INFILE2>) {
 close(INFILE2);
 
 $num_indx = $indx;
-$prev_err = $m1;
-$sumErr = $m2;
+$prev_err = 0;
 for ($indx=0; $indx<$num_indx; $indx++) {
   print "------------------------------------\n";
   $err = $accel[$indx] - $Xset;
@@ -105,36 +98,9 @@ for ($indx=0; $indx<$num_indx; $indx++) {
   $duty = $duty + $temp;
   $duty = &saturate($duty);
   printf("Value written to PWM is %4x\n",$duty);
-  ################ JOHN ADDED
-  &format_duty($duty);
-  # print outfile $dutyout, "\n" ; 
   $prev_err = $err;
 }
 
-# ADDED ending -> print out sum_err
-if($indx==$num_indx) {
-  printf " sum_err is %d\n ",$sumErr ;
-  printf " prev_err at the end is %d\n ",$prev_err;
-  close outfile;
-}
-
-#ADDED function - formats duty to be 16 bits before turning to hex for output
-sub format_duty {
-   $tmp = uc(sprintf("%x",$_[0]));
-	if($duty>=0) { 
-		 $tmp = sprintf("%04s",$tmp);
-		 print outfile $tmp, "\n";  
-		}
-	else {
-	  my $h0 = chop($tmp);
-	  my $h1 = chop($tmp);
-	  my $h2 = chop($tmp);
-	  my $h3 = chop($tmp);
-	  print outfile ($h3,$h2,$h1,$h0,"\n");
-	  #$tmp = sprintf("%.4s",$tmp);
-	}
-	return ($tmp);
-}
 
 sub saturate {
   if ($_[0]>8191) { print "  Pos Saturation occurred\n";  return(8191); }

@@ -14,7 +14,6 @@ entity dc_datapath is
         c_err           : in     vl_logic;
         c_duty          : in     vl_logic;
         c_sumerr        : in     vl_logic;
-        c_diferr        : in     vl_logic;
         c_xset          : in     vl_logic;
         c_preverr       : in     vl_logic;
         c_pid           : in     vl_logic;

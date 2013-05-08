@@ -39,6 +39,8 @@ module PWM (clk, rst_n, wrt_duty, duty, CH_A, CH_B);
   always@(posedge clk or negedge rst_n) begin
     if(!rst_n)
       cnt <= 0;
+	 else if(wrt_duty)
+		cnt <= 0;
     else
       cnt <= cnt + 1;
   end
@@ -60,7 +62,9 @@ module PWM (clk, rst_n, wrt_duty, duty, CH_A, CH_B);
   always@(posedge clk or negedge rst_n) begin
       if(!rst_n)
         CH_A <= 0;
-      else
+      else if(wrt_duty)
+			CH_A <= 0;
+		else
         CH_A <= CH_A_nxt;
   end
 
@@ -74,7 +78,9 @@ module PWM (clk, rst_n, wrt_duty, duty, CH_A, CH_B);
   always@(posedge clk or negedge rst_n) begin
       if(!rst_n)
         CH_B <= 0;
-      else
+      else if(wrt_duty)
+		  CH_B <= 0;	//TODO Added
+		else
         CH_B <= CH_B_nxt;
   end
 

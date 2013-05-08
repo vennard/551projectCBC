@@ -1,6 +1,6 @@
 module control(accel_vld, frm_rdy, clk, rst_n, cfg_data, c_prod, eep_addr,
                chrg_pmp_en, eep_r_w_n, clr_rdy, strt_tx, eep_cs_n, wrt_duty,
-               c_err, c_duty, c_sumerr, c_diferr, c_xset, c_preverr, c_pid,
+               c_err, c_duty, c_sumerr, c_xset, c_preverr, c_pid,
                c_init_prod, c_subtract, c_multsat, c_clr_duty, asrcsel, bsrcsel,
 					c_eep_reg);
                
@@ -22,7 +22,7 @@ output reg wrt_duty;
 output reg c_err; 
 output reg c_duty; 
 output reg c_sumerr; 
-output reg c_diferr; 
+//output reg c_diferr; 
 output reg c_xset; 
 output reg c_preverr; 
 output reg c_pid; 
@@ -165,7 +165,7 @@ begin
    c_err = 1'b0; 
 	c_duty = 1'b0;
 	c_sumerr = 1'b0; 
-	c_diferr = 1'b0; 
+//	c_diferr = 1'b0; 
 	c_xset = 1'b0; 
 	c_preverr = 1'b0; 
 	c_pid = 1'b0;
@@ -336,7 +336,7 @@ begin
 
       CALC_DERR : begin
          //DErr = Err - PrevErr
-         c_diferr = 1'b1;
+//       c_diferr = 1'b1;
 			c_subtract = 1'b1;
 			asrcsel = ERR;
 			bsrcsel = PREVERR;
@@ -480,6 +480,7 @@ begin
             /*eep_addr = cfg_data[17:16];
             asrcsel = cfg_data[13:0];
             bsrcsel = ZEROB;*/ //TODO: Dont think these are needed
+            eep_addr = cfg_data[17:16];	//TODO JOHN ADDED -- fixing writes
             eep_cs_n = 1'b0;
             eep_r_w_n = 1'b0;
             chrg_pmp_en = 1'b1;

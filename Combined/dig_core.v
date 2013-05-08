@@ -28,7 +28,7 @@ wire [1:0] c_prod;
 wire c_err;
 wire c_duty;
 wire c_sumerr;
-wire c_differr;
+//wire c_differr;
 wire c_xset;
 wire c_preverr;
 wire c_pid;
@@ -63,7 +63,7 @@ control icntrl(.accel_vld(accel_vld),
                .c_err(c_err),
                .c_duty(c_duty),
                .c_sumerr(c_sumerr),
-               .c_diferr(c_diferr),
+//             .c_diferr(c_diferr),
                .c_xset(c_xset),
                .c_preverr(c_preverr),
                .c_pid(c_pid),
@@ -91,7 +91,7 @@ dc_datapath idatapath(.dst(dst),
 				          .c_err(c_err),
 				          .c_duty(c_duty),
 				          .c_sumerr(c_sumerr),
-				          .c_diferr(c_diferr),
+//				          .c_diferr(c_diferr),
 				          .c_xset(c_xset),
 				          .c_preverr(c_preverr),
 				          .c_pid(c_pid),
